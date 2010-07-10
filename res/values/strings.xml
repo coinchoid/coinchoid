@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, CoincheActivity!</string>
+    <string name="app_name">Coinche</string>
+<string name="planet_prompt">TOTO</string>
+<string-array name="points"><item>80</item>
+<item>90</item>
+<item>100</item>
+<item>110</item>
+<item>120</item>
+<item>130</item>
+<item>140</item>
+<item>150</item>
+<item>160</item>
+<item>170</item>
+<item>180</item>
+<item>Capot</item>
+</string-array>
+<string name="win">C\'est fait !</string>
+<string name="lost">C\'est chu !</string>
+</resources>
