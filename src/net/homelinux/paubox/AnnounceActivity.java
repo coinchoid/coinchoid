@@ -9,8 +9,9 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.content.Intent;
 
-public class CoincheActivity extends Activity {
+public class AnnounceActivity extends Activity {
 	
 
 	private static final int MIN_BET = 80;
