@@ -38,19 +38,25 @@ public class AnnounceActivity extends Activity {
 		else return Integer.toString(bet);
 	}
 	
+	// Call the waiting activity
+    protected void launchWaitingActivity() {
+        Intent i = new Intent(this, WaitingActivity.class);
+        startActivity(i);
+    }
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.announce_layout);
         
         final OnClickListener radio_listener = new OnClickListener() {
             public void onClick(View v) {
                 // Perform action on clicks
-                // RadioButton rb = (RadioButton) v;
+                RadioButton rb = (RadioButton) v;
                 // Toast.makeText(CoincheActivity.this, rb.getText(), Toast.LENGTH_SHORT).show();
             }
-        };
+        };  
         
         final RadioButton radio_coeur = (RadioButton) findViewById(R.id.radio_coeur);
         final RadioButton radio_carreau = (RadioButton) findViewById(R.id.radio_carreau);
@@ -58,11 +64,17 @@ public class AnnounceActivity extends Activity {
         final RadioButton radio_trefle = (RadioButton) findViewById(R.id.radio_trefle);
         final RadioButton radio_sansat = (RadioButton) findViewById(R.id.radio_sansat);
         final RadioButton radio_toutat = (RadioButton) findViewById(R.id.radio_toutat);
+        final Button button_go = (Button) findViewById(R.id.button_go);
         radio_coeur.setOnClickListener(radio_listener);
         radio_carreau.setOnClickListener(radio_listener);
         radio_pique.setOnClickListener(radio_listener);
         radio_trefle.setOnClickListener(radio_listener);
-        
+        button_go.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on clicks
+                launchWaitingActivity();
+            }
+        });
         Spinner s = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(
                 this, R.array.points, android.R.layout.simple_spinner_item);
