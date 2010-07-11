@@ -82,6 +82,11 @@ public class AnnounceActivity extends Activity {
         // Make it a subactivity so we know when it returns
         startActivityForResult(launchPreferencesIntent, REQUEST_CODE_PREFERENCES);
     }
+    protected void launchDisplayActivity(Game[] data) {
+        Intent myIntent = new Intent(this,ScoreDisplayActivity.class);
+        myIntent.putExtra("net.homelinux.paubox.Games",data);
+        startActivity(myIntent);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -176,6 +181,14 @@ public class AnnounceActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         score_spinner.setAdapter(adapter);
 
+        /*
+         * Example Code to display an array of games.
+        Game c = new Game();
+        Game c1 = new Game();
+        Game[] data = {c,c1};
+        launchDisplayActivity(data);
+        */
+
         score_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long i) {
             	current_game.setCurrentBet(Integer.parseInt(parent.getSelectedItem().toString()));
@@ -187,5 +200,6 @@ public class AnnounceActivity extends Activity {
                 // this.
             }
         });
+        
     }
 }

@@ -17,6 +17,11 @@
 		>
 		</activity>
 		<activity
+			android:name=".ScoreDisplayActivity"
+			android:label="@string/app_name"
+		>
+		</activity>
+		<activity
 			android:name=".PreferencesActivity"
 			android:label="@string/app_name"
 		>

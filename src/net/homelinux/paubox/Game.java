@@ -181,4 +181,8 @@ public class Game implements Parcelable {
         writeGameToParcel(out, flags);
     }
 
+	public String toString() {
+		String result = "Attaque : " + current_team_betting + "Annonce " + this.getAnnounce();
+		return result;
+	}
 }
