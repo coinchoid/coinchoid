@@ -18,4 +18,5 @@
 </string-array>
 <string name="win">C\'est fait !</string>
 <string name="lost">C\'est chu !</string>
+<string name="go">Ok</string>
 </resources>

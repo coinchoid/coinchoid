@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<Spinner android:id="@+id/spinner" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:drawSelectorOnTop="true"
-		android:prompt="@string/planet_prompt" />
-	<RadioGroup android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:orientation="vertical">
-		<RadioButton android:id="@+id/radio_coeur"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Coeur" />
-		<RadioButton android:id="@+id/radio_carreau"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Carreau" />
-		<RadioButton android:id="@+id/radio_pique"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Pique" />
-		<RadioButton android:id="@+id/radio_trefle"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Trèfle" />
-		<RadioButton android:id="@+id/radio_toutat"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Tout Atout" />
-		<RadioButton android:id="@+id/radio_sansat"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Sans Atout" />
-	</RadioGroup>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
-	<Button android:id="@+id/button_win" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/win" />
-	<Button android:id="@+id/button_lost" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="@string/lost" />
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	>
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		>
+		<Button
+			android:id="@+id/button_win"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/win"
+			android:layout_gravity="left"
+			android:layout_weight="0.5"
+		/>
+		<Button
+			android:id="@+id/button_lost"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/lost"
+			android:layout_gravity="right"
+			android:layout_weight="0.5"
+		/>
 	</LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
