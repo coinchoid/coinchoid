@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -27,13 +29,22 @@ public class AnnounceActivity extends Activity {
 	// For the scores
 	private static final int MIN_BET = 80;
 	private static final int MAX_BET = 160;
-
+	// For the trump (one int per suit, see http://en.wikipedia.org/wiki/Belote)
+	// WARNING do not change values since they are used in string.xml
+	private static final int TRUMP_CLUB = 0;
+	private static final int TRUMP_DIAMOND = 1;
+	private static final int TRUMP_HEART = 2;
+	private static final int TRUMP_SPADE = 3;
+	private static final int TRUMP_NO_TRUMP = 4;
+	private static final int TRUMP_ALL_TRUMPS = 5;
 
 	/************************
 	 **** CLASS VARIABLE **** 
 	 ************************/
 	int current_bet = 80;
+	int current_trump = TRUMP_CLUB;
 	TextView debug_text;
+    Spinner score_spinner;   
 
 
 	/**************************
@@ -60,12 +71,33 @@ public class AnnounceActivity extends Activity {
 	private void newGame() {
 		upBet(true);
 	}
-    private void updateCounterText() {
+    private void updateDebugText() {
         // Since we're in the same package, we can use this context to get
         // the default shared preferences
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         final String winning_score = sharedPref.getString("winning_score", "coucou");
-        debug_text.setText("Winning score is " + winning_score);
+        debug_text.setText("Current: " + current_bet + " " + toTrumpString(current_trump) + " (max = " + winning_score + ")");
+    }
+    private int toTrumpInt(int id) {
+    	switch (id) {
+    		case (R.id.radio_heart) :
+    			return TRUMP_HEART;
+    		case (R.id.radio_diamond) :
+    			return TRUMP_DIAMOND;
+    		case (R.id.radio_club) :
+    			return TRUMP_CLUB;
+    		case (R.id.radio_spade) :
+    			return TRUMP_SPADE;
+    		case (R.id.radio_alltrump) :
+    			return TRUMP_ALL_TRUMPS;
+    		case (R.id.radio_notrump) :
+    			return TRUMP_NO_TRUMP;
+        	}
+    	return -1;
+    }
+    private String toTrumpString(int trump) {
+    	String [] p = getResources().getStringArray(R.array.trumps);
+    	return p[trump];
     }
 
 	/****************************
@@ -91,7 +123,7 @@ public class AnnounceActivity extends Activity {
         // earlier in startSubActivity
         if (requestCode == REQUEST_CODE_PREFERENCES) {
             // Read a sample value they have set
-        	updateCounterText();
+        	updateDebugText();
         }
     }
 
@@ -118,7 +150,7 @@ public class AnnounceActivity extends Activity {
      * Invoked when the user selects an item from the Menu.
      * 
      * @param item the Menu entry which was selected
-     * @return true if the Menu item was legit (and we consumed it), false
+     * @return true if the Menu item was legitimate (and we consumed it), false
      *         otherwise
      */
     @Override
@@ -144,34 +176,48 @@ public class AnnounceActivity extends Activity {
             public void onClick(View v) {
                 // Perform action on clicks
                 RadioButton rb = (RadioButton) v;
-                // Toast.makeText(CoincheActivity.this, rb.getText(), Toast.LENGTH_SHORT).show();
+                current_trump = toTrumpInt(rb.getId());
+                updateDebugText();
             }
         };  
         
-        final RadioButton radio_coeur = (RadioButton) findViewById(R.id.radio_coeur);
-        final RadioButton radio_carreau = (RadioButton) findViewById(R.id.radio_carreau);
-        final RadioButton radio_pique = (RadioButton) findViewById(R.id.radio_pique);
-        final RadioButton radio_trefle = (RadioButton) findViewById(R.id.radio_trefle);
-        final RadioButton radio_sansat = (RadioButton) findViewById(R.id.radio_sansat);
-        final RadioButton radio_toutat = (RadioButton) findViewById(R.id.radio_toutat);
+        final RadioButton radio0 = (RadioButton) findViewById(R.id.radio_heart);
+        final RadioButton radio1 = (RadioButton) findViewById(R.id.radio_diamond);
+        final RadioButton radio2 = (RadioButton) findViewById(R.id.radio_spade);
+        final RadioButton radio3 = (RadioButton) findViewById(R.id.radio_club);
+        final RadioButton radio4 = (RadioButton) findViewById(R.id.radio_alltrump);
+        final RadioButton radio5 = (RadioButton) findViewById(R.id.radio_notrump);
         final Button button_go = (Button) findViewById(R.id.button_go);
         debug_text = (TextView) findViewById(R.id.debug_text);
-        radio_coeur.setOnClickListener(radio_listener);
-        radio_carreau.setOnClickListener(radio_listener);
-        radio_pique.setOnClickListener(radio_listener);
-        radio_trefle.setOnClickListener(radio_listener);
+        radio0.setOnClickListener(radio_listener);
+        radio1.setOnClickListener(radio_listener);
+        radio2.setOnClickListener(radio_listener);
+        radio3.setOnClickListener(radio_listener);
+        radio4.setOnClickListener(radio_listener);
+        radio5.setOnClickListener(radio_listener);
+
         button_go.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 // Perform action on clicks
                 launchWaitingActivity();
             }
         });
-        Spinner s = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(
+        score_spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this, R.array.points, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s.setAdapter(adapter);
+        score_spinner.setAdapter(adapter);
 
-        
+        score_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long i) {
+            	current_bet = Integer.parseInt(parent.getSelectedItem().toString());
+            	updateDebugText();
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+                // We don't need to worry about nothing being selected, since Spinners don't allow
+                // this.
+            }
+        });
     }
 }

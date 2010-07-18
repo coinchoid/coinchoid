@@ -24,37 +24,37 @@
 		android:orientation="vertical"
 		>
 		<RadioButton
-			android:id="@+id/radio_coeur"
+			android:id="@+id/radio_heart"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Coeur"
 		/>
 		<RadioButton
-			android:id="@+id/radio_carreau"
+			android:id="@+id/radio_diamond"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Carreau"
 		/>
 		<RadioButton
-			android:id="@+id/radio_pique"
+			android:id="@+id/radio_spade"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Pique"
 		/>
 		<RadioButton
-			android:id="@+id/radio_trefle"
+			android:id="@+id/radio_club"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Trèfle"
 		/>
 		<RadioButton
-			android:id="@+id/radio_toutat"
+			android:id="@+id/radio_alltrump"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Tout Atout"
 		/>
 		<RadioButton
-			android:id="@+id/radio_sansat"
+			android:id="@+id/radio_notrump"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Sans Atout"
