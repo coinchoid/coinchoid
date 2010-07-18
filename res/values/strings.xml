@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, CoincheActivity!</string>
+    
     <string name="app_name">Coinche</string>
-<string name="planet_prompt">TOTO</string>
+<string name="go">Ok</string><string name="hello">Hello World, CoincheActivity!</string><string name="lost">C\'est chu !</string><string name="menu_new_game">Nouvelle partie</string><string name="menu_preferences">Preferences</string><string name="planet_prompt">TOTO</string>
 <string-array name="points"><item>80</item>
 <item>90</item>
 <item>100</item>
@@ -17,6 +17,13 @@
 <item>Capot</item>
 </string-array>
 <string name="win">C\'est fait !</string>
-<string name="lost">C\'est chu !</string>
-<string name="go">Ok</string>
+
+
+
+
+<string name="title_winning_score">Partie en ?</string>
+<string name="summary_winning_score">Score à atteindre pour terminer la partie</string>
+<string name="title_bergel_rule">La règle du Bergel</string>
+<string name="summary_on_bergel_rule">Avec la règle du Bergel</string>
+<string name="summary_off_bergel_rule">Sans la règle du Bergel</string>
 </resources>
