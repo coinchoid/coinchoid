@@ -1,11 +1,16 @@
 package net.homelinux.paubox;
 
-import android.content.res.Resources;
+import android.os.Parcelable;
+import android.os.Parcel;
 
-public class Game {
+public class Game implements Parcelable {
 	/*******************
 	 **** CONSTANTS ****
 	 *******************/
+	// To be serializable 
+	private static final long serialVersionUID = 1L;
+	
+	// Players
 	private static final int Nous_1 = 0; // player holding the phone
 	private static final int Eux_1 = 1;
 	private static final int Nous_2 = 3;
@@ -36,7 +41,6 @@ public class Game {
 	int current_trump;
 	int current_team_betting;
 	int current_dealer;
-	Resources res;
 
 	/**************************
 	 **** PRIVATE METHODDS ****
@@ -72,9 +76,48 @@ public class Game {
 		}
 	}
     private String toTrumpString(int trump) {
-    	String [] p = res.getStringArray(R.array.trumps);
-    	return p[trump];
+    	switch(trump) {
+    		case (TRUMP_HEART) :
+    			//return R.string.trump_heart;
+    			return "Coeur";
+    		case (TRUMP_DIAMOND) :
+    			//return R.string.trump_diamond;
+    			return "Carreau";
+    		case (TRUMP_CLUB) :
+    			//return R.string.trump_club;
+    			return "Trèfle";
+    		case (TRUMP_SPADE) :
+    			//return R.string.trump_spade;
+    			return "Pique";
+    		case (TRUMP_ALL_TRUMPS) :
+    			//return R.string.trump_alltrump;
+    			return "Tout At";
+    		case (TRUMP_NO_TRUMP) :
+    			//return R.string.trump_notrump;
+    			return "Sans At";
+    		default:
+    			return "problem in toTrumpString";
+    	}
     }
+    private void writeGameToParcel(Parcel out, int flags) {
+        //out.writeStringArray(player_names);
+        out.writeInt(teamE_score);
+    	out.writeInt(teamN_score);
+    	out.writeInt(current_bet);
+    	out.writeInt(current_trump);
+    	out.writeInt(current_team_betting);
+    	out.writeInt(current_dealer);
+    }
+    private void readParcelToGame(Parcel in) {
+        //in.readStringArray(player_names);
+        teamE_score = in.readInt();
+        teamN_score = in.readInt();
+        current_bet = in.readInt();
+        current_trump = in.readInt();
+        current_team_betting = in.readInt();
+        current_dealer = in.readInt();
+    }
+
 
 	/****************************
 	 **** PROTECTED METHODDS ****
@@ -92,16 +135,14 @@ public class Game {
 	protected void setCurrentBet(int _current_bet) {
 		current_bet = _current_bet;
 	}
-	protected void setRes(Resources _res) {
-		res = _res;
-	}
 	
 	// constructors
-	protected Game(Resources _res) {
-		res = _res;
+	protected Game() {
 		newGame();
 	}
-
+	protected Game(Parcel in) {
+		readParcelToGame(in);
+	}
 	// other methods
 	protected void changeDealingPlayer() {
 		current_dealer = next_player(current_dealer);
@@ -115,5 +156,29 @@ public class Game {
 		teamE_score = 0;
 		teamN_score = 0;
 	}
+	protected String getAnnounce() {
+		return Integer.toString(current_bet) + " " + getCurrentTrump();
+	}
+
+	/*************************
+	 **** PUBLIC METHODDS ****
+	 *************************/
+	public int describeContents() {
+        return 0;
+    }
+
+	public static final Parcelable.Creator<Game> CREATOR
+    	= new Parcelable.Creator<Game>() {
+		public Game createFromParcel(Parcel in) {
+			return new Game(in);
+		}
+
+		public Game[] newArray(int size) {
+			return new Game[size];
+		}
+	};
+	public void writeToParcel(Parcel out, int flags) {
+        writeGameToParcel(out, flags);
+    }
 
 }

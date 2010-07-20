@@ -1,7 +1,9 @@
 package net.homelinux.paubox;
 
+import java.io.*;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Menu;
@@ -69,8 +71,9 @@ public class AnnounceActivity extends Activity {
 	 ****************************/
 	// Call the waiting activity
     protected void launchWaitingActivity() {
-        Intent i = new Intent(this, WaitingActivity.class);
-        startActivity(i);
+        Intent waiting_intent = new Intent(this, WaitingActivity.class);
+        waiting_intent.putExtra("net.homelinux.paubox.Game", (Parcelable) current_game);
+        startActivity(waiting_intent);
     }
 	// Call the preferences activity
     protected void launchPreferencesActivity() {
@@ -145,7 +148,7 @@ public class AnnounceActivity extends Activity {
             }
         };  
         
-        current_game = new Game(getResources());
+        current_game = new Game();
         final RadioButton radio0 = (RadioButton) findViewById(R.id.radio_heart);
         final RadioButton radio1 = (RadioButton) findViewById(R.id.radio_diamond);
         final RadioButton radio2 = (RadioButton) findViewById(R.id.radio_spade);
