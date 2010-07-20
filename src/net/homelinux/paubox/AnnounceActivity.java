@@ -26,23 +26,11 @@ public class AnnounceActivity extends Activity {
     private static final int MENU_NEW_GAME = 1;
     private static final int MENU_PREFERENCES = 2;
     private static final int REQUEST_CODE_PREFERENCES = 1;
-	// For the scores
-	private static final int MIN_BET = 80;
-	private static final int MAX_BET = 160;
-	// For the trump (one int per suit, see http://en.wikipedia.org/wiki/Belote)
-	// WARNING do not change values since they are used in string.xml
-	private static final int TRUMP_CLUB = 0;
-	private static final int TRUMP_DIAMOND = 1;
-	private static final int TRUMP_HEART = 2;
-	private static final int TRUMP_SPADE = 3;
-	private static final int TRUMP_NO_TRUMP = 4;
-	private static final int TRUMP_ALL_TRUMPS = 5;
 
 	/************************
 	 **** CLASS VARIABLE **** 
 	 ************************/
-	int current_bet = 80;
-	int current_trump = TRUMP_CLUB;
+	Game current_game;
 	TextView debug_text;
     Spinner score_spinner;   
 
@@ -50,55 +38,31 @@ public class AnnounceActivity extends Activity {
 	/**************************
 	 **** PRIVATE METHODDS ****
 	 **************************/
-	private void upBet(boolean up) {
-		if (up) {
-			current_bet += 10;
-		} else {
-			current_bet -=10;
-		}
-		if (current_bet < MIN_BET) {
-			current_bet = MIN_BET;
-		} else if (current_bet> MAX_BET) {
-			current_bet = MAX_BET+10;
-		}
-		
-		debug_text.setText(betToString(current_bet));
-	}
-	private String betToString(int bet) {
-		if (bet == MAX_BET +10) return "Capot !";
-		else return Integer.toString(bet);
-	}
-	private void newGame() {
-		upBet(true);
-	}
     private void updateDebugText() {
         // Since we're in the same package, we can use this context to get
         // the default shared preferences
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         final String winning_score = sharedPref.getString("winning_score", "coucou");
-        debug_text.setText("Current: " + current_bet + " " + toTrumpString(current_trump) + " (max = " + winning_score + ")");
+        debug_text.setText("Current: " + current_game.getCurrentBet() + " " + current_game.getCurrentTrump() + " (max = " + winning_score + ")");
     }
     private int toTrumpInt(int id) {
     	switch (id) {
     		case (R.id.radio_heart) :
-    			return TRUMP_HEART;
+    			return Game.TRUMP_HEART;
     		case (R.id.radio_diamond) :
-    			return TRUMP_DIAMOND;
+    			return Game.TRUMP_DIAMOND;
     		case (R.id.radio_club) :
-    			return TRUMP_CLUB;
+    			return Game.TRUMP_CLUB;
     		case (R.id.radio_spade) :
-    			return TRUMP_SPADE;
+    			return Game.TRUMP_SPADE;
     		case (R.id.radio_alltrump) :
-    			return TRUMP_ALL_TRUMPS;
+    			return Game.TRUMP_ALL_TRUMPS;
     		case (R.id.radio_notrump) :
-    			return TRUMP_NO_TRUMP;
+    			return Game.TRUMP_NO_TRUMP;
         	}
     	return -1;
     }
-    private String toTrumpString(int trump) {
-    	String [] p = getResources().getStringArray(R.array.trumps);
-    	return p[trump];
-    }
+
 
 	/****************************
 	 **** PROTECTED METHODDS ****
@@ -157,7 +121,7 @@ public class AnnounceActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_NEW_GAME:
-                newGame();
+                current_game.newGame();
                 return true;
             case MENU_PREFERENCES:
                 launchPreferencesActivity();
@@ -176,11 +140,12 @@ public class AnnounceActivity extends Activity {
             public void onClick(View v) {
                 // Perform action on clicks
                 RadioButton rb = (RadioButton) v;
-                current_trump = toTrumpInt(rb.getId());
+                current_game.setCurrentTrump(toTrumpInt(rb.getId()));
                 updateDebugText();
             }
         };  
         
+        current_game = new Game(getResources());
         final RadioButton radio0 = (RadioButton) findViewById(R.id.radio_heart);
         final RadioButton radio1 = (RadioButton) findViewById(R.id.radio_diamond);
         final RadioButton radio2 = (RadioButton) findViewById(R.id.radio_spade);
@@ -210,7 +175,7 @@ public class AnnounceActivity extends Activity {
 
         score_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long i) {
-            	current_bet = Integer.parseInt(parent.getSelectedItem().toString());
+            	current_game.setCurrentBet(Integer.parseInt(parent.getSelectedItem().toString()));
             	updateDebugText();
             }
 
