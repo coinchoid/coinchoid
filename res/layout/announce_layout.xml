@@ -27,37 +27,37 @@
 			android:id="@+id/radio_heart"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Coeur"
+			android:text="@string/trump_heart"
 		/>
 		<RadioButton
 			android:id="@+id/radio_diamond"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Carreau"
+			android:text="@string/trump_diamond"
 		/>
 		<RadioButton
 			android:id="@+id/radio_spade"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Pique"
+			android:text="@string/trump_spade"
 		/>
 		<RadioButton
 			android:id="@+id/radio_club"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Trèfle"
+			android:text="@string/trump_club"
 		/>
 		<RadioButton
 			android:id="@+id/radio_alltrump"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Tout Atout"
+			android:text="@string/trump_alltrump"
 		/>
 		<RadioButton
 			android:id="@+id/radio_notrump"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Sans Atout"
+			android:text="@string/trump_notrump"
 		/>
 	</RadioGroup>
 	<LinearLayout

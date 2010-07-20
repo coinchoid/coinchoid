@@ -31,4 +31,10 @@
 <item>Sans At</item>
 <item>Tout At</item>
 </string-array>
+<string name="trump_heart">Coeur</string>
+<string name="trump_diamond">Carreau</string>
+<string name="trump_spade">Pique</string>
+<string name="trump_club">Trèfle</string>
+<string name="trump_alltrump">Tout atout</string>
+<string name="trump_notrump">Sans atout</string>
 </resources>
