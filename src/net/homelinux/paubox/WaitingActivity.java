@@ -35,7 +35,6 @@ public class WaitingActivity extends Activity {
 
 	final Button winButton = (Button) findViewById(R.id.button_win);
 	winButton.setOnClickListener(new OnClickListener() {
-	    @Override
 	    public void onClick(View v) {
 		setResult(AnnounceActivity.REQUEST_CODE_WAITING, new Intent().putExtra("net.homelinux.paubox.won",true));
 		finish();
@@ -43,7 +42,6 @@ public class WaitingActivity extends Activity {
 	});
 	final Button lostButton = (Button) findViewById(R.id.button_lost);
 	lostButton.setOnClickListener(new OnClickListener() {
-	    @Override
 	    public void onClick(View v) {
 		setResult(AnnounceActivity.REQUEST_CODE_WAITING, new Intent().putExtra("net.homelinux.paubox.won",false));
 		finish();
