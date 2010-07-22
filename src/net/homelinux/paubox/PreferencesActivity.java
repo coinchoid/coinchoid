@@ -9,9 +9,9 @@ import android.preference.PreferenceActivity;
 public class PreferencesActivity extends PreferenceActivity { 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	super.onCreate(savedInstanceState);
 
-        // Load the XML preferences file
-        addPreferencesFromResource(R.xml.preferences);
+	// Load the XML preferences file
+	addPreferencesFromResource(R.xml.preferences);
     }
 }
