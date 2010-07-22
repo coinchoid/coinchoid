@@ -22,7 +22,7 @@ public class Game implements Parcelable {
 
     // For the scores
     private static final int MIN_BET = 80;
-    private static final int MAX_BET = 160;
+    private static final int CAPOT_BET = 190; // 190 means "capot" useful for some functions
 
     // For the trump (one int per suit, see http://en.wikipedia.org/wiki/Belote)
     // WARNING do not change values since they are used in string.xml
@@ -64,20 +64,10 @@ public class Game implements Parcelable {
 	}
     }
     private String betToString(int bet) {
-	if (bet == MAX_BET +10) return "Capot !";
-	else return Integer.toString(bet);
-    }
-    private void upBet(boolean up) {
-	if (up) {
-	    current_bet += 10;
-	} else {
-	    current_bet -=10;
-	}
-	if (current_bet < MIN_BET) {
-	    current_bet = MIN_BET;
-	} else if (current_bet> MAX_BET) {
-	    current_bet = MAX_BET+10;
-	}
+	if (bet == CAPOT_BET)
+	    return "Capot !";
+	else
+	    return Integer.toString(bet);
     }
     private String toTrumpString(int trump) {
 	switch(trump) {
@@ -135,11 +125,20 @@ public class Game implements Parcelable {
     protected int getCurrentBet() {
 	return current_bet;
     }
+    protected String getCurrentBetString() {
+	return betToString(current_bet);
+    }
     protected void setCurrentTrump(int _current_trump) {
 	current_trump = _current_trump;
     }
     protected void setCurrentBet(int _current_bet) {
 	current_bet = _current_bet;
+    }
+    protected void setCurrentBetFromItemId(long adapter_view_id) {
+	if (adapter_view_id == android.widget.AdapterView.INVALID_ROW_ID)
+	    current_bet = MIN_BET;
+	else
+	    current_bet = MIN_BET + (int)adapter_view_id * 10;
     }
 
     // constructors
@@ -164,7 +163,7 @@ public class Game implements Parcelable {
 	winner = UNPLAYED;
     }
     protected String getAnnounce() {
-	return Integer.toString(current_bet) + " " + getCurrentTrump();
+	return betToString(current_bet) + " " + getCurrentTrump();
     }
 
     protected void setWon(boolean won) {

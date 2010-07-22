@@ -47,7 +47,7 @@ public class AnnounceActivity extends Activity {
 	// the default shared preferences
 	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 	final String winning_score = sharedPref.getString("winning_score", "coucou");
-	debug_text.setText("Current: " + current_game.getCurrentBet() + " " + current_game.getCurrentTrump() + " (max = " + winning_score + ")");
+	debug_text.setText("Current: " + current_game.getCurrentBetString() + " " + current_game.getCurrentTrump() + " (max = " + winning_score + ")");
     }
     private int toTrumpInt(int id) {
 	switch (id) {
@@ -198,7 +198,7 @@ public class AnnounceActivity extends Activity {
 
 	score_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 	    public void onItemSelected(AdapterView<?> parent, View view, int position, long i) {
-		current_game.setCurrentBet(Integer.parseInt(parent.getSelectedItem().toString()));
+		current_game.setCurrentBetFromItemId(parent.getSelectedItemId());
 		updateDebugText();
 	    }
 
