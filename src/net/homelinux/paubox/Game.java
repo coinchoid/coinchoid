@@ -15,8 +15,10 @@ public class Game implements Parcelable {
 	private static final int Eux_1 = 1;
 	private static final int Nous_2 = 3;
 	private static final int Eux_2 = 4;
-	private static final int Nous = 0;
-	private static final int Eux = 1;
+	public static final int Nous = 0;
+	public static final int Eux = 1;
+	//This goes in the winner field, along with "Nous" and "Eux" so the values must be different
+	public static final int UNPLAYED = 2;
 
 	// For the scores
 	private static final int MIN_BET = 80;
@@ -30,6 +32,7 @@ public class Game implements Parcelable {
 	public static final int TRUMP_SPADE = 3;
 	public static final int TRUMP_NO_TRUMP = 4;
 	public static final int TRUMP_ALL_TRUMPS = 5;
+	
 
 	/************************
 	 **** CLASS VARIABLE **** 
@@ -41,6 +44,7 @@ public class Game implements Parcelable {
 	int current_trump;
 	int current_team_betting;
 	int current_dealer;
+	int winner;
 
 	/**************************
 	 **** PRIVATE METHODDS ****
@@ -107,6 +111,7 @@ public class Game implements Parcelable {
     	out.writeInt(current_trump);
     	out.writeInt(current_team_betting);
     	out.writeInt(current_dealer);
+    	out.writeInt(winner);
     }
     private void readParcelToGame(Parcel in) {
         //in.readStringArray(player_names);
@@ -116,6 +121,7 @@ public class Game implements Parcelable {
         current_trump = in.readInt();
         current_team_betting = in.readInt();
         current_dealer = in.readInt();
+        winner = in.readInt();
     }
 
 
@@ -155,11 +161,18 @@ public class Game implements Parcelable {
 		current_dealer = Nous_1;
 		teamE_score = 0;
 		teamN_score = 0;
+		winner = UNPLAYED;
 	}
 	protected String getAnnounce() {
 		return Integer.toString(current_bet) + " " + getCurrentTrump();
 	}
 
+	protected void setWon(boolean won) {
+		if (current_team_betting == Nous) 
+			if (won) winner = Nous;
+			else winner = Eux;
+		else setWon(!won);
+	}
 	/*************************
 	 **** PUBLIC METHODDS ****
 	 *************************/
@@ -185,4 +198,5 @@ public class Game implements Parcelable {
 		String result = "Attaque : " + current_team_betting + "Annonce " + this.getAnnounce();
 		return result;
 	}
+	
 }

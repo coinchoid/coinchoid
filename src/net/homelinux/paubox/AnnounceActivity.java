@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.AdapterView;
 import android.content.Intent;
@@ -27,7 +28,8 @@ public class AnnounceActivity extends Activity {
 	// For the menu
     private static final int MENU_NEW_GAME = 1;
     private static final int MENU_PREFERENCES = 2;
-    private static final int REQUEST_CODE_PREFERENCES = 1;
+    public static final int REQUEST_CODE_PREFERENCES = RESULT_FIRST_USER + 1;
+    public static final int REQUEST_CODE_WAITING = RESULT_FIRST_USER + 2;
 
 	/************************
 	 **** CLASS VARIABLE **** 
@@ -73,7 +75,7 @@ public class AnnounceActivity extends Activity {
     protected void launchWaitingActivity() {
         Intent waiting_intent = new Intent(this, WaitingActivity.class);
         waiting_intent.putExtra("net.homelinux.paubox.Game", (Parcelable) current_game);
-        startActivity(waiting_intent);
+        startActivityForResult(waiting_intent, REQUEST_CODE_WAITING);
     }
 	// Call the preferences activity
     protected void launchPreferencesActivity() {
@@ -96,6 +98,11 @@ public class AnnounceActivity extends Activity {
         if (requestCode == REQUEST_CODE_PREFERENCES) {
             // Read a sample value they have set
         	updateDebugText();
+        } else if (requestCode == REQUEST_CODE_WAITING) {
+        	boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);
+        	current_game.setWon(won);
+        	Toast.makeText(getApplicationContext(), "The game was" + (won ? "won !" : "lost :("),
+					Toast.LENGTH_SHORT).show();
         }
     }
 
