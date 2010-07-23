@@ -33,5 +33,14 @@
 		android:layout_height="fill_parent">
 		<Button android:id="@+id/button_go" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="@string/go" />
+		<RadioGroup android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:orientation="horizontal">
+			<RadioButton android:id="@+id/button_Us"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="Us" />
+			<RadioButton android:id="@+id/button_Them"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="Them" />
+		</RadioGroup>
 	</LinearLayout>
 </LinearLayout>

@@ -114,6 +114,17 @@ public class AnnounceActivity extends BaseMenuActivity {
 		final RadioButton radio4 = (RadioButton) findViewById(R.id.radio_alltrump);
 		final RadioButton radio5 = (RadioButton) findViewById(R.id.radio_notrump);
 		final Button button_go = (Button) findViewById(R.id.button_go);
+
+		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
+		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
+		radio_us.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				current_game.currentDeal().setTeam_betting(Game.Us);
+			}});
+		radio_us.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				current_game.currentDeal().setTeam_betting(Game.Them);
+			}});
 		debug_text = (TextView) findViewById(R.id.debug_text);
 		radio0.setOnClickListener(radio_listener);
 		radio1.setOnClickListener(radio_listener);
