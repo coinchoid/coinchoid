@@ -167,10 +167,10 @@ public class Game implements Parcelable {
 	}
 
 	protected void setWon(boolean won) {
-		if (current_team_betting == Us)
-			if (won) winner = Us;
-			else winner = Them;
-		else setWon(!won);
+		if (current_team_betting == Us ^ won)
+			winner = Them;
+		else
+			winner = Us;
 	}
 	/*************************
 	 **** PUBLIC METHODDS ****
