@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class WaitingActivity extends Activity {
+public class WaitingActivity extends BaseMenuActivity {
 
     Game current_game;
     TextView annouce_reminder;

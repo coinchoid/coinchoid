@@ -20,16 +20,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-public class AnnounceActivity extends Activity {
+public class AnnounceActivity extends BaseMenuActivity {
 
-    /*******************
-     **** CONSTANTS ****
-     *******************/
-    // For the menu
-    private static final int MENU_NEW_GAME = 1;
-    private static final int MENU_PREFERENCES = 2;
-    public static final int REQUEST_CODE_PREFERENCES = RESULT_FIRST_USER + 1;
-    public static final int REQUEST_CODE_WAITING = RESULT_FIRST_USER + 2;
 
     /************************
      **** CLASS VARIABLE **** 
@@ -37,7 +29,6 @@ public class AnnounceActivity extends Activity {
     Game current_game;
     TextView debug_text;
     Spinner score_spinner;   
-
 
     /**************************
      **** PRIVATE METHODDS ****
@@ -77,13 +68,6 @@ public class AnnounceActivity extends Activity {
 	waiting_intent.putExtra("net.homelinux.paubox.Game", (Parcelable) current_game);
 	startActivityForResult(waiting_intent, REQUEST_CODE_WAITING);
     }
-    // Call the preferences activity
-    protected void launchPreferencesActivity() {
-	debug_text.setText("Preferences");
-	Intent launchPreferencesIntent = new Intent(this, PreferencesActivity.class);
-	// Make it a subactivity so we know when it returns
-	startActivityForResult(launchPreferencesIntent, REQUEST_CODE_PREFERENCES);
-    }
     protected void launchDisplayActivity(Game[] data) {
 	Intent myIntent = new Intent(this,ScoreDisplayActivity.class);
 	myIntent.putExtra("net.homelinux.paubox.Games",data);
@@ -109,41 +93,6 @@ public class AnnounceActivity extends Activity {
     /*************************
      **** PUBLIC METHODDS ****
      *************************/
-    /**
-     * Invoked during initialization to give the Activity a chance to set up its Menu.
-     * 
-     * @param menu the Menu to which entries may be added
-     * @return true
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	super.onCreateOptionsMenu(menu);
-
-	menu.add(0, MENU_NEW_GAME, 0, R.string.menu_new_game);
-	menu.add(0, MENU_PREFERENCES, 0, R.string.menu_preferences);
-
-	return true;
-    }
-
-    /**
-     * Invoked when the user selects an item from the Menu.
-     * 
-     * @param item the Menu entry which was selected
-     * @return true if the Menu item was legitimate (and we consumed it), false
-     *         otherwise
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-	switch (item.getItemId()) {
-	case MENU_NEW_GAME:
-	    current_game.newGame();
-	    return true;
-	case MENU_PREFERENCES:
-	    launchPreferencesActivity();
-	    return true;
-	}
-	return false;
-    }
 
     /** Called when the activity is first created. */
     @Override

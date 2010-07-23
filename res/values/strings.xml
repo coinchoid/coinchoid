@@ -37,4 +37,8 @@
 <string name="trump_club">Trèfle</string>
 <string name="trump_alltrump">Tout atout</string>
 <string name="trump_notrump">Sans atout</string>
+<string name="new_game">New Game !</string>
+<string name="quit">Quit :(</string>
+<string name="display_scores">Display Scores !</string>
+<string name="preferences">Preferences</string>
 </resources>
