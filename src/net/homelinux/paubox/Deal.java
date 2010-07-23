@@ -104,8 +104,8 @@ public class Deal implements Parcelable {
 	protected void newDeal() {
 		bet = 80;
 		trump  = TRUMP_CLUB;
-		team_betting = Game.Nous; // of course
-		dealer = Game.Nous_1;
+		team_betting = Game.Us; // of course
+		dealer = Game.Us_1;
 		teamE_score = 0;
 		teamN_score = 0;
 		winner = Game.UNPLAYED;
@@ -174,10 +174,11 @@ public class Deal implements Parcelable {
 	}
 
 	protected void setWon(boolean won) {
-		if (team_betting == Game.Nous)
-			if (won) winner = Game.Nous;
-			else winner = Game.Eux;
-		else setWon(!won);
+	    if (team_betting == Game.Us ^ won)
+            winner = Game.Them;
+        else
+            winner = Game.Us;
+
 	}
 
 	protected String getAnnounce() {

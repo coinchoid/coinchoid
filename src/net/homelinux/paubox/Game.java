@@ -13,13 +13,13 @@ public class Game {
 	public static final long serialVersionUID = 1L;
 
 	// Players
-	public static final int Nous_1 = 0; // player holding the phone
-	public static final int Eux_1 = 1;
-	public static final int Nous_2 = 3;
-	public static final int Eux_2 = 4;
-	public static final int Nous = 0;
-	public static final int Eux = 1;
-	//This goes in the winner field, along with "Nous" and "Eux" so the values must be different
+	public static final int Us_1 = 0; // player holding the phone
+	public static final int Them_1 = 1;
+	public static final int Us_2 = 3;
+	public static final int Them_2 = 4;
+	public static final int Us = 0;
+	public static final int Them = 1;
+	//This goes in the winner field, along with "Us" and "Them" so the values must be different
 	public static final int UNPLAYED = 2;
 
 	/************************
@@ -33,14 +33,14 @@ public class Game {
 	 **************************/
 	private int next_player (int player) {
 		switch (player) {
-		case Nous_1:
-			return Eux_1;
-		case Eux_1:
-			return Nous_2;
-		case Nous_2:
-			return Eux_2;
-		case Eux_2:
-			return Nous_1;
+		case Us_1:
+			return Them_1;
+		case Them_1:
+			return Us_2;
+		case Us_2:
+			return Them_2;
+		case Them_2:
+			return Us_1;
 		default:
 			return -1;	
 		}
