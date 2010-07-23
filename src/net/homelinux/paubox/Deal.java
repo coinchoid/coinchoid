@@ -1,9 +1,11 @@
 package net.homelinux.paubox;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
-public class Deal implements Parcelable {
+public class Deal implements Serializable {
+
+	// To be serializable
+	public static final long serialVersionUID = 1L;
 
 	int teamE_score;
 	int teamN_score;
@@ -124,53 +126,8 @@ public class Deal implements Parcelable {
 	public static final int TRUMP_NO_TRUMP = 4;
 	public static final int TRUMP_ALL_TRUMPS = 5;
 
-
-
-	private void writeGameToParcel(Parcel out, int flags) {
-		//out.writeStringArray(player_names);
-		out.writeInt(teamE_score);
-		out.writeInt(teamN_score);
-		out.writeInt(bet);
-		out.writeInt(trump);
-		out.writeInt(team_betting);
-		out.writeInt(dealer);
-		out.writeInt(winner);
-	}
-	private void readParcelToGame(Parcel in) {
-		//in.readStringArray(player_names);
-		teamE_score = in.readInt();
-		teamN_score = in.readInt();
-		bet = in.readInt();
-		trump = in.readInt();
-		team_betting = in.readInt();
-		dealer = in.readInt();
-		winner = in.readInt();
-	}
-
-	public int describeContents() {
-		return 0;
-	}
-
-	protected Deal(Parcel in) {
-		readParcelToGame(in);
-	}
-
 	public Deal() {
 		newDeal();
-	}
-
-	public static final Parcelable.Creator<Deal> CREATOR
-	= new Parcelable.Creator<Deal>() {
-		public Deal createFromParcel(Parcel in) {
-			return new Deal(in);
-		}
-
-		public Deal[] newArray(int size) {
-			return new Deal[size];
-		}
-	};
-	public void writeToParcel(Parcel out, int flags) {
-		writeGameToParcel(out, flags);
 	}
 
 	protected void setWon(boolean won) {
@@ -178,11 +135,13 @@ public class Deal implements Parcelable {
             winner = Game.Them;
         else
             winner = Game.Us;
-
 	}
 
 	protected String getAnnounce() {
 		return betToString(bet) + " " + toTrumpString(trump);
 	}
 
+	public String toString() {
+		return team_betting + ""+ getAnnounce() + " : " + (winner==team_betting ? "Faite !" : "Chute !") ;
+	}
 }

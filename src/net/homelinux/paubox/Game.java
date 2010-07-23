@@ -1,11 +1,9 @@
 package net.homelinux.paubox;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class Game {
+public class Game implements Serializable {
 	/*******************
 	 **** CONSTANTS ****
 	 *******************/
@@ -78,6 +76,13 @@ public class Game {
 	}
 	protected Deal currentDeal() {
 		return currentInning().currentDeal();
+	}
+
+	protected void newDeal() {
+		currentInning().newDeal();
+	}
+	protected void newInning() {
+		innings.add(new Inning());
 	}
 
 }

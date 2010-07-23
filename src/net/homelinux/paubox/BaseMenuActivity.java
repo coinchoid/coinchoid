@@ -16,11 +16,18 @@ public class BaseMenuActivity extends Activity {
 	public static final int REQUEST_CODE_PREFERENCES = RESULT_FIRST_USER + 1;
 	public static final int REQUEST_CODE_WAITING = RESULT_FIRST_USER + 2;
 
+	Game current_game;
+
 	// Call the preferences activity
 	protected void launchPreferencesActivity() {
 		Intent launchPreferencesIntent = new Intent(this, PreferencesActivity.class);
 		// Make it a subactivity so we know when it returns
 		startActivityForResult(launchPreferencesIntent, REQUEST_CODE_PREFERENCES);
+	}
+	protected void launchDisplayActivity() {
+		Intent myIntent = new Intent(this,ScoreDisplayActivity.class);
+		myIntent.putExtra("net.homelinux.paubox.Game",current_game);
+		startActivity(myIntent);
 	}
 
 	/**
@@ -58,8 +65,7 @@ public class BaseMenuActivity extends Activity {
 			launchPreferencesActivity();
 			return true;
 		case R.id.display_scores:
-			Toast.makeText(getApplicationContext(), "Display scores",
-					Toast.LENGTH_SHORT).show();
+			launchDisplayActivity();
 			return true;
 		}
 		return false;

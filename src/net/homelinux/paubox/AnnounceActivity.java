@@ -1,13 +1,8 @@
 package net.homelinux.paubox;
 
-import java.io.*;
-import android.app.Activity;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -26,7 +21,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 	/************************
 	 **** CLASS VARIABLE **** 
 	 ************************/
-	Game current_game;
 	TextView debug_text;
 	Spinner score_spinner;   
 
@@ -66,13 +60,8 @@ public class AnnounceActivity extends BaseMenuActivity {
 	// Call the waiting activity
 	protected void launchWaitingActivity() {
 		Intent waiting_intent = new Intent(this, WaitingActivity.class);
-		waiting_intent.putExtra("net.homelinux.paubox.Game", (Parcelable) current_game.currentDeal());
+		waiting_intent.putExtra("net.homelinux.paubox.Game", current_game.currentDeal());
 		startActivityForResult(waiting_intent, REQUEST_CODE_WAITING);
-	}
-	protected void launchDisplayActivity(Game[] data) {
-		Intent myIntent = new Intent(this,ScoreDisplayActivity.class);
-		myIntent.putExtra("net.homelinux.paubox.Games",data);
-		startActivity(myIntent);
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -86,6 +75,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		} else if (requestCode == REQUEST_CODE_WAITING) {
 			boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);
 			current_game.currentDeal().setWon(won);
+			current_game.newDeal();
 			Toast.makeText(getApplicationContext(), "The game was" + (won ? "won !" : "lost :("),
 					Toast.LENGTH_SHORT).show();
 		}
@@ -144,14 +134,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		score_spinner.setAdapter(adapter);
 
-		/*
-		 * Example Code to display an array of games.
-        Game c = new Game();
-        Game c1 = new Game();
-        Game[] data = {c,c1};
-        launchDisplayActivity(data);
-		 */
-
 		score_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long i) {
 				current_game.currentDeal().setBet(BetFromItemId(parent.getSelectedItemId()));
@@ -163,6 +145,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 				// this.
 			}
 		});
-
 	}
 }
+

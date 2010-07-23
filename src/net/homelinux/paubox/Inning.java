@@ -1,8 +1,12 @@
 package net.homelinux.paubox;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Inning {
+public class Inning implements Serializable {
+
+	// To be serializable
+	public static final long serialVersionUID = 1L;
 
 	ArrayList<Deal> deals;
 	protected Deal currentDeal() {
@@ -17,6 +21,19 @@ public class Inning {
 
 	public Inning () {
 		newInning();
+	}
+
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		for(Deal i : deals) {
+			result.append(i.toString()).append("\n");
+		}
+		result.deleteCharAt(result.length()-1);
+		return result.toString();
+	}
+
+	protected void newDeal() {
+		deals.add(new Deal());
 	}
 
 }

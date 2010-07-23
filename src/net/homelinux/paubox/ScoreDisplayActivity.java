@@ -1,45 +1,41 @@
 package net.homelinux.paubox;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
-public class ScoreDisplayActivity extends ListActivity  {
+public class ScoreDisplayActivity extends Activity  {
 
-	private Parcelable[] games;
+	private Game game;
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.score_display);
 
-		ListView lv = getListView();
-		lv.setTextFilterEnabled(true);
+		final LinearLayout left_col = (LinearLayout) findViewById(R.id.left_column);
+		final LinearLayout right_col = (LinearLayout) findViewById(R.id.right_column);
 
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// When clicked, show a toast with the TextView text
-				Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-						Toast.LENGTH_SHORT).show();
+
+		game = (Game) getIntent().getSerializableExtra("net.homelinux.paubox.Game");
+		for (Inning i : game.innings) {
+			for (Deal d : i.deals) {
+				TextView left = new TextView(this);
+				TextView right = new TextView(this);
+				if (d.winner == Game.Them) {
+					left.setText(Integer.toString(d.bet));
+					right.setText("");
+				}
+				else {
+					right.setText(Integer.toString(d.bet));
+					left.setText("");
+				}
+				left_col.addView(left);
+				right_col.addView(right);
 			}
-		});
-
-		Bundle b = getIntent().getExtras();
-		games = b.getParcelableArray("net.homelinux.paubox.Games");
-		String[] strings = new String[games.length];
-		for (int j = 0; j<games.length;j++) {
-			strings[j] = games[j].toString();
 		}
-
-		setListAdapter(new ArrayAdapter<String>(this, R.layout.score_display, strings));
 	}
 }
 

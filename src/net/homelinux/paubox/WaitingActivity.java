@@ -26,8 +26,7 @@ public class WaitingActivity extends BaseMenuActivity {
 
 		setContentView(R.layout.waiting_layout);
 
-		Bundle b = getIntent().getExtras();
-		current_game = b.getParcelable("net.homelinux.paubox.Game");
+		current_game = (Deal)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 
 		annouce_reminder = (TextView) findViewById(R.id.announce_reminder);
 		annouce_reminder.setText("Annonce en cours : " + current_game.getAnnounce());
