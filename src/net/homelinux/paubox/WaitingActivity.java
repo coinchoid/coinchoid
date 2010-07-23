@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class WaitingActivity extends BaseMenuActivity {
 
-	Game current_game;
+	Deal current_game;
 	TextView annouce_reminder;
 
 	// Call the announce activity

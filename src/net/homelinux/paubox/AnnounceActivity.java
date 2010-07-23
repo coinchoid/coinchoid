@@ -38,22 +38,23 @@ public class AnnounceActivity extends BaseMenuActivity {
 		// the default shared preferences
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		final String winning_score = sharedPref.getString("winning_score", "coucou");
-		debug_text.setText("Current: " + current_game.getCurrentBetString() + " " + current_game.getCurrentTrump() + " (max = " + winning_score + ")");
+		Deal current_deal = current_game.currentDeal();
+		debug_text.setText("Current: " + current_deal.getBet() + " " + current_deal.getTrump() + " (max = " + winning_score + ")");
 	}
 	private int toTrumpInt(int id) {
 		switch (id) {
 		case (R.id.radio_heart) :
-			return Game.TRUMP_HEART;
+			return Deal.TRUMP_HEART;
 		case (R.id.radio_diamond) :
-			return Game.TRUMP_DIAMOND;
+			return Deal.TRUMP_DIAMOND;
 		case (R.id.radio_club) :
-			return Game.TRUMP_CLUB;
+			return Deal.TRUMP_CLUB;
 		case (R.id.radio_spade) :
-			return Game.TRUMP_SPADE;
+			return Deal.TRUMP_SPADE;
 		case (R.id.radio_alltrump) :
-			return Game.TRUMP_ALL_TRUMPS;
+			return Deal.TRUMP_ALL_TRUMPS;
 		case (R.id.radio_notrump) :
-			return Game.TRUMP_NO_TRUMP;
+			return Deal.TRUMP_NO_TRUMP;
 		}
 		return -1;
 	}
@@ -65,7 +66,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 	// Call the waiting activity
 	protected void launchWaitingActivity() {
 		Intent waiting_intent = new Intent(this, WaitingActivity.class);
-		waiting_intent.putExtra("net.homelinux.paubox.Game", (Parcelable) current_game);
+		waiting_intent.putExtra("net.homelinux.paubox.Game", (Parcelable) current_game.currentDeal());
 		startActivityForResult(waiting_intent, REQUEST_CODE_WAITING);
 	}
 	protected void launchDisplayActivity(Game[] data) {
@@ -84,12 +85,18 @@ public class AnnounceActivity extends BaseMenuActivity {
 			updateDebugText();
 		} else if (requestCode == REQUEST_CODE_WAITING) {
 			boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);
-			current_game.setWon(won);
+			current_game.currentDeal().setWon(won);
 			Toast.makeText(getApplicationContext(), "The game was" + (won ? "won !" : "lost :("),
 					Toast.LENGTH_SHORT).show();
 		}
 	}
 
+	protected int BetFromItemId(long adapter_view_id) {
+		if (adapter_view_id == android.widget.AdapterView.INVALID_ROW_ID)
+			return Deal.MIN_BET;
+		else
+			return Deal.MIN_BET + (int)adapter_view_id * 10;
+	}
 	/*************************
 	 **** PUBLIC METHODDS ****
 	 *************************/
@@ -104,7 +111,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 			public void onClick(View v) {
 				// Perform action on clicks
 				RadioButton rb = (RadioButton) v;
-				current_game.setCurrentTrump(toTrumpInt(rb.getId()));
+				current_game.currentDeal().setTrump(toTrumpInt(rb.getId()));
 				updateDebugText();
 			}
 		};  
@@ -147,7 +154,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		score_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long i) {
-				current_game.setCurrentBetFromItemId(parent.getSelectedItemId());
+				current_game.currentDeal().setBet(BetFromItemId(parent.getSelectedItemId()));
 				updateDebugText();
 			}
 
