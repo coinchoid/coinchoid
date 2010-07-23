@@ -11,13 +11,13 @@ public class Game implements Parcelable {
 	private static final long serialVersionUID = 1L;
 
 	// Players
-	private static final int Nous_1 = 0; // player holding the phone
-	private static final int Eux_1 = 1;
-	private static final int Nous_2 = 3;
-	private static final int Eux_2 = 4;
-	public static final int Nous = 0;
-	public static final int Eux = 1;
-	//This goes in the winner field, along with "Nous" and "Eux" so the values must be different
+	private static final int Us_1 = 0; // player holding the phone
+	private static final int Them_1 = 1;
+	private static final int Us_2 = 3;
+	private static final int Them_2 = 4;
+	public static final int Us = 0;
+	public static final int Them = 1;
+	//This goes in the winner field, along with "Us" and "Them" so the values must be different
 	public static final int UNPLAYED = 2;
 
 	// For the scores
@@ -51,14 +51,14 @@ public class Game implements Parcelable {
 	 **************************/
 	private int next_player (int player) {
 		switch (player) {
-		case Nous_1:
-			return Eux_1;
-		case Eux_1:
-			return Nous_2;
-		case Nous_2:
-			return Eux_2;
-		case Eux_2:
-			return Nous_1;
+		case Us_1:
+			return Them_1;
+		case Them_1:
+			return Us_2;
+		case Us_2:
+			return Them_2;
+		case Them_2:
+			return Us_1;
 		default:
 			return -1;	
 		}
@@ -156,8 +156,8 @@ public class Game implements Parcelable {
 	protected void newGame() {
 		current_bet = 80;
 		current_trump  = TRUMP_CLUB;
-		current_team_betting = Nous; // of course
-		current_dealer = Nous_1;
+		current_team_betting = Us; // of course
+		current_dealer = Us_1;
 		teamE_score = 0;
 		teamN_score = 0;
 		winner = UNPLAYED;
@@ -167,9 +167,9 @@ public class Game implements Parcelable {
 	}
 
 	protected void setWon(boolean won) {
-		if (current_team_betting == Nous) 
-			if (won) winner = Nous;
-			else winner = Eux;
+		if (current_team_betting == Us)
+			if (won) winner = Us;
+			else winner = Them;
 		else setWon(!won);
 	}
 	/*************************
