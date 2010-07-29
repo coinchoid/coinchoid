@@ -1,8 +1,19 @@
 package net.homelinux.paubox;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -10,10 +21,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.AdapterView;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 public class AnnounceActivity extends BaseMenuActivity {
 
@@ -91,6 +98,11 @@ public class AnnounceActivity extends BaseMenuActivity {
 	 **** PUBLIC METHODDS ****
 	 *************************/
 
+	@Override
+	public void onPause() {
+		super.onPause();
+		writeGame(current_game);
+	}
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -106,7 +118,9 @@ public class AnnounceActivity extends BaseMenuActivity {
 			}
 		};  
 
-		current_game = new Game();
+		current_game = readGame();
+		if (current_game == null)
+			current_game = new Game();
 		final RadioButton radio0 = (RadioButton) findViewById(R.id.radio_heart);
 		final RadioButton radio1 = (RadioButton) findViewById(R.id.radio_diamond);
 		final RadioButton radio2 = (RadioButton) findViewById(R.id.radio_spade);
@@ -156,6 +170,35 @@ public class AnnounceActivity extends BaseMenuActivity {
 				// this.
 			}
 		});
+	}
+
+	static private String FILENAME = "coinchoid_current_game.ser";
+	private void writeGame(Game game) {
+		try {
+			FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(game);
+			fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private Game readGame() {
+		Game game = null;
+		try {
+			FileInputStream fis = openFileInput(FILENAME);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			game = (Game) ois.readObject();
+			fis.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return game;
 	}
 }
 
