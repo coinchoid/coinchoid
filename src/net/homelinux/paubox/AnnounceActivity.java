@@ -91,6 +91,8 @@ public class AnnounceActivity extends BaseMenuActivity {
 	protected int BetFromItemId(long adapter_view_id) {
 		if (adapter_view_id == android.widget.AdapterView.INVALID_ROW_ID)
 			return Deal.MIN_BET;
+		else if (adapter_view_id > (Deal.MAX_BET - Deal.MIN_BET)/10)
+			return Deal.CAPOT_BET;
 		else
 			return Deal.MIN_BET + (int)adapter_view_id * 10;
 	}

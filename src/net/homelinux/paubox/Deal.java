@@ -115,7 +115,8 @@ public class Deal implements Serializable {
 
 	// For the scores
 	public static final int MIN_BET = 80;
-	public static final int CAPOT_BET = 190; // 190 means "capot" useful for some functions
+	public static final int MAX_BET = 180;
+	public static final int CAPOT_BET = 250; // 250 means "capot" useful for some functions
 
 	// For the trump (one int per suit, see http://en.wikipedia.org/wiki/Belote)
 	// WARNING do not change values since they are used in string.xml
