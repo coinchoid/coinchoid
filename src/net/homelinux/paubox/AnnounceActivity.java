@@ -121,7 +121,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 			public void onClick(View v) {
 				current_game.currentDeal().setTeam_betting(Game.Us);
 			}});
-		radio_us.setOnClickListener(new OnClickListener() {
+		radio_them.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				current_game.currentDeal().setTeam_betting(Game.Them);
 			}});

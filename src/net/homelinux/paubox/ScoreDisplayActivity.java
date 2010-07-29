@@ -20,21 +20,23 @@ public class ScoreDisplayActivity extends Activity  {
 
 
 		game = (Game) getIntent().getSerializableExtra("net.homelinux.paubox.Game");
-		for (Inning i : game.innings) {
-			for (Deal d : i.deals) {
-				if (d.winner!=Game.UNPLAYED) {
-					TextView left = new TextView(this);
-					TextView right = new TextView(this);
-					if (d.winner == Game.Them) {
-						left.setText(Integer.toString(d.bet));
-						right.setText("");
+		if (game != null) {
+			for (Inning i : game.innings) {
+				for (Deal d : i.deals) {
+					if (d.winner!=Game.UNPLAYED) {
+						TextView left = new TextView(this);
+						TextView right = new TextView(this);
+						if (d.winner == Game.Them) {
+							left.setText(Integer.toString(d.bet));
+							right.setText("");
+						}
+						else {
+							right.setText(Integer.toString(d.bet));
+							left.setText("");
+						}
+						left_col.addView(left);
+						right_col.addView(right);
 					}
-					else {
-						right.setText(Integer.toString(d.bet));
-						left.setText("");
-					}
-					left_col.addView(left);
-					right_col.addView(right);
 				}
 			}
 		}
