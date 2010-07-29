@@ -41,4 +41,6 @@
 <string name="quit">Quit :(</string>
 <string name="display_scores">Display Scores !</string>
 <string name="preferences">Preferences</string>
+<string name="Us">Nous</string>
+<string name="Them">Eux</string>
 </resources>
