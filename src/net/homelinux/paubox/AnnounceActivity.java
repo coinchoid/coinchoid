@@ -32,7 +32,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 	Spinner score_spinner;   
 
 	/**************************
-	 **** PRIVATE METHODDS ****
+	 **** PRIVATE METHODS *****
 	 **************************/
 	private void updateDebugText() {
 		// Since we're in the same package, we can use this context to get
