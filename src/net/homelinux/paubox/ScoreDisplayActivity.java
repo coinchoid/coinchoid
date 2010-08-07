@@ -38,7 +38,7 @@ public class ScoreDisplayActivity extends Activity  {
 						left.setGravity(Gravity.CENTER);
 						right.setBackgroundColor(Color.BLACK);
 						right.setGravity(Gravity.CENTER);
-						if (d.winner == Game.Them) {
+						if (d.winner == Game.Us) {
 							Us_score += d.bet;
 						}
 						else {
