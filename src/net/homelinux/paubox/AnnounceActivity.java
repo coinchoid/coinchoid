@@ -111,47 +111,53 @@ public class AnnounceActivity extends BaseMenuActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.announce_layout);
 
-		final OnClickListener radio_listener = new OnClickListener() {
-			public void onClick(View v) {
-				// Perform action on clicks
-				RadioButton rb = (RadioButton) v;
-				current_game.currentDeal().setTrump(toTrumpInt(rb.getId()));
-				updateDebugText();
-			}
-		};  
-
 		current_game = readGame();
 		if (current_game == null)
 			current_game = new Game();
-		final RadioButton radio0 = (RadioButton) findViewById(R.id.radio_heart);
-		final RadioButton radio1 = (RadioButton) findViewById(R.id.radio_diamond);
-		final RadioButton radio2 = (RadioButton) findViewById(R.id.radio_spade);
-		final RadioButton radio3 = (RadioButton) findViewById(R.id.radio_club);
-		final RadioButton radio4 = (RadioButton) findViewById(R.id.radio_alltrump);
-		final RadioButton radio5 = (RadioButton) findViewById(R.id.radio_notrump);
+		final RadioButton trumpRadioButtons[] = {
+				(RadioButton) findViewById(R.id.radio_heart),
+				(RadioButton) findViewById(R.id.radio_diamond),
+				(RadioButton) findViewById(R.id.radio_spade),
+				(RadioButton) findViewById(R.id.radio_club),
+				(RadioButton) findViewById(R.id.radio_alltrump),
+				(RadioButton) findViewById(R.id.radio_notrump)
+		};
 		final Button button_go = (Button) findViewById(R.id.button_go);
 
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
-		radio_us.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				current_game.currentDeal().setTeam_betting(Game.Us);
-			}});
-		radio_them.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				current_game.currentDeal().setTeam_betting(Game.Them);
-			}});
 		debug_text = (TextView) findViewById(R.id.debug_text);
-		radio0.setOnClickListener(radio_listener);
-		radio1.setOnClickListener(radio_listener);
-		radio2.setOnClickListener(radio_listener);
-		radio3.setOnClickListener(radio_listener);
-		radio4.setOnClickListener(radio_listener);
-		radio5.setOnClickListener(radio_listener);
 
 		button_go.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// Perform action on clicks
+				//Save the current Trump
+				boolean checked = false;
+				for (RadioButton rb : trumpRadioButtons) {
+					if (rb.isChecked()) {
+						current_game.currentDeal().setTrump(toTrumpInt(rb.getId()));
+						updateDebugText();
+						checked = true;
+						break;
+					}
+				}
+				if (!checked) {
+					Toast.makeText(getApplicationContext(), "Please select a trump" , Toast.LENGTH_SHORT).show();
+					return;
+				}
+
+				//Save the current team betting
+				if (radio_us.isChecked()) current_game.currentDeal().setTeam_betting(Game.Us);
+				else if (radio_them.isChecked()) {
+					current_game.currentDeal().setTeam_betting(Game.Them);
+				}
+				else {
+					Toast.makeText(getApplicationContext(), "Please select a team" , Toast.LENGTH_SHORT).show();
+					return;
+				}
+
+				//Save the current bet
+				current_game.currentDeal().setBet(BetFromItemId(score_spinner.getSelectedItemId()));
+
 				launchWaitingActivity();
 			}
 		});
@@ -161,17 +167,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		score_spinner.setAdapter(adapter);
 
-		score_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long i) {
-				current_game.currentDeal().setBet(BetFromItemId(parent.getSelectedItemId()));
-				updateDebugText();
-			}
-
-			public void onNothingSelected(AdapterView<?> parent) {
-				// We don't need to worry about nothing being selected, since Spinners don't allow
-				// this.
-			}
-		});
 	}
 
 	static private String FILENAME = "coinchoid_current_game.ser";
