@@ -13,14 +13,12 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 public class AnnounceActivity extends BaseMenuActivity {
 
@@ -141,7 +139,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 					}
 				}
 				if (!checked) {
-					Toast.makeText(getApplicationContext(), "Please select a trump" , Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), R.string.select_trump , Toast.LENGTH_SHORT).show();
 					return;
 				}
 
@@ -151,7 +149,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 					current_game.currentDeal().setTeam_betting(Game.Them);
 				}
 				else {
-					Toast.makeText(getApplicationContext(), "Please select a team" , Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), R.string.select_team , Toast.LENGTH_SHORT).show();
 					return;
 				}
 
