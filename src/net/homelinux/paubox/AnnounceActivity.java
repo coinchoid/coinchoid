@@ -126,6 +126,30 @@ public class AnnounceActivity extends BaseMenuActivity {
 				(RadioButton) findViewById(R.id.radio_notrump)
 		};
 		final Button button_go = (Button) findViewById(R.id.button_go);
+		final Button button_coinche = (Button) findViewById(R.id.button_coinche);
+		button_coinche.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Deal d = current_game.currentDeal();
+				switch (d.getCoinchedMultiplicator()) {
+				case 1:
+					d.setCoinchedMultiplicator(2);
+					button_coinche.setText(R.string.coinched);
+					break;
+				case 2:
+					d.setCoinchedMultiplicator(4);
+					button_coinche.setText(R.string.overcoinched);
+					break;
+				case 4:
+					d.setCoinchedMultiplicator(1);
+					button_coinche.setText(R.string.uncoinched);
+					break;
+				default:
+					Toast.makeText(getApplicationContext(), "WRONG COINCHEDMULTIPLICATOR!",
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);

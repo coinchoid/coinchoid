@@ -45,4 +45,7 @@
 <string name="Them">Eux</string>
 <string name="select_trump">Please select a trump</string>
 <string name="select_team">Please select a team</string>
+<string name="uncoinched">Uncoinched</string>
+<string name="coinched">Coinched!</string>
+<string name="overcoinched">Overcoinched!!</string>
 </resources>

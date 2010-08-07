@@ -14,6 +14,15 @@ public class Deal implements Serializable {
 	int trump;
 	int dealer;
 	int winner;
+	int coinchedMultiplicator;
+
+	protected int getCoinchedMultiplicator() {
+		return coinchedMultiplicator;
+	}
+
+	protected void setCoinchedMultiplicator(int coinchedMultiplicator) {
+		this.coinchedMultiplicator = coinchedMultiplicator;
+	}
 
 	protected int getTeamE_score() {
 		return teamE_score;
@@ -110,6 +119,7 @@ public class Deal implements Serializable {
 		dealer = Game.Us_1;
 		teamE_score = 0;
 		teamN_score = 0;
+		coinchedMultiplicator = 1;
 		winner = Game.UNPLAYED;
 	}
 
