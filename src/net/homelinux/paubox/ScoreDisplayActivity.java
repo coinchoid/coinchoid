@@ -39,10 +39,10 @@ public class ScoreDisplayActivity extends Activity  {
 						right.setBackgroundColor(Color.BLACK);
 						right.setGravity(Gravity.CENTER);
 						if (d.winner == Game.Us) {
-							Us_score += d.bet;
+							Us_score += d.bet*d.coinchedMultiplicator;
 						}
 						else {
-							Them_score += d.bet;
+							Them_score += d.bet*d.coinchedMultiplicator;
 						}
 						left.setText(Integer.toString(Them_score));
 						right.setText(Integer.toString(Us_score));
