@@ -54,6 +54,7 @@ public class BaseMenuActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.new_game:
+			current_game = new Game();
 			Toast.makeText(getApplicationContext(), "Starting new game",
 					Toast.LENGTH_SHORT).show();
 			return true;
