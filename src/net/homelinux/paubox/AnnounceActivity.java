@@ -78,11 +78,16 @@ public class AnnounceActivity extends BaseMenuActivity {
 			// Read a sample value they have set
 			updateDebugText();
 		} else if (requestCode == REQUEST_CODE_WAITING) {
-			boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);
-			current_game.currentDeal().setWon(won);
-			current_game.newDeal();
-			Toast.makeText(getApplicationContext(), "The game was" + (won ? "won !" : "lost :("),
-					Toast.LENGTH_SHORT).show();
+			if (resultCode != RESULT_CANCELED) {
+				boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);
+				current_game.currentDeal().setWon(won);
+				current_game.newDeal();
+				Toast.makeText(getApplicationContext(), "The game was" + (won ? "won !" : "lost :("),
+						Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(getApplicationContext(), "Cancel",
+						Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 
