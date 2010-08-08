@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -27,7 +28,8 @@ public class AnnounceActivity extends BaseMenuActivity {
 	 **** CLASS VARIABLE **** 
 	 ************************/
 	TextView debug_text;
-	Spinner score_spinner;   
+	Spinner score_spinner;
+	Button button_coinche;
 
 	/**************************
 	 **** PRIVATE METHODS *****
@@ -82,6 +84,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 				boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);
 				current_game.currentDeal().setWon(won);
 				current_game.newDeal();
+				button_coinche.setText(CoincheButtonTextId(current_game.currentDeal().getCoinchedMultiplicator()));
 				Toast.makeText(getApplicationContext(), "The game was" + (won ? "won !" : "lost :("),
 						Toast.LENGTH_SHORT).show();
 			} else {
@@ -102,6 +105,23 @@ public class AnnounceActivity extends BaseMenuActivity {
 	/*************************
 	 **** PUBLIC METHODDS ****
 	 *************************/
+
+	private int CoincheButtonTextId(int multiplicator) {
+		switch (multiplicator) {
+		case 1: return R.string.uncoinched;
+		case 2: return R.string.coinched;
+		case 4: return R.string.overcoinched;
+		default: return -1;
+		}
+	}
+	private int nextMultiplicator(int multiplicator) {
+		switch (multiplicator) {
+		case 1: return 2;
+		case 2: return 4;
+		case 4: return 1;
+		default: return -1;
+		}
+	}
 
 	@Override
 	public void onPause() {
@@ -126,27 +146,21 @@ public class AnnounceActivity extends BaseMenuActivity {
 				(RadioButton) findViewById(R.id.radio_notrump)
 		};
 		final Button button_go = (Button) findViewById(R.id.button_go);
-		final Button button_coinche = (Button) findViewById(R.id.button_coinche);
+		button_coinche = (Button) findViewById(R.id.button_coinche);
+		current_game.currentDeal().setCoinchedMultiplicator(1);
+		button_coinche.setText(CoincheButtonTextId(current_game.currentDeal().getCoinchedMultiplicator()));
 		button_coinche.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Deal d = current_game.currentDeal();
-				switch (d.getCoinchedMultiplicator()) {
-				case 1:
-					d.setCoinchedMultiplicator(2);
-					button_coinche.setText(R.string.coinched);
-					break;
-				case 2:
-					d.setCoinchedMultiplicator(4);
-					button_coinche.setText(R.string.overcoinched);
-					break;
-				case 4:
-					d.setCoinchedMultiplicator(1);
-					button_coinche.setText(R.string.uncoinched);
-					break;
-				default:
+				int nextMultiplicator = nextMultiplicator(d.getCoinchedMultiplicator());
+				if (nextMultiplicator==-1) {
 					Toast.makeText(getApplicationContext(), "WRONG COINCHEDMULTIPLICATOR!",
 							Toast.LENGTH_SHORT).show();
+				}
+				else {
+					button_coinche.setText(CoincheButtonTextId(nextMultiplicator));
+					d.setCoinchedMultiplicator(nextMultiplicator);
 				}
 			}
 		});
@@ -223,6 +237,23 @@ public class AnnounceActivity extends BaseMenuActivity {
 			e.printStackTrace();
 		}
 		return game;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case R.id.new_game:
+			button_coinche.setText(CoincheButtonTextId(current_game.currentDeal().getCoinchedMultiplicator()));
+			return true;
+		case R.id.quit:
+			return true;
+		case R.id.preferences:
+			return true;
+		case R.id.display_scores:
+			return true;
+		}
+		return false;
 	}
 }
 
