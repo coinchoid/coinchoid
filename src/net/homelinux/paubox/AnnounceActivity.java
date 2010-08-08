@@ -122,6 +122,11 @@ public class AnnounceActivity extends BaseMenuActivity {
 		default: return -1;
 		}
 	}
+	private void uncheckAllRadioButtons(RadioButton buttons[]) {
+		for (RadioButton rb : buttons) {
+			rb.setChecked(false);
+		}
+	}
 
 	@Override
 	public void onPause() {
@@ -145,6 +150,16 @@ public class AnnounceActivity extends BaseMenuActivity {
 				(RadioButton) findViewById(R.id.radio_alltrump),
 				(RadioButton) findViewById(R.id.radio_notrump)
 		};
+		OnClickListener radioEmulatorListener = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				uncheckAllRadioButtons(trumpRadioButtons);
+				((RadioButton)v).setChecked(true);
+			}
+		};
+		for (RadioButton b : trumpRadioButtons) {
+			b.setOnClickListener(radioEmulatorListener);
+		}
 		final Button button_go = (Button) findViewById(R.id.button_go);
 		button_coinche = (Button) findViewById(R.id.button_coinche);
 		current_game.currentDeal().setCoinchedMultiplicator(1);

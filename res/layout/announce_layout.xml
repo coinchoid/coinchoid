@@ -9,24 +9,32 @@
 		android:prompt="@string/planet_prompt" />
 	<RadioGroup android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:orientation="vertical">
-		<RadioButton android:id="@+id/radio_heart"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/trump_heart" />
-		<RadioButton android:id="@+id/radio_diamond"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/trump_diamond" />
-		<RadioButton android:id="@+id/radio_spade"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/trump_spade" />
-		<RadioButton android:id="@+id/radio_club"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/trump_club" />
-		<RadioButton android:id="@+id/radio_alltrump"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/trump_alltrump" />
-		<RadioButton android:id="@+id/radio_notrump"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/trump_notrump" />
+	<TableLayout>
+		<TableRow>
+			<RadioButton android:id="@+id/radio_heart"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="@string/trump_heart" />
+			<RadioButton android:id="@+id/radio_diamond"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="@string/trump_diamond" />
+		</TableRow>
+		<TableRow>
+			<RadioButton android:id="@+id/radio_spade"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="@string/trump_spade" />
+			<RadioButton android:id="@+id/radio_club"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="@string/trump_club" />
+		</TableRow>
+		<TableRow>
+			<RadioButton android:id="@+id/radio_alltrump"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="@string/trump_alltrump" />
+			<RadioButton android:id="@+id/radio_notrump"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="@string/trump_notrump" />
+		</TableRow>
+	</TableLayout>
 	</RadioGroup>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
