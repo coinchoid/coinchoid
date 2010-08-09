@@ -151,7 +151,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 				(RadioButton) findViewById(R.id.radio_notrump)
 		};
 		OnClickListener radioEmulatorListener = new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				uncheckAllRadioButtons(trumpRadioButtons);
 				((RadioButton)v).setChecked(true);
@@ -165,7 +164,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 		current_game.currentDeal().setCoinchedMultiplicator(1);
 		button_coinche.setText(CoincheButtonTextId(current_game.currentDeal().getCoinchedMultiplicator()));
 		button_coinche.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				Deal d = current_game.currentDeal();
 				int nextMultiplicator = nextMultiplicator(d.getCoinchedMultiplicator());
