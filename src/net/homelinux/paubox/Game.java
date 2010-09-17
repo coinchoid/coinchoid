@@ -56,7 +56,7 @@ public class Game implements Serializable {
 	}
 
 	private void update_distribution(){
-		player = (player + 1) % 4;
+		player = next_player(player);
 	}
 
 	private String player_Distribution(){
