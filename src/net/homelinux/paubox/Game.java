@@ -25,6 +25,10 @@ public class Game implements Serializable {
 	 ************************/
 	String[] player_names;
 	ArrayList<Inning> innings;
+	
+	int score_Us;
+	int score_Them;
+	int player;
 
 	/**************************
 	 **** PRIVATE METHODDS ****
@@ -44,6 +48,32 @@ public class Game implements Serializable {
 		}
 	}
 
+	private void update_score(){
+		if (currentDeal().winner == Game.Us)
+			score_Us = score_Us + currentDeal().bet*currentDeal().getCoinchedMultiplicator();
+		else
+			score_Them = score_Them + currentDeal().bet*currentDeal().getCoinchedMultiplicator();			
+	}
+
+	private void update_distribution(){
+		player = (player + 1) % 4;
+	}
+
+	private String player_Distribution(){
+		switch(player) {
+		case 0:
+			return "Us_1";
+		case 1:
+			return "Them_1";
+		case 2:
+			return "Us_2";
+		case 3:
+			return "Them_2";
+		default:
+			return "error player_Distribution ";
+		}
+	}
+
 	/****************************
 	 **** PROTECTED METHODDS ****
 	 ****************************/	
@@ -54,6 +84,9 @@ public class Game implements Serializable {
 	}
 
 	protected void newGame() {
+		score_Us = 0;
+		score_Them = 0;
+		player = 0;
 		innings = new ArrayList<Inning>();
 		innings.add(new Inning());
 	}
@@ -71,9 +104,15 @@ public class Game implements Serializable {
 		return result.toString();
 	}
 
+	protected void updateResult() {
+		update_score();
+		update_distribution();
+	}
+
 	protected Inning currentInning() {
 		return innings.get(innings.size()-1);
 	}
+
 	protected Deal currentDeal() {
 		return currentInning().currentDeal();
 	}
@@ -81,8 +120,21 @@ public class Game implements Serializable {
 	protected void newDeal() {
 		currentInning().newDeal();
 	}
+
 	protected void newInning() {
 		innings.add(new Inning());
+	}
+
+	protected String getPlayer_Distribution() {
+		return player_Distribution();
+	}
+
+	protected int getScore_Us() {
+		return score_Us;
+	}
+
+	protected int getScore_Them() {
+		return score_Them;
 	}
 
 }

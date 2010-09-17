@@ -142,7 +142,7 @@ public class Deal implements Serializable {
 	}
 
 	protected void setWon(boolean won) {
-	    if (team_betting == Game.Us ^ won)
+	    if (team_betting == Game.Us ^ won)       //XOR
             winner = Game.Them;
         else
             winner = Game.Us;

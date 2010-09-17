@@ -1,56 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
+	android:orientation="vertical" 
+	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
-	<TextView android:id="@+id/debug_text" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="TextView de debug" />
-	<Spinner android:id="@+id/spinner" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:drawSelectorOnTop="true"
+
+	<TextView android:id="@+id/debug_text" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="TextView de debug" />
+
+	<TextView android:id="@+id/current_score" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="Score courant" />
+
+	<TextView android:id="@+id/distribution"
+		android:layout_width="fill_parent" 
+		android:text="distribution : Us_1"
+		android:layout_height="wrap_content" />	
+
+	<Spinner android:id="@+id/spinner" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:drawSelectorOnTop="true"
 		android:prompt="@string/planet_prompt" />
+
 	<RadioGroup android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:orientation="vertical">
+		android:layout_height="wrap_content" 
+		android:orientation="vertical">
+
 	<TableLayout>
+
 		<TableRow>
+
 			<RadioButton android:id="@+id/radio_heart"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
 				android:text="@string/trump_heart" />
+
 			<RadioButton android:id="@+id/radio_diamond"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
 				android:text="@string/trump_diamond" />
+
 		</TableRow>
+
 		<TableRow>
+
 			<RadioButton android:id="@+id/radio_spade"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
 				android:text="@string/trump_spade" />
+
 			<RadioButton android:id="@+id/radio_club"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
 				android:text="@string/trump_club" />
+
 		</TableRow>
+
 		<TableRow>
+
 			<RadioButton android:id="@+id/radio_alltrump"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
 				android:text="@string/trump_alltrump" />
+
 			<RadioButton android:id="@+id/radio_notrump"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
 				android:text="@string/trump_notrump" />
+
 		</TableRow>
+
 	</TableLayout>
+
 	</RadioGroup>
+	
+	<Spinner android:id="@+id/coincheSpinner" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:drawSelectorOnTop="true"
+		android:prompt="@string/coinche" />
+
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
-		<Button android:id="@+id/button_coinche" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" />
-		<Button android:id="@+id/button_go" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="@string/go" />
+		android:orientation="horizontal" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+
 		<RadioGroup android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:orientation="horizontal">
+			android:layout_height="wrap_content" 
+			android:orientation="horizontal">
+
 			<RadioButton android:id="@+id/button_Us"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
 				android:text="Us" />
+
 			<RadioButton android:id="@+id/button_Them"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
 				android:text="Them" />
+
 		</RadioGroup>
+
 	</LinearLayout>
+
+	<Button android:id="@+id/button_go" 
+		android:layout_width="100sp"
+		android:layout_height="wrap_content" 
+		android:layout_gravity="center"			
+		android:text="@string/go" />
+
 </LinearLayout>

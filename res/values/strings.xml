@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string name="app_name">Coinche</string>
-<string name="go">Ok</string><string name="hello">Hello World, CoincheActivity!</string><string name="lost">C\'est chu !</string><string name="menu_new_game">Nouvelle partie</string><string name="menu_preferences">Preferences</string><string name="planet_prompt">TOTO</string>
+<string name="go">Ok</string>
+<string name="hello">Hello World, CoincheActivity!</string>
+<string name="lost">C\'est chu !</string>
+<string name="menu_new_game">Nouvelle partie</string>
+<string name="menu_preferences">Preferences</string>
+<string name="planet_prompt">TOTO</string>
 <string-array name="points">
 <item>80</item>
 <item>90</item>
@@ -16,6 +21,13 @@
 <item>170</item>
 <item>180</item>
 <item>Capot</item>
+</string-array>
+
+<string name="coinche">Coinche</string>
+<string-array name="coinche_array">
+<item>Uncoinched</item>
+<item>Coinched</item>
+<item>Overcoinched</item>
 </string-array>
 
 <string name="win">C\'est fait !</string>

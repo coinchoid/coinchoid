@@ -23,6 +23,7 @@ public class ScoreDisplayActivity extends Activity  {
 		ll.bottomMargin = 1;
 		final TableRow.LayoutParams lr = new TableRow.LayoutParams();
 		lr.bottomMargin = 1;
+		
 		game = (Game) getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 
 		int Us_score = 0, Them_score = 0;

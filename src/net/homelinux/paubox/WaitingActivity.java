@@ -29,16 +29,21 @@ public class WaitingActivity extends BaseMenuActivity {
 
 		annouce_reminder = (TextView) findViewById(R.id.announce_reminder);
 		annouce_reminder.setText("Annonce en cours : " + current_game.getAnnounce());
-		//annouce_reminder.setText("Annonce en cours : test");
+		
 
 		final Button winButton = (Button) findViewById(R.id.button_win);
+		
 		winButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				setResult(AnnounceActivity.REQUEST_CODE_WAITING, new Intent().putExtra("net.homelinux.paubox.won",true));
+				
 				finish();
 			}
 		});
+		
+		
 		final Button lostButton = (Button) findViewById(R.id.button_lost);
+		
 		lostButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				setResult(AnnounceActivity.REQUEST_CODE_WAITING, new Intent().putExtra("net.homelinux.paubox.won",false));

@@ -9,6 +9,7 @@ public class Inning implements Serializable {
 	public static final long serialVersionUID = 1L;
 
 	ArrayList<Deal> deals;
+	
 	protected Deal currentDeal() {
 		return deals.get(deals.size()-1);
 	}
