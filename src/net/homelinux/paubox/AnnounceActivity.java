@@ -25,7 +25,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 
 	/************************
-	 **** CLASS VARIABLE **** 
+	 **** CLASS VARIABLE ****
 	 ************************/
 	TextView debug_text;
 	Spinner score_spinner;
@@ -130,7 +130,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		case 2: return 4;
 		default: return -1;
 		
-		} 
+		}
 	}
 
 	private void uncheckAllRadioButtons(RadioButton buttons[]) {
@@ -212,7 +212,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 				}
 
 				//Save the current team betting
-				if (radio_us.isChecked()) 
+				if (radio_us.isChecked())
 					current_game.currentDeal().setTeam_betting(Game.Us);
 				else if (radio_them.isChecked()) {
 					current_game.currentDeal().setTeam_betting(Game.Them);

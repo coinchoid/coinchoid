@@ -7,7 +7,7 @@ public class Game implements Serializable {
 	/*******************
 	 **** CONSTANTS ****
 	 *******************/
-	// To be serializable 
+	// To be serializable
 	public static final long serialVersionUID = 1L;
 
 	// Players
@@ -21,7 +21,7 @@ public class Game implements Serializable {
 	public static final int UNPLAYED = 2;
 
 	/************************
-	 **** CLASS VARIABLE **** 
+	 **** CLASS VARIABLE ****
 	 ************************/
 	String[] player_names;
 	ArrayList<Inning> innings;
