@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,8 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 	int score_us;
 	int score_them;
+
+	PowerManager.WakeLock wl;
 
 	/**************************
 	 **** PRIVATE METHODS *****
@@ -89,6 +92,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		if (requestCode == REQUEST_CODE_PREFERENCES) {
 			// Read a sample value they have set
 			updateDebugText();
+			updatePreferences();
 		} else if (requestCode == REQUEST_CODE_WAITING) {
 			if (resultCode != RESULT_CANCELED) {
 				boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);			
@@ -109,6 +113,15 @@ public class AnnounceActivity extends BaseMenuActivity {
 		score_spinner.setSelection(0);
 		coinche_spinner.setSelection(0);
 
+	}
+
+	private void updatePreferences() {
+		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("wake_lock_enable", false)) {
+			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+			wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "AnnounceActivity");
+		} else {
+			wl = null;
+		}
 	}
 
 	protected int BetFromItemId(long adapter_view_id) {
@@ -140,9 +153,20 @@ public class AnnounceActivity extends BaseMenuActivity {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		if (wl!=null) {
+			wl.acquire();
+		}
+	}
+
+	@Override
 	public void onPause() {
 		super.onPause();
 		writeGame(current_game);
+		if (wl!=null) {
+			wl.release();
+		}
 	}
 
 
@@ -153,7 +177,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.announce_layout);
-
+		updatePreferences();
 		current_game = readGame();		
 
 		if (current_game == null) {
