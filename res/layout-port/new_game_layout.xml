@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<TextView android:id="@+id/title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/title_new_game"
+		android:shadowColor="#80FF0000"
+		android:textSize="35sp"
+		android:textStyle="bold" />
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:orientation="vertical"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="10">
+
+			<EditText android:id="@+id/name_player1"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/name_player1"
+				android:inputType="textPersonName"/>
+
+			<EditText android:id="@+id/name_player2"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/name_player2"
+				android:inputType="textPersonName"/>
+
+			<EditText android:id="@+id/name_player3"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/name_player3"
+				android:inputType="textPersonName"/>
+
+			<EditText android:id="@+id/name_player4"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/name_player4"
+				android:inputType="textPersonName"/>
+
+		</LinearLayout>
+
+		<Button android:id="@+id/button_new_game_go"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"			
+			android:text="@string/new_game_go" />
+			
+	</LinearLayout>
+
+	<CheckBox android:key="shuffle_game"
+		android:defaultValue="true"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:text="@string/shuffle_game" />
+
+
+</LinearLayout>

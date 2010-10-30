@@ -13,8 +13,8 @@ public class Game implements Serializable {
 	// Players
 	public static final int Us_1 = 0; // player holding the phone
 	public static final int Them_1 = 1;
-	public static final int Us_2 = 3;
-	public static final int Them_2 = 4;
+	public static final int Us_2 = 2;
+	public static final int Them_2 = 3;
 	public static final int Us = 0;
 	public static final int Them = 1;
 	//This goes in the winner field, along with "Us" and "Them" so the values must be different
@@ -60,18 +60,7 @@ public class Game implements Serializable {
 	}
 
 	private String player_Distribution(){
-		switch(player) {
-		case 0:
-			return "Us_1";
-		case 1:
-			return "Them_1";
-		case 2:
-			return "Us_2";
-		case 3:
-			return "Them_2";
-		default:
-			return "error player_Distribution ";
-		}
+		return player_names[player];
 	}
 
 	/****************************
@@ -89,6 +78,7 @@ public class Game implements Serializable {
 		player = 0;
 		innings = new ArrayList<Inning>();
 		innings.add(new Inning());
+		player_names = new String[4];
 	}
 
 	/*************************
@@ -135,6 +125,10 @@ public class Game implements Serializable {
 
 	protected int getScore_Them() {
 		return score_Them;
+	}
+
+	public void setPlayer_name(String name, int player) {
+	    player_names[player] = name;
 	}
 
 }

@@ -178,11 +178,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.announce_layout);
 		updatePreferences();
-		current_game = readGame();		
-
-		if (current_game == null) {
-			current_game = new Game();
-		}
+		current_game = (Game)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 
 		current_score = (TextView) findViewById(R.id.current_score);			
 		current_score.setText("Us : " + current_game.getScore_Us() + "\nThem : " + current_game.getScore_Them());
@@ -269,11 +265,9 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 	}
 
-	static private String FILENAME = "coinchoid_current_game.ser";
-
 	private void writeGame(Game game) {
 		try {
-			FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+			FileOutputStream fos = openFileOutput(NewGameActivity.FILENAME, Context.MODE_PRIVATE);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(game);
 			fos.close();
@@ -281,23 +275,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	private Game readGame() {
-		Game game = null;
-		try {
-			FileInputStream fis = openFileInput(FILENAME);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			game = (Game) ois.readObject();
-			fis.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return game;
 	}
 
 	@Override
