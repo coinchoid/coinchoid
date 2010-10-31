@@ -31,7 +31,7 @@ public class ScoreDisplayActivity extends Activity  {
 		if (game != null) {
 			for (Inning i : game.innings) {
 				for (Deal d : i.deals) {
-					if (d.winner!=Game.UNPLAYED) {
+					if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
 						TableRow tr = new TableRow(this);
 						TextView left = new TextView(this);
 						TextView right = new TextView(this);

@@ -57,7 +57,7 @@
 			
 	</LinearLayout>
 
-	<CheckBox android:key="shuffle_game"
+	<CheckBox android:id="@+id/shuffle_game"
 		android:defaultValue="true"
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"

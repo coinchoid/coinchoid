@@ -49,6 +49,9 @@ public class Game implements Serializable {
 	}
 
 	private void update_score(){
+		if (currentDeal().isShuffleDeal())
+		    return;
+
 		if (currentDeal().winner == Game.Us)
 			score_Us = score_Us + currentDeal().bet*currentDeal().getCoinchedMultiplicator();
 		else

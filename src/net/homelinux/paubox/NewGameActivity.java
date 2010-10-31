@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class NewGameActivity extends BaseMenuActivity {
@@ -26,6 +27,7 @@ public class NewGameActivity extends BaseMenuActivity {
 	EditText text_player2;
 	EditText text_player3;
 	EditText text_player4;
+	CheckBox shuffle_game;
 	
 	/**************************
 	 **** PRIVATE METHODS *****
@@ -67,7 +69,7 @@ public class NewGameActivity extends BaseMenuActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_game_layout);
-		current_game = readGame();		
+		current_game = readGame();
 
 		if (current_game == null) {
 			current_game = new Game();
@@ -80,6 +82,7 @@ public class NewGameActivity extends BaseMenuActivity {
 				current_game.setPlayer_name(text_player2.getText().toString(), Game.Them_1);
 				current_game.setPlayer_name(text_player3.getText().toString(), Game.Us_2);
 				current_game.setPlayer_name(text_player4.getText().toString(), Game.Them_2);
+				current_game.currentDeal().setShuffleDeal(shuffle_game.isChecked());
 				launchAnnouceActivity();
 			}
 		});
@@ -88,7 +91,7 @@ public class NewGameActivity extends BaseMenuActivity {
 		text_player2 = (EditText) findViewById(R.id.name_player2);		
 		text_player3 = (EditText) findViewById(R.id.name_player3);		
 		text_player4 = (EditText) findViewById(R.id.name_player4);		
-		
+		shuffle_game = (CheckBox) findViewById(R.id.shuffle_game);
 	}
 
 }

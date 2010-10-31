@@ -13,6 +13,7 @@ public class Deal implements Serializable {
 	int dealer;
 	int winner;
 	int coinchedMultiplicator;
+	Boolean shuffleDeal;
 
 	protected int getCoinchedMultiplicator() {
 		return coinchedMultiplicator;
@@ -101,6 +102,7 @@ public class Deal implements Serializable {
 		dealer = Game.Us_1;
 		coinchedMultiplicator = 1;
 		winner = Game.UNPLAYED;
+		shuffleDeal = false;
 	}
 
 	// For the scores
@@ -134,5 +136,13 @@ public class Deal implements Serializable {
 
 	public String toString() {
 		return team_betting + ""+ getAnnounce() + " : " + (winner==team_betting ? "Faite !" : "Chute !") ;
+	}
+
+	public Boolean isShuffleDeal() {
+	    return shuffleDeal;
+	}
+
+	public void setShuffleDeal(Boolean shuffleDeal) {
+	    this.shuffleDeal = shuffleDeal;
 	}
 }
