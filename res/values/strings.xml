@@ -25,9 +25,9 @@
 
 <string name="coinche">Coinche</string>
 <string-array name="coinche_array">
-<item>Uncoinched</item>
-<item>Coinched</item>
-<item>Overcoinched</item>
+<item>Non coinché</item>
+<item>Coinché</item>
+<item>Surcoinché!</item>
 </string-array>
 
 <string name="win">C\'est fait !</string>
@@ -54,9 +54,9 @@
 <string name="Them">Eux</string>
 
 <string name="select_team">Please select a team</string>
-<string name="uncoinched">Uncoinched</string>
-<string name="coinched">Coinched!</string>
-<string name="overcoinched">Overcoinched!!</string>
+
+<string name="coinched">coinché</string>
+<string name="overcoinched">surcoinché</string>
 <string name="shuffle_game">Mélangeante ?</string>
 
 
@@ -66,4 +66,6 @@
 <string name="name_player4">A droite</string>
 <string name="title_new_game">Nouvelle partie</string>
 <string name="new_game_go">Start!</string>
+<string name="better_to_string_us">pour nous</string>
+<string name="better_to_string">pour eux</string>
 </resources>

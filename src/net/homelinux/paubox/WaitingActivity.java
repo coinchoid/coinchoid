@@ -28,7 +28,7 @@ public class WaitingActivity extends BaseMenuActivity {
 		current_game = (Deal)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 
 		annouce_reminder = (TextView) findViewById(R.id.announce_reminder);
-		annouce_reminder.setText("Annonce en cours : " + current_game.getAnnounce());
+		annouce_reminder.setText("Annonce en cours : " + current_game.getAnnounce(this));
 		
 
 		final Button winButton = (Button) findViewById(R.id.button_win);

@@ -2,6 +2,8 @@ package net.homelinux.paubox;
 
 import java.io.Serializable;
 
+import android.app.Activity;
+
 public class Deal implements Serializable {
 
 	// To be serializable
@@ -61,27 +63,25 @@ public class Deal implements Serializable {
 			return Integer.toString(bet);
 	}
 
-	// TODO : use strings in strings.xml
-	private String coinchedMultiplicatorToString() {
+	private String coinchedMultiplicatorToString(Activity a) {
 		if (coinchedMultiplicator == 1)
 			return "";
 
 		if (coinchedMultiplicator == 2)
-			return " coinché";
+			return " " + a.getApplicationContext().getText(R.string.coinched).toString();
 
 		if (coinchedMultiplicator == 4)
-			return " surcoinché";
+			return " " + a.getApplicationContext().getText(R.string.overcoinched).toString();
 
 		return "ERROR";
 	}
 
-	// TODO : use strings in strings.xml
-	private String betterToString() {
+	private String betterToString(Activity a) {
 		if (team_betting == Game.Us)
-			return "pour Nous";
+			return a.getApplicationContext().getText(R.string.better_to_string_us).toString();
 
 		if (team_betting == Game.Them)
-			return "pour Eux";
+			return a.getApplicationContext().getText(R.string.better_to_string_us).toString();
 
 		return "ERROR";
 	}
@@ -111,12 +111,12 @@ public class Deal implements Serializable {
             winner = Game.Us;
 	}
 
-	protected String getAnnounce() {
-		return betToString() + coinchedMultiplicatorToString() + " " + betterToString();
+	protected String getAnnounce(Activity a) {
+		return betToString() + coinchedMultiplicatorToString(a) + " " + betterToString(a);
 	}
 
-	public String toString() {
-		return team_betting + ""+ getAnnounce() + " : " + (winner==team_betting ? "Faite !" : "Chute !") ;
+	public String toString(Activity a) {
+		return team_betting + " " + getAnnounce(a) + " : " + (winner==team_betting ? "Faite !" : "Chute !") ;
 	}
 
 	public Boolean isShuffleDeal() {
