@@ -34,9 +34,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 	TextView current_score;
 	TextView distribution;
 
-	int score_us;
-	int score_them;
-
 	PowerManager.WakeLock wl;
 
 	/**************************
