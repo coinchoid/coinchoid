@@ -15,7 +15,6 @@ public class Deal implements Serializable, Editable {
 
 	int team_betting;
 	int bet;
-	int trump;
 	int dealer;
 	int winner;
 	int coinchedMultiplicator;
@@ -45,14 +44,6 @@ public class Deal implements Serializable, Editable {
 		this.bet = bet;
 	}
 
-	protected int getTrump() {
-		return trump;
-	}
-
-	protected void setTrump(int trump) {
-		this.trump = trump;
-	}
-
 	protected int getDealer() {
 		return dealer;
 	}
@@ -69,41 +60,38 @@ public class Deal implements Serializable, Editable {
 		this.winner = winner;
 	}
 
-	public static String betToString(int bet) {
+	private String betToString() {
 		if (bet == CAPOT_BET)
 			return "Capot !";
 		else
 			return Integer.toString(bet);
 	}
 
-	public static String toTrumpString(int trump) {
-		switch(trump) {
-		case (TRUMP_HEART) :
-			//return R.string.trump_heart;
-			return "Coeur";
-		case (TRUMP_DIAMOND) :
-			//return R.string.trump_diamond;
-			return "Carreau";
-		case (TRUMP_CLUB) :
-			//return R.string.trump_club;
-			return "Trèfle";
-		case (TRUMP_SPADE) :
-			//return R.string.trump_spade;
-			return "Pique";
-		case (TRUMP_ALL_TRUMPS) :
-			//return R.string.trump_alltrump;
-			return "Tout At";
-		case (TRUMP_NO_TRUMP) :
-			//return R.string.trump_notrump;
-			return "Sans At";
-		default:
-			return "problem in toTrumpString";
-		}
+	private String coinchedMultiplicatorToString(Activity a) {
+		if (coinchedMultiplicator == 1)
+			return "";
+
+		if (coinchedMultiplicator == 2)
+			return " " + a.getApplicationContext().getText(R.string.coinched).toString();
+
+		if (coinchedMultiplicator == 4)
+			return " " + a.getApplicationContext().getText(R.string.overcoinched).toString();
+
+		return "ERROR";
+	}
+
+	private String betterToString(Activity a) {
+		if (team_betting == Game.Us)
+			return a.getApplicationContext().getText(R.string.better_to_string_us).toString();
+
+		if (team_betting == Game.Them)
+			return a.getApplicationContext().getText(R.string.better_to_string_us).toString();
+
+		return "ERROR";
 	}
 
 	protected void newDeal() {
 		bet = 80;
-		trump  = TRUMP_CLUB;
 		team_betting = Game.Us; // of course
 		dealer = Game.Us_1;
 		coinchedMultiplicator = 1;
@@ -116,15 +104,6 @@ public class Deal implements Serializable, Editable {
 	public static final int MAX_BET = 180;
 	public static final int CAPOT_BET = 250; // 250 means "capot" useful for some functions
 
-	// For the trump (one int per suit, see http://en.wikipedia.org/wiki/Belote)
-	// WARNING do not change values since they are used in string.xml
-	public static final int TRUMP_CLUB = 0;
-	public static final int TRUMP_DIAMOND = 1;
-	public static final int TRUMP_HEART = 2;
-	public static final int TRUMP_SPADE = 3;
-	public static final int TRUMP_NO_TRUMP = 4;
-	public static final int TRUMP_ALL_TRUMPS = 5;
-
 	public Deal() {
 		newDeal();
 	}
@@ -136,12 +115,12 @@ public class Deal implements Serializable, Editable {
             winner = Game.Us;
 	}
 
-	protected String getAnnounce() {
-		return betToString(bet) + " " + toTrumpString(trump);
+	protected String getAnnounce(Activity a) {
+		return betToString() + coinchedMultiplicatorToString(a) + " " + betterToString(a);
 	}
 
-	public String toString() {
-		return team_betting + ""+ getAnnounce() + " : " + (winner==team_betting ? "Faite !" : "Chute !") ;
+	public String toString(Activity a) {
+		return team_betting + " " + getAnnounce(a) + " : " + (winner==team_betting ? "Faite !" : "Chute !") ;
 	}
 
 	@Override
