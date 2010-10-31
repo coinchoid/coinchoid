@@ -43,28 +43,8 @@ public class AnnounceActivity extends BaseMenuActivity {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		final String winning_score = sharedPref.getString("winning_score", "coucou");
 		Deal current_deal = current_game.currentDeal();
-		debug_text.setText("Current: " + current_deal.getBet() + " " + current_deal.getTrump() + " (max = " + winning_score + ")");
+		debug_text.setText("Current: " + current_deal.getAnnounce() + " (max = " + winning_score + ")");
 	}
-
-
-	private int toTrumpInt(int id) {
-		switch (id) {
-		case (R.id.radio_heart) :
-			return Deal.TRUMP_HEART;
-		case (R.id.radio_diamond) :
-			return Deal.TRUMP_DIAMOND;
-		case (R.id.radio_club) :
-			return Deal.TRUMP_CLUB;
-		case (R.id.radio_spade) :
-			return Deal.TRUMP_SPADE;
-		case (R.id.radio_alltrump) :
-			return Deal.TRUMP_ALL_TRUMPS;
-		case (R.id.radio_notrump) :
-			return Deal.TRUMP_NO_TRUMP;
-		}
-		return -1;
-	}
-
 
 	/****************************
 	 **** PROTECTED METHODDS ****
@@ -141,12 +121,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 	}
 
-	private void uncheckAllRadioButtons(RadioButton buttons[]) {
-		for (RadioButton rb : buttons) {
-			rb.setChecked(false);
-		}
-	}
-
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -181,26 +155,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 		distribution = (TextView) findViewById(R.id.distribution);
 		distribution.setText("distribution : " + current_game.getPlayer_Distribution());
 
-
-		final RadioButton trumpRadioButtons[] = {
-				(RadioButton) findViewById(R.id.radio_heart),
-				(RadioButton) findViewById(R.id.radio_diamond),
-				(RadioButton) findViewById(R.id.radio_spade),
-				(RadioButton) findViewById(R.id.radio_club),
-				(RadioButton) findViewById(R.id.radio_alltrump),
-				(RadioButton) findViewById(R.id.radio_notrump)
-		};
-		OnClickListener radioEmulatorListener = new OnClickListener() {
-			public void onClick(View v) {
-				uncheckAllRadioButtons(trumpRadioButtons);
-				((RadioButton)v).setChecked(true);
-			}
-		};
-
-		for (RadioButton b : trumpRadioButtons) {
-			b.setOnClickListener(radioEmulatorListener);
-		}
-
 		final Button button_go = (Button) findViewById(R.id.button_go);
 		current_game.currentDeal().setCoinchedMultiplicator(1);
 
@@ -210,22 +164,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		button_go.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				//Save the current Trump
-				boolean checked = false;
-				for (RadioButton rb : trumpRadioButtons) {
-					if (rb.isChecked()) {
-						current_game.currentDeal().setTrump(toTrumpInt(rb.getId()));
-						updateDebugText();
-						checked = true;
-						break;
-					}
-				}
-
-				if (!checked) {
-					Toast.makeText(getApplicationContext(), R.string.select_trump , Toast.LENGTH_SHORT).show();
-					return;
-				}
-
 				//Save the current team betting
 				if (radio_us.isChecked())
 					current_game.currentDeal().setTeam_betting(Game.Us);

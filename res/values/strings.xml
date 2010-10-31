@@ -39,26 +39,20 @@
 <string name="title_wake_lock_enable">Mise en veille</string>
 <string name="summary_on_wake_lock_enable">Empêche la veille</string>
 <string name="summary_off_wake_lock_enable">Autorise la veille</string>
-<string-array name="trumps"><item>Trèfle</item>
-<item>Carreau</item>
-<item>Coeur</item>
-<item>Pique</item>
-<item>Sans At</item>
-<item>Tout At</item>
-</string-array>
-<string name="trump_heart">Coeur</string>
-<string name="trump_diamond">Carreau</string>
-<string name="trump_spade">Pique</string>
-<string name="trump_club">Trèfle</string>
-<string name="trump_alltrump">Tout atout</string>
-<string name="trump_notrump">Sans atout</string>
+
+
+
+
+
+
+
 <string name="new_game">New Game !</string>
 <string name="quit">Quit :(</string>
 <string name="display_scores">Display Scores !</string>
 <string name="preferences">Preferences</string>
 <string name="Us">Nous</string>
 <string name="Them">Eux</string>
-<string name="select_trump">Please select a trump</string>
+
 <string name="select_team">Please select a team</string>
 <string name="uncoinched">Uncoinched</string>
 <string name="coinched">Coinched!</string>
