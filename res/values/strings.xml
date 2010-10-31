@@ -63,4 +63,13 @@
 <string name="uncoinched">Uncoinched</string>
 <string name="coinched">Coinched!</string>
 <string name="overcoinched">Overcoinched!!</string>
+<string name="shuffle_game">Mélangeante ?</string>
+
+
+<string name="name_player1">Vous !</string>
+<string name="name_player2">A gauche</string>
+<string name="name_player3">partenaire</string>
+<string name="name_player4">A droite</string>
+<string name="title_new_game">Nouvelle partie</string>
+<string name="new_game_go">Start!</string>
 </resources>

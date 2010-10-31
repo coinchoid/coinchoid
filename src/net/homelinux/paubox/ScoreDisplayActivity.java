@@ -12,7 +12,6 @@ import android.view.View.OnClickListener;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ScoreDisplayActivity extends Activity  {
 
@@ -32,12 +31,11 @@ public class ScoreDisplayActivity extends Activity  {
 		int Us_score = 0, Them_score = 0;
 		for (final Inning i : game.innings) {
 			for (final Deal d : i.deals) {
-				if (d.winner!=Game.UNPLAYED) {
+				if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
 					TableRow tr = new TableRow(activity);
 					tr.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							//Toast.makeText(activity.getApplicationContext(), "Lauching Edit", Toast.LENGTH_SHORT).show();
 							ScoreDisplayActivity.launchEditActivity(activity, d);
 						}
 					});

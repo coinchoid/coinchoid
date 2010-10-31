@@ -13,14 +13,13 @@ public class Deal implements Serializable, Editable {
 	// To be serializable
 	public static final long serialVersionUID = 1L;
 
-	int teamE_score;
-	int teamN_score;
 	int team_betting;
 	int bet;
 	int trump;
 	int dealer;
 	int winner;
 	int coinchedMultiplicator;
+	Boolean shuffleDeal;
 
 	protected int getCoinchedMultiplicator() {
 		return coinchedMultiplicator;
@@ -28,22 +27,6 @@ public class Deal implements Serializable, Editable {
 
 	protected void setCoinchedMultiplicator(int coinchedMultiplicator) {
 		this.coinchedMultiplicator = coinchedMultiplicator;
-	}
-
-	protected int getTeamE_score() {
-		return teamE_score;
-	}
-
-	protected void setTeamE_score(int teamEScore) {
-		teamE_score = teamEScore;
-	}
-
-	protected int getTeamN_score() {
-		return teamN_score;
-	}
-
-	protected void setTeamN_score(int teamNScore) {
-		teamN_score = teamNScore;
 	}
 
 	protected int getTeam_betting() {
@@ -123,10 +106,9 @@ public class Deal implements Serializable, Editable {
 		trump  = TRUMP_CLUB;
 		team_betting = Game.Us; // of course
 		dealer = Game.Us_1;
-		teamE_score = 0;
-		teamN_score = 0;
 		coinchedMultiplicator = 1;
 		winner = Game.UNPLAYED;
+		shuffleDeal = false;
 	}
 
 	// For the scores
@@ -172,5 +154,13 @@ public class Deal implements Serializable, Editable {
 		((TextView) root.findViewById(R.id.de_trump)).setText(Integer.toString(trump));
 		((TextView) root.findViewById(R.id.de_coinchedMultiplicator)).setText(Integer.toString(coinchedMultiplicator));
 		return root;
+  }
+
+	public Boolean isShuffleDeal() {
+	    return shuffleDeal;
+	}
+
+	public void setShuffleDeal(Boolean shuffleDeal) {
+	    this.shuffleDeal = shuffleDeal;
 	}
 }
