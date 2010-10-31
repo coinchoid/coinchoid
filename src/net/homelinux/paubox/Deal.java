@@ -7,8 +7,6 @@ public class Deal implements Serializable {
 	// To be serializable
 	public static final long serialVersionUID = 1L;
 
-	int teamE_score;
-	int teamN_score;
 	int team_betting;
 	int bet;
 	int trump;
@@ -22,22 +20,6 @@ public class Deal implements Serializable {
 
 	protected void setCoinchedMultiplicator(int coinchedMultiplicator) {
 		this.coinchedMultiplicator = coinchedMultiplicator;
-	}
-
-	protected int getTeamE_score() {
-		return teamE_score;
-	}
-
-	protected void setTeamE_score(int teamEScore) {
-		teamE_score = teamEScore;
-	}
-
-	protected int getTeamN_score() {
-		return teamN_score;
-	}
-
-	protected void setTeamN_score(int teamNScore) {
-		teamN_score = teamNScore;
 	}
 
 	protected int getTeam_betting() {
@@ -117,8 +99,6 @@ public class Deal implements Serializable {
 		trump  = TRUMP_CLUB;
 		team_betting = Game.Us; // of course
 		dealer = Game.Us_1;
-		teamE_score = 0;
-		teamN_score = 0;
 		coinchedMultiplicator = 1;
 		winner = Game.UNPLAYED;
 	}
