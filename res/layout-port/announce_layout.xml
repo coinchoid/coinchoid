@@ -36,6 +36,10 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 
+		<TextView android:id="@+id/who_take"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/who_take" />
 
 		<RadioGroup android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
@@ -44,12 +48,12 @@
 			<RadioButton android:id="@+id/button_Us"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Us" />
+				android:text="@string/Us" />
 
 			<RadioButton android:id="@+id/button_Them"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Them" />
+				android:text="@string/Them" />
 
 		</RadioGroup>
 
