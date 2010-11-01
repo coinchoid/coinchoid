@@ -30,12 +30,12 @@
 			<RadioButton android:id="@+id/button_Us"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Us" />
+				android:text="@string/Us" />
 
 			<RadioButton android:id="@+id/button_Them"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Them" />
+				android:text="@string/Them" />
 
 		</RadioGroup>
 
