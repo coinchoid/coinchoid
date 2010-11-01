@@ -15,32 +15,51 @@ import android.widget.TextView;
 
 public class ScoreDisplayActivity extends Activity  {
 
+	private static final int EDIT = 0;
 	private Game game;
+	private TableLayout table;
+	private TableRow.LayoutParams ll;
+	private TableRow.LayoutParams lr;
+	private Deal selected_deal;
 	
-	static View makeDisplayView(final Activity activity,final Game game) {
-		LayoutInflater inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	View makeDisplayView() {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View root = inflater.inflate(R.layout.score_display, null, false);
-		final TableLayout table = (TableLayout) root.findViewById(R.id.display_table);
-		final TableRow.LayoutParams ll = new TableRow.LayoutParams();
+		table = (TableLayout) root.findViewById(R.id.display_table);
+		ll = new TableRow.LayoutParams();
 		ll.rightMargin = 1;
 		ll.bottomMargin = 1;
-		final TableRow.LayoutParams lr = new TableRow.LayoutParams();
+		lr = new TableRow.LayoutParams();
 		lr.bottomMargin = 1;
 		
+		return root;
+	}
 
+	public void onResume() {
+		super.onResume();
+		clearScores();
+		displayScore();
+	}
+
+	private void clearScores() {
+		table.removeAllViews();
+	}
+
+	private void displayScore() {
 		int Us_score = 0, Them_score = 0;
 		for (final Inning i : game.innings) {
 			for (final Deal d : i.deals) {
 				if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
-					TableRow tr = new TableRow(activity);
+					TableRow tr = new TableRow(this);
 					tr.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							ScoreDisplayActivity.launchEditActivity(activity, d);
+							selected_deal = d;
+							ScoreDisplayActivity.launchEditActivity(ScoreDisplayActivity.this, d);
 						}
 					});
-					TextView left = new TextView(activity);
-					TextView right = new TextView(activity);
+					TextView left = new TextView(this);
+					TextView right = new TextView(this);
 					left.setBackgroundColor(Color.BLACK);
 					left.setGravity(Gravity.CENTER);
 					right.setBackgroundColor(Color.BLACK);
@@ -59,13 +78,12 @@ public class ScoreDisplayActivity extends Activity  {
 				}
 			}
 		}
-		return root;
 	}
 
 	static void launchEditActivity(Activity activity,Deal d) {
 		Intent editIntent = new Intent(activity, EditActivity.class);
 		editIntent.putExtra("net.homelinux.paubox.Editable", d);
-		activity.startActivity(editIntent);
+		activity.startActivityForResult(editIntent,BaseMenuActivity.REQUEST_CODE_EDIT);
 	}
 
 	@Override
@@ -73,7 +91,22 @@ public class ScoreDisplayActivity extends Activity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.score_display);
 		game = (Game) getIntent().getSerializableExtra("net.homelinux.paubox.Game");
-		setContentView(ScoreDisplayActivity.makeDisplayView(this, game));
+		setContentView(makeDisplayView());
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == BaseMenuActivity.REQUEST_CODE_EDIT) {
+			final Deal d = (Deal) data.getSerializableExtra("net.homelinux.paubox.edit");
+			this.selected_deal.setAs(d);
+		}
+	}
+
+	public void onPause() {
+		super.onPause();
+		setResult(BaseMenuActivity.REQUEST_CODE_EDIT, new Intent().putExtra("net.homelinux.paubox.edit", game));
 	}
 }
 

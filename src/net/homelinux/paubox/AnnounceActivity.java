@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,8 +28,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 	 **** CLASS VARIABLE ****
 	 ************************/
 	TextView debug_text;
-	Spinner bet_spinner;
-	Spinner coinche_spinner;
 	TextView current_score;
 	TextView distribution;
 
@@ -64,11 +63,13 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		// The preferences returned if the request code is what we had given
 		// earlier in startSubActivity
-		if (requestCode == REQUEST_CODE_PREFERENCES) {
+		switch (requestCode) {
+		case REQUEST_CODE_PREFERENCES:
 			// Read a sample value they have set
 			updateDebugText();
 			updatePreferences();
-		} else if (requestCode == REQUEST_CODE_WAITING) {
+			break;
+		case REQUEST_CODE_WAITING:
 			if (resultCode != RESULT_CANCELED) {
 				boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);			
 				current_game.currentDeal().setWon(won);
@@ -81,13 +82,14 @@ public class AnnounceActivity extends BaseMenuActivity {
 				Toast.makeText(getApplicationContext(), "Cancel",
 						Toast.LENGTH_SHORT).show();
 			}
+			break;
+		case REQUEST_CODE_EDIT:
+			final Game g = (Game) data.getSerializableExtra("net.homelinux.paubox.edit");
+			current_game.setAs(g);
 		}	
 
 		current_score.setText("Us : " + current_game.getScore_Us() + "\nThem : " + current_game.getScore_Them());		
 		distribution.setText("distribution : " + current_game.getPlayer_Distribution());
-		bet_spinner.setSelection(0);
-		coinche_spinner.setSelection(0);
-
 	}
 
 	private void updatePreferences() {
@@ -99,7 +101,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 	}
 
-	protected int BetFromItemId(long adapter_view_id) {
+	static protected int BetFromItemId(long adapter_view_id) {
 		if (adapter_view_id == android.widget.AdapterView.INVALID_ROW_ID)
 			return Deal.MIN_BET;
 		else if (adapter_view_id > (Deal.MAX_BET - Deal.MIN_BET)/10)
@@ -111,13 +113,12 @@ public class AnnounceActivity extends BaseMenuActivity {
 	 **** PUBLIC METHODDS ****
 	 *************************/
 
-	private int coincheMultiplicatorFromItemId(int position){
-		switch(position){
-		case 0: return 1;
-		case 1: return 2;
-		case 2: return 4;
-		default: return -1;
-		
+	static private int coincheMultiplicatorFromItemId(int position){
+		switch(position) {
+			case 0: return 1;
+			case 1: return 2;
+			case 2: return 4;
+			default: return -1;
 		}
 	}
 
@@ -138,7 +139,62 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 	}
 
+	public void configureAnnounceView() {
+		current_score = (TextView) findViewById(R.id.current_score);                    
+		current_score.setText("Us : " + current_game.getScore_Us() + "\nThem : " + current_game.getScore_Them());
 
+		distribution = (TextView) findViewById(R.id.distribution);
+		distribution.setText("distribution : " + current_game.getPlayer_Distribution());
+
+		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
+		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
+		final Spinner score_spinner = (Spinner) findViewById(R.id.bet_spinner);
+		final Spinner coinche_spinner = (Spinner) findViewById(R.id.coincheSpinner);
+		final Deal d = current_game.currentDeal();
+		Button button_go = ((Button) findViewById(R.id.button_go));
+		button_go.setOnClickListener(new OnClickListener() {
+					public void onClick(View v) {
+						saveDeal(AnnounceActivity.this, d, radio_us, radio_them, score_spinner,
+								coinche_spinner);
+						launchWaitingActivity();
+					}});
+	}
+	
+	public static void saveDeal(final Activity a, final Deal d,
+			final RadioButton radio_us, final RadioButton radio_them,
+			final Spinner score_spinner, final Spinner coinche_spinner) {
+		//Save the current team betting
+		if (radio_us.isChecked())
+			d.setTeam_betting(Game.Us);
+		else if (radio_them.isChecked()) {
+			d.setTeam_betting(Game.Them);
+		}
+		else {
+			Toast.makeText(a.getApplicationContext(), R.string.select_team , Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		//Save the current bet and the multiplicator
+		d.setBet(BetFromItemId(score_spinner.getSelectedItemId()));
+		d.setCoinchedMultiplicator(coincheMultiplicatorFromItemId(coinche_spinner.getSelectedItemPosition()));
+	}
+	
+	public static void configureDealView(final Activity a,final Deal d) {
+
+		final Spinner bet_spinner = (Spinner) a.findViewById(R.id.bet_spinner);
+		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coincheSpinner);
+		d.setCoinchedMultiplicator(1);
+
+		ArrayAdapter<CharSequence> bet_adapter = ArrayAdapter.createFromResource(
+				a, R.array.points, android.R.layout.simple_spinner_item);
+		bet_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		bet_spinner.setAdapter(bet_adapter);
+
+		ArrayAdapter<CharSequence> coinche_adapter = ArrayAdapter.createFromResource(
+				a, R.array.coinche_array, android.R.layout.simple_spinner_item);
+		coinche_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		coinche_spinner.setAdapter(coinche_adapter);
+	}
 
 
 	/** Called when the activity is first created. */
@@ -149,53 +205,9 @@ public class AnnounceActivity extends BaseMenuActivity {
 		updatePreferences();
 		current_game = (Game)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 
-		current_score = (TextView) findViewById(R.id.current_score);			
-		current_score.setText("Us : " + current_game.getScore_Us() + "\nThem : " + current_game.getScore_Them());
-
-		distribution = (TextView) findViewById(R.id.distribution);
-		distribution.setText("distribution : " + current_game.getPlayer_Distribution());
-
-		final Button button_go = (Button) findViewById(R.id.button_go);
-		current_game.currentDeal().setCoinchedMultiplicator(1);
-
-		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
-		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
-		debug_text = (TextView) findViewById(R.id.debug_text);
-
-		button_go.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				//Save the current team betting
-				if (radio_us.isChecked())
-					current_game.currentDeal().setTeam_betting(Game.Us);
-				else if (radio_them.isChecked()) {
-					current_game.currentDeal().setTeam_betting(Game.Them);
-				}
-				else {
-					Toast.makeText(getApplicationContext(), R.string.select_team , Toast.LENGTH_SHORT).show();
-					return;
-				}
-
-				//Save the current bet and the multiplicator
-				current_game.currentDeal().setBet(BetFromItemId(bet_spinner.getSelectedItemId()));
-				current_game.currentDeal().setCoinchedMultiplicator(coincheMultiplicatorFromItemId(coinche_spinner.getSelectedItemPosition()));
-
-				launchWaitingActivity();
-			}
-		});
-
-
-		bet_spinner = (Spinner) findViewById(R.id.bet_spinner);
-		ArrayAdapter<CharSequence> bet_adapter = ArrayAdapter.createFromResource(
-				this, R.array.points, android.R.layout.simple_spinner_item);
-		bet_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		bet_spinner.setAdapter(bet_adapter);
-
-		coinche_spinner = (Spinner) findViewById(R.id.coinche_spinner);
-		ArrayAdapter<CharSequence> coinche_adapter = ArrayAdapter.createFromResource(
-				this, R.array.coinche_array, android.R.layout.simple_spinner_item);
-		coinche_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		coinche_spinner.setAdapter(coinche_adapter);
-
+		AnnounceActivity.configureDealView(this, current_game.currentDeal());
+		configureAnnounceView();
+		
 	}
 
 	private void writeGame(Game game) {

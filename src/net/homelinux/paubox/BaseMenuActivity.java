@@ -15,6 +15,7 @@ public class BaseMenuActivity extends Activity {
 
 	public static final int REQUEST_CODE_PREFERENCES = RESULT_FIRST_USER + 1;
 	public static final int REQUEST_CODE_WAITING = RESULT_FIRST_USER + 2;
+	public static final int REQUEST_CODE_EDIT = RESULT_FIRST_USER + 3;
 
 	Game current_game;
 
@@ -27,7 +28,7 @@ public class BaseMenuActivity extends Activity {
 	protected void launchDisplayActivity() {
 		Intent myIntent = new Intent(this,ScoreDisplayActivity.class);
 		myIntent.putExtra("net.homelinux.paubox.Game",current_game);
-		startActivity(myIntent);
+		startActivityForResult(myIntent, REQUEST_CODE_EDIT);
 	}
 
 	/**

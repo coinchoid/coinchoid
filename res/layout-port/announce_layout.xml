@@ -19,41 +19,7 @@
 		android:text="distribution : Us_1"
 		android:layout_height="wrap_content" />	
 
-	<Spinner android:id="@+id/bet_spinner"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:drawSelectorOnTop="true"
-		android:prompt="@string/planet_prompt" />
-
-	<Spinner android:id="@+id/coinche_spinner"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:drawSelectorOnTop="true"
-		android:prompt="@string/coinche" />
-
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-
-
-		<RadioGroup android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal">
-
-			<RadioButton android:id="@+id/button_Us"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Us" />
-
-			<RadioButton android:id="@+id/button_Them"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Them" />
-
-		</RadioGroup>
-
-	</LinearLayout>
+	<include layout="@layout/deal_edit_layout" />
 
 	<Button android:id="@+id/button_go"
 		android:layout_width="100sp"

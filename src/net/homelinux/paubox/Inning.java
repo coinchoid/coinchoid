@@ -37,4 +37,10 @@ public class Inning implements Serializable {
 		deals.add(new Deal());
 	}
 
+	public void setAs(Inning inning) {
+		for (int i=0;i<deals.size();i++) {
+			(deals.get(i)).setAs(inning.deals.get(i));
+		}
+	}
+
 }

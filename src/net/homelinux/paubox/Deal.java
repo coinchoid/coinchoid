@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-public class Deal implements Serializable, Editable {
+public class Deal implements Serializable {
 
 	// To be serializable
 	public static final long serialVersionUID = 1L;
@@ -123,23 +123,20 @@ public class Deal implements Serializable, Editable {
 		return team_betting + " " + getAnnounce(a) + " : " + (winner==team_betting ? "Faite !" : "Chute !") ;
 	}
 
-	@Override
-	public View makeEditView(Activity a) {
-		LayoutInflater inflater = (LayoutInflater)a.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View root = inflater.inflate(R.layout.deal_edit_layout, null, false);
-		((TextView) root.findViewById(R.id.de_team_betting)).setText(Integer.toString(team_betting));
-		((TextView) root.findViewById(R.id.de_winner)).setText(Integer.toString(winner));
-		((TextView) root.findViewById(R.id.de_bet)).setText(Integer.toString(bet));
-		((TextView) root.findViewById(R.id.de_trump)).setText(Integer.toString(trump));
-		((TextView) root.findViewById(R.id.de_coinchedMultiplicator)).setText(Integer.toString(coinchedMultiplicator));
-		return root;
-  }
-
 	public Boolean isShuffleDeal() {
 	    return shuffleDeal;
 	}
 
 	public void setShuffleDeal(Boolean shuffleDeal) {
 	    this.shuffleDeal = shuffleDeal;
+	}
+
+	public void setAs(Deal d) {
+		team_betting = d.team_betting;
+		bet = d.bet;
+		dealer = d.dealer;
+		winner = d.winner;
+		coinchedMultiplicator = d.coinchedMultiplicator;
+		Boolean shuffleDeal = d.shuffleDeal;
 	}
 }
