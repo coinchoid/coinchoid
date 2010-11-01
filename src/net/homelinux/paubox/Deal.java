@@ -3,6 +3,10 @@ package net.homelinux.paubox;
 import java.io.Serializable;
 
 import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 public class Deal implements Serializable {
 
@@ -125,5 +129,14 @@ public class Deal implements Serializable {
 
 	public void setShuffleDeal(Boolean shuffleDeal) {
 	    this.shuffleDeal = shuffleDeal;
+	}
+
+	public void setAs(Deal d) {
+		team_betting = d.team_betting;
+		bet = d.bet;
+		dealer = d.dealer;
+		winner = d.winner;
+		coinchedMultiplicator = d.coinchedMultiplicator;
+		Boolean shuffleDeal = d.shuffleDeal;
 	}
 }
