@@ -12,7 +12,7 @@ public class Deal implements Serializable {
 	int dealer;
 	int winner;
 	int coinchedMultiplicator;
-	Boolean shuffleDeal;
+	boolean shuffleDeal;
 
 	protected int getCoinchedMultiplicator() {
 		return coinchedMultiplicator;
