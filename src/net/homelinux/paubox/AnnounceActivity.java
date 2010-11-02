@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -101,7 +102,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 	}
 
-	static protected int BetFromItemId(long adapter_view_id) {
+	static protected int BetFromItemId(int adapter_view_id) {
 		if (adapter_view_id == android.widget.AdapterView.INVALID_ROW_ID)
 			return Deal.MIN_BET;
 		else if (adapter_view_id > (Deal.MAX_BET - Deal.MIN_BET)/10)
@@ -148,13 +149,13 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
-		final Spinner score_spinner = (Spinner) findViewById(R.id.bet_spinner);
+		final SeekBar bet_seekbar = (SeekBar) findViewById(R.id.bet_seekbar);
 		final Spinner coinche_spinner = (Spinner) findViewById(R.id.coinche_spinner);
 		final Deal d = current_game.currentDeal();
 		Button button_go = ((Button) findViewById(R.id.button_go));
 		button_go.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {
-						saveDeal(AnnounceActivity.this, d, radio_us, radio_them, score_spinner,
+						saveDeal(AnnounceActivity.this, d, radio_us, radio_them, bet_seekbar,
 								coinche_spinner);
 						launchWaitingActivity();
 					}});
@@ -162,7 +163,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 	
 	public static void saveDeal(final Activity a, final Deal d,
 			final RadioButton radio_us, final RadioButton radio_them,
-			final Spinner score_spinner, final Spinner coinche_spinner) {
+			final SeekBar bet_seekbar, final Spinner coinche_spinner) {
 		//Save the current team betting
 		if (radio_us.isChecked())
 			d.setTeam_betting(Game.Us);
@@ -175,20 +176,20 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 
 		//Save the current bet and the multiplicator
-		d.setBet(BetFromItemId(score_spinner.getSelectedItemId()));
+		d.setBet(BetFromItemId(bet_seekbar.getProgress()));
 		d.setCoinchedMultiplicator(coincheMultiplicatorFromItemId(coinche_spinner.getSelectedItemPosition()));
 	}
 	
 	public static void configureDealView(final Activity a,final Deal d) {
-
-		final Spinner bet_spinner = (Spinner) a.findViewById(R.id.bet_spinner);
+	    
+		final SeekBar bet_seekbar = (SeekBar) a.findViewById(R.id.bet_seekbar);
+		final TextView progress_text = (TextView) a.findViewById(R.id.progress_text);
+		final TextView tracking_text = (TextView) a.findViewById(R.id.tracking_text);
 		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coinche_spinner);
 		d.setCoinchedMultiplicator(1);
 
-		ArrayAdapter<CharSequence> bet_adapter = ArrayAdapter.createFromResource(
-				a, R.array.points, android.R.layout.simple_spinner_item);
-		bet_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		bet_spinner.setAdapter(bet_adapter);
+		final BetSeekBarListener bet_listener = new BetSeekBarListener(a, bet_seekbar, progress_text, tracking_text);
+		bet_seekbar.setOnSeekBarChangeListener(bet_listener);
 
 		ArrayAdapter<CharSequence> coinche_adapter = ArrayAdapter.createFromResource(
 				a, R.array.coinche_array, android.R.layout.simple_spinner_item);
