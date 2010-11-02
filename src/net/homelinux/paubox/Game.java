@@ -57,6 +57,18 @@ public class Game implements Serializable {
 		else
 			score_Them = score_Them + currentDeal().bet*currentDeal().getCoinchedMultiplicator();			
 	}
+	public void recomputeScores() {
+		//We only support 1 inning for now
+		score_Us = score_Them = 0;
+		for (Deal d : innings.get(0).deals) {
+			if (d.winner == Game.Us) {
+				score_Us += d.bet*d.coinchedMultiplicator;
+			}
+			else {
+				score_Them += d.bet*d.coinchedMultiplicator;
+			}
+		}
+	}
 
 	private void update_distribution(){
 		player = next_player(player);

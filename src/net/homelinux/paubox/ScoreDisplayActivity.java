@@ -52,6 +52,7 @@ public class ScoreDisplayActivity extends Activity  {
 				if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
 					TableRow tr = new TableRow(this);
 					tr.setOnClickListener(new OnClickListener() {
+						@Override
 						public void onClick(View v) {
 							selected_deal = d;
 							ScoreDisplayActivity.launchEditActivity(ScoreDisplayActivity.this, d);
@@ -98,8 +99,10 @@ public class ScoreDisplayActivity extends Activity  {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (requestCode == BaseMenuActivity.REQUEST_CODE_EDIT) {
-			final Deal d = (Deal) data.getSerializableExtra("net.homelinux.paubox.edit");
-			this.selected_deal.setAs(d);
+			if (resultCode != RESULT_CANCELED) {
+				final Deal d = (Deal) data.getSerializableExtra("net.homelinux.paubox.edit");
+				this.selected_deal.setAs(d);
+			}
 		}
 	}
 

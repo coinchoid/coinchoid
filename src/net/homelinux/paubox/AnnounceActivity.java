@@ -84,8 +84,11 @@ public class AnnounceActivity extends BaseMenuActivity {
 			}
 			break;
 		case REQUEST_CODE_EDIT:
-			final Game g = (Game) data.getSerializableExtra("net.homelinux.paubox.edit");
-			current_game.setAs(g);
+			if (data!=null) {
+				final Game g = (Game) data.getSerializableExtra("net.homelinux.paubox.edit");
+				current_game.setAs(g);
+				current_game.recomputeScores();
+			}
 		}	
 
 		current_score.setText("Us : " + current_game.getScore_Us() + "\nThem : " + current_game.getScore_Them());		
@@ -101,13 +104,22 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 	}
 
-	static protected int BetFromItemId(long adapter_view_id) {
+	static protected int BetFromItemId(int adapter_view_id) {
 		if (adapter_view_id == android.widget.AdapterView.INVALID_ROW_ID)
 			return Deal.MIN_BET;
 		else if (adapter_view_id > (Deal.MAX_BET - Deal.MIN_BET)/10)
 			return Deal.CAPOT_BET;
 		else
-			return Deal.MIN_BET + (int)adapter_view_id * 10;
+			return Deal.MIN_BET + adapter_view_id * 10;
+	}
+	static protected int ItemIdFromBet(int bet) {
+		if (bet >= Deal.MIN_BET && bet <= Deal.MAX_BET) {
+			return (bet - Deal.MIN_BET)/10;
+		}
+		else if (bet <Deal.MIN_BET) {
+			return 0;
+		}
+		else return  ((Deal.MAX_BET - Deal.MIN_BET) / 10)+1;
 	}
 	/*************************
 	 **** PUBLIC METHODDS ****
@@ -120,6 +132,9 @@ public class AnnounceActivity extends BaseMenuActivity {
 			case 2: return 4;
 			default: return -1;
 		}
+	}
+	static private int ItemIdFromcoincheMultiplicator(int coinchedMultiplicator){
+		return coinchedMultiplicator/2;
 	}
 
 	@Override
@@ -175,25 +190,34 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 
 		//Save the current bet and the multiplicator
-		d.setBet(BetFromItemId(score_spinner.getSelectedItemId()));
+		d.setBet(BetFromItemId(score_spinner.getSelectedItemPosition()));
 		d.setCoinchedMultiplicator(coincheMultiplicatorFromItemId(coinche_spinner.getSelectedItemPosition()));
 	}
 	
 	public static void configureDealView(final Activity a,final Deal d) {
 
+		final RadioButton radio_us = (RadioButton) a.findViewById(R.id.button_Us);
+		final RadioButton radio_them = (RadioButton) a.findViewById(R.id.button_Them);
+		if (d.team_betting == Game.Us) {
+			radio_us.setChecked(true);
+		}
+		else if (d.team_betting == Game.Them){
+			radio_them.setChecked(true);
+		}
 		final Spinner bet_spinner = (Spinner) a.findViewById(R.id.bet_spinner);
-		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coinche_spinner);
-		d.setCoinchedMultiplicator(1);
+		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coincheSpinner);
 
 		ArrayAdapter<CharSequence> bet_adapter = ArrayAdapter.createFromResource(
 				a, R.array.points, android.R.layout.simple_spinner_item);
 		bet_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		bet_spinner.setAdapter(bet_adapter);
+		bet_spinner.setSelection(ItemIdFromBet(d.bet));
 
 		ArrayAdapter<CharSequence> coinche_adapter = ArrayAdapter.createFromResource(
 				a, R.array.coinche_array, android.R.layout.simple_spinner_item);
 		coinche_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		coinche_spinner.setAdapter(coinche_adapter);
+		coinche_spinner.setSelection(ItemIdFromcoincheMultiplicator(d.coinchedMultiplicator));
 	}
 
 
