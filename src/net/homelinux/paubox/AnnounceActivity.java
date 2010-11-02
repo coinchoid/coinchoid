@@ -85,8 +85,11 @@ public class AnnounceActivity extends BaseMenuActivity {
 			}
 			break;
 		case REQUEST_CODE_EDIT:
-			final Game g = (Game) data.getSerializableExtra("net.homelinux.paubox.edit");
-			current_game.setAs(g);
+			if (data!=null) {
+				final Game g = (Game) data.getSerializableExtra("net.homelinux.paubox.edit");
+				current_game.setAs(g);
+				current_game.recomputeScores();
+			}
 		}	
 
 		current_score.setText("Us : " + current_game.getScore_Us() + "\nThem : " + current_game.getScore_Them());		
@@ -108,7 +111,16 @@ public class AnnounceActivity extends BaseMenuActivity {
 		else if (adapter_view_id > (Deal.MAX_BET - Deal.MIN_BET)/10)
 			return Deal.CAPOT_BET;
 		else
-			return Deal.MIN_BET + (int)adapter_view_id * 10;
+			return Deal.MIN_BET + adapter_view_id * 10;
+	}
+	static protected int ItemIdFromBet(int bet) {
+		if (bet >= Deal.MIN_BET && bet <= Deal.MAX_BET) {
+			return (bet - Deal.MIN_BET)/10;
+		}
+		else if (bet <Deal.MIN_BET) {
+			return 0;
+		}
+		else return  ((Deal.MAX_BET - Deal.MIN_BET) / 10)+1;
 	}
 	/*************************
 	 **** PUBLIC METHODDS ****
@@ -121,6 +133,9 @@ public class AnnounceActivity extends BaseMenuActivity {
 			case 2: return 4;
 			default: return -1;
 		}
+	}
+	static private int ItemIdFromcoincheMultiplicator(int coinchedMultiplicator){
+		return coinchedMultiplicator/2;
 	}
 
 	@Override
@@ -181,20 +196,28 @@ public class AnnounceActivity extends BaseMenuActivity {
 	}
 	
 	public static void configureDealView(final Activity a,final Deal d) {
-	    
+		final RadioButton radio_us = (RadioButton) a.findViewById(R.id.button_Us);
+		final RadioButton radio_them = (RadioButton) a.findViewById(R.id.button_Them);
+		if (d.team_betting == Game.Us) {
+			radio_us.setChecked(true);
+		}
+		else if (d.team_betting == Game.Them){
+			radio_them.setChecked(true);
+		}
 		final SeekBar bet_seekbar = (SeekBar) a.findViewById(R.id.bet_seekbar);
 		final TextView progress_text = (TextView) a.findViewById(R.id.progress_text);
 		final TextView tracking_text = (TextView) a.findViewById(R.id.tracking_text);
-		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coinche_spinner);
-		d.setCoinchedMultiplicator(1);
+		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coincheSpinner);
 
 		final BetSeekBarListener bet_listener = new BetSeekBarListener(a, bet_seekbar, progress_text, tracking_text);
 		bet_seekbar.setOnSeekBarChangeListener(bet_listener);
+		bet_seekbar.setProgress(ItemIdFromBet(d.bet));
 
 		ArrayAdapter<CharSequence> coinche_adapter = ArrayAdapter.createFromResource(
 				a, R.array.coinche_array, android.R.layout.simple_spinner_item);
 		coinche_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		coinche_spinner.setAdapter(coinche_adapter);
+		coinche_spinner.setSelection(ItemIdFromcoincheMultiplicator(d.coinchedMultiplicator));
 	}
 
 
