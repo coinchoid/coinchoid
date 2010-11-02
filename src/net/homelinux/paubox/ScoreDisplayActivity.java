@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 public class ScoreDisplayActivity extends Activity  {
 
-	private static final int EDIT = 0;
 	private Game game;
 	private TableLayout table;
 	private TableRow.LayoutParams ll;

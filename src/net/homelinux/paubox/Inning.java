@@ -3,6 +3,7 @@ package net.homelinux.paubox;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Inning implements Serializable {
 
 	ArrayList<Deal> deals;

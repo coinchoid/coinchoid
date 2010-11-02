@@ -3,11 +3,8 @@ package net.homelinux.paubox;
 import java.io.Serializable;
 
 import android.app.Activity;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 
+@SuppressWarnings("serial")
 public class Deal implements Serializable {
 
 	int team_betting;
@@ -134,6 +131,6 @@ public class Deal implements Serializable {
 		dealer = d.dealer;
 		winner = d.winner;
 		coinchedMultiplicator = d.coinchedMultiplicator;
-		Boolean shuffleDeal = d.shuffleDeal;
+		shuffleDeal = d.shuffleDeal;
 	}
 }
