@@ -207,7 +207,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		final SeekBar bet_seekbar = (SeekBar) a.findViewById(R.id.bet_seekbar);
 		final TextView progress_text = (TextView) a.findViewById(R.id.progress_text);
 		final TextView tracking_text = (TextView) a.findViewById(R.id.tracking_text);
-		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coincheSpinner);
+		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coinche_spinner);
 
 		final BetSeekBarListener bet_listener = new BetSeekBarListener(a, bet_seekbar, progress_text, tracking_text);
 		bet_seekbar.setOnSeekBarChangeListener(bet_listener);

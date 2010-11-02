@@ -52,7 +52,6 @@ public class ScoreDisplayActivity extends Activity  {
 				if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
 					TableRow tr = new TableRow(this);
 					tr.setOnClickListener(new OnClickListener() {
-						@Override
 						public void onClick(View v) {
 							selected_deal = d;
 							ScoreDisplayActivity.launchEditActivity(ScoreDisplayActivity.this, d);
