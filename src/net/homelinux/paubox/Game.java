@@ -7,9 +7,6 @@ public class Game implements Serializable {
 	/*******************
 	 **** CONSTANTS ****
 	 *******************/
-	// To be serializable
-	public static final long serialVersionUID = 1L;
-
 	// Players
 	public static final int Us_1 = 0; // player holding the phone
 	public static final int Them_1 = 1;

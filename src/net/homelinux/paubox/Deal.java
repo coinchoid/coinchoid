@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 public class Deal implements Serializable {
 
-	// To be serializable
-	public static final long serialVersionUID = 1L;
-
 	int team_betting;
 	int bet;
 	int dealer;

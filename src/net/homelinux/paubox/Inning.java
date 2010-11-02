@@ -5,9 +5,6 @@ import java.util.ArrayList;
 
 public class Inning implements Serializable {
 
-	// To be serializable
-	public static final long serialVersionUID = 1L;
-
 	ArrayList<Deal> deals;
 	
 	protected Deal currentDeal() {
