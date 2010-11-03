@@ -67,7 +67,7 @@
 <string name="title_new_game">Nouvelle partie</string>
 <string name="new_game_go">Start!</string>
 <string name="better_to_string_us">pour nous</string>
-<string name="better_to_string">pour eux</string>
+<string name="better_to_string_them">pour eux</string>
 <string name="who_take">Qui prend ?</string>
 <string name="seekbar_tracking_on">Changing</string>
 <string name="seekbar_tracking_off">Not Changing</string>

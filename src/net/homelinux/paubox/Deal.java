@@ -79,7 +79,7 @@ public class Deal implements Serializable {
 			return a.getApplicationContext().getText(R.string.better_to_string_us).toString();
 
 		if (team_betting == Game.Them)
-			return a.getApplicationContext().getText(R.string.better_to_string_us).toString();
+			return a.getApplicationContext().getText(R.string.better_to_string_them).toString();
 
 		return "ERROR";
 	}
