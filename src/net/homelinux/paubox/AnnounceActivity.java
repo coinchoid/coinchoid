@@ -133,9 +133,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 			default: return -1;
 		}
 	}
-	static private int ItemIdFromcoincheMultiplicator(int coinchedMultiplicator){
-		return coinchedMultiplicator/2;
-	}
 
 	@Override
 	public void onResume() {
@@ -164,20 +161,20 @@ public class AnnounceActivity extends BaseMenuActivity {
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
 		final Spinner score_spinner = (Spinner) findViewById(R.id.bet_spinner);
-		final Spinner coinche_spinner = (Spinner) findViewById(R.id.coinche_spinner);
+		final Button coinche_button = (Button) findViewById(R.id.coinche_button);
 		final Deal d = current_game.currentDeal();
 		Button button_go = ((Button) findViewById(R.id.button_go));
 		button_go.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {
 						saveDeal(AnnounceActivity.this, d, radio_us, radio_them, score_spinner,
-								coinche_spinner);
+								coinche_button);
 						launchWaitingActivity();
 					}});
 	}
 	
 	public static void saveDeal(final Activity a, final Deal d,
 			final RadioButton radio_us, final RadioButton radio_them,
-			final Spinner score_spinner, final Spinner coinche_spinner) {
+			final Spinner score_spinner, final Button coinche_button) {
 		//Save the current team betting
 		if (radio_us.isChecked())
 			d.setTeam_betting(Game.Us);
@@ -191,7 +188,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		//Save the current bet and the multiplicator
 		d.setBet(BetFromItemId(score_spinner.getSelectedItemPosition()));
-		d.setCoinchedMultiplicator(coincheMultiplicatorFromItemId(coinche_spinner.getSelectedItemPosition()));
+		d.setCoinchedMultiplicator(multiplicatorFromText(a,coinche_button.getText().toString()));
 	}
 	
 	public static void configureDealView(final Activity a,final Deal d) {
@@ -205,7 +202,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 			radio_them.setChecked(true);
 		}
 		final Spinner bet_spinner = (Spinner) a.findViewById(R.id.bet_spinner);
-		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coinche_spinner);
+		final Button coinche_button = (Button) a.findViewById(R.id.coinche_button);
 
 		ArrayAdapter<CharSequence> bet_adapter = ArrayAdapter.createFromResource(
 				a, R.array.points, android.R.layout.simple_spinner_item);
@@ -213,13 +210,31 @@ public class AnnounceActivity extends BaseMenuActivity {
 		bet_spinner.setAdapter(bet_adapter);
 		bet_spinner.setSelection(ItemIdFromBet(d.bet));
 
-		ArrayAdapter<CharSequence> coinche_adapter = ArrayAdapter.createFromResource(
-				a, R.array.coinche_array, android.R.layout.simple_spinner_item);
-		coinche_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		coinche_spinner.setAdapter(coinche_adapter);
-		coinche_spinner.setSelection(ItemIdFromcoincheMultiplicator(d.coinchedMultiplicator));
+		coinche_button.setText(resIdFromMultiplicator(d.coinchedMultiplicator));
+		coinche_button.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				int newMultiplicator = multiplicatorFromText(a, coinche_button.getText().toString());
+				newMultiplicator *= 2;
+				if (newMultiplicator > 4) newMultiplicator = 1;
+				coinche_button.setText(resIdFromMultiplicator(newMultiplicator));
+			}
+		});
 	}
 
+    private static int multiplicatorFromText(Context c, String text) {
+		if (text.equals(c.getString(R.string.uncoinched))) return 1;
+		else if (text.equals(c.getString(R.string.coinched))) return 2;
+		else if (text.equals(c.getString(R.string.overcoinched))) return 4;
+		else return -1;
+    }
+	private static int resIdFromMultiplicator(int coinchedMultiplicator) {
+		switch (coinchedMultiplicator) {
+			case 1: return R.string.uncoinched;
+			case 2: return R.string.coinched;
+			case 4: return R.string.overcoinched;
+			default: return -1;
+		}
+	}
 
 	/** Called when the activity is first created. */
 	@Override

@@ -23,13 +23,6 @@
 <item>Capot</item>
 </string-array>
 
-<string name="coinche">Coinche</string>
-<string-array name="coinche_array">
-<item>Non coinché</item>
-<item>Coinché</item>
-<item>Surcoinché!</item>
-</string-array>
-
 <string name="win">C\'est fait !</string>
 <string name="title_winning_score">Partie en ?</string>
 <string name="summary_winning_score">Score à atteindre pour terminer la partie</string>
@@ -55,8 +48,9 @@
 
 <string name="select_team">Please select a team</string>
 
-<string name="coinched">coinché</string>
-<string name="overcoinched">surcoinché</string>
+<string name="uncoinched">Non coinché</string>
+<string name="coinched">Coinché</string>
+<string name="overcoinched">Surcoinché!</string>
 <string name="shuffle_game">Mélangeante ?</string>
 
 

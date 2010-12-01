@@ -18,7 +18,7 @@ public class EditActivity extends Activity {
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
 		final Spinner score_spinner = (Spinner) findViewById(R.id.bet_spinner);
-		final Spinner coinche_spinner = (Spinner) findViewById(R.id.coinche_spinner);
+		final Button coinche_button = (Button) findViewById(R.id.coinche_button);
 		final RadioButton winner_us = (RadioButton) findViewById(R.id.winner_Us);
 		final RadioButton winner_them = (RadioButton) findViewById(R.id.winner_Them);
 		if (d.winner==Game.Us) {
@@ -31,7 +31,7 @@ public class EditActivity extends Activity {
 		edit_ok.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {
 						AnnounceActivity.saveDeal(EditActivity.this, d, radio_us, radio_them, score_spinner,
-								coinche_spinner);
+								coinche_button);
 						if (winner_us.isChecked()) {
 							d.setWinner(Game.Us);
 						} else if (winner_them.isChecked()) {
