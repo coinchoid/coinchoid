@@ -205,7 +205,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 			radio_them.setChecked(true);
 		}
 		final Spinner bet_spinner = (Spinner) a.findViewById(R.id.bet_spinner);
-		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coincheSpinner);
+		final Spinner coinche_spinner = (Spinner) a.findViewById(R.id.coinche_spinner);
 
 		ArrayAdapter<CharSequence> bet_adapter = ArrayAdapter.createFromResource(
 				a, R.array.points, android.R.layout.simple_spinner_item);
