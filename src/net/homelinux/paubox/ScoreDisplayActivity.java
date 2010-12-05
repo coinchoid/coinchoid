@@ -7,8 +7,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -46,6 +48,33 @@ public class ScoreDisplayActivity extends Activity  {
 	}
 
 	private void displayScore() {
+		OnTouchListener highlightListener = new OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN: {
+					TableRow row = (TableRow) v;
+					for (int i = 0;i<row.getChildCount();i++) {
+						TextView child = (TextView) row.getChildAt(i);
+						child.setBackgroundColor(Color.WHITE);
+						child.setTextColor(Color.BLACK);
+					}
+					break;
+				}
+				case MotionEvent.ACTION_OUTSIDE:
+				case MotionEvent.ACTION_CANCEL:
+				case MotionEvent.ACTION_UP: {
+					TableRow row = (TableRow) v;
+					for (int i = 0;i<row.getChildCount();i++) {
+						TextView child = (TextView) row.getChildAt(i);
+						child.setBackgroundColor(Color.BLACK);
+						child.setTextColor(Color.WHITE);
+					}
+					break;
+				}
+				}
+				return false;
+			}
+		};
 		int Us_score = 0, Them_score = 0;
 		for (final Inning i : game.innings) {
 			for (final Deal d : i.deals) {
@@ -58,6 +87,7 @@ public class ScoreDisplayActivity extends Activity  {
 							ScoreDisplayActivity.launchEditActivity(ScoreDisplayActivity.this, d);
 						}
 					});
+					tr.setOnTouchListener(highlightListener);
 					TextView left = new TextView(this);
 					TextView right = new TextView(this);
 					left.setBackgroundColor(Color.BLACK);
