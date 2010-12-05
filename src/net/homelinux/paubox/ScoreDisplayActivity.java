@@ -89,7 +89,6 @@ public class ScoreDisplayActivity extends Activity  {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.score_display);
 		game = (Game) getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 		setContentView(makeDisplayView());
 	}
