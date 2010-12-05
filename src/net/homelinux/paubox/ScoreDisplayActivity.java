@@ -3,6 +3,7 @@ package net.homelinux.paubox;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -55,10 +56,10 @@ public class ScoreDisplayActivity extends Activity  {
 					TableRow row = (TableRow) v;
 					for (int i = 0;i<row.getChildCount();i++) {
 						TextView child = (TextView) row.getChildAt(i);
-						child.setBackgroundColor(Color.WHITE);
-						child.setTextColor(Color.BLACK);
+						child.setPressed(true);
+						child.setBackgroundColor(Color.LTGRAY);
 					}
-					break;
+					return false;
 				}
 				case MotionEvent.ACTION_OUTSIDE:
 				case MotionEvent.ACTION_CANCEL:
@@ -66,10 +67,10 @@ public class ScoreDisplayActivity extends Activity  {
 					TableRow row = (TableRow) v;
 					for (int i = 0;i<row.getChildCount();i++) {
 						TextView child = (TextView) row.getChildAt(i);
+						child.setPressed(false);
 						child.setBackgroundColor(Color.BLACK);
-						child.setTextColor(Color.WHITE);
 					}
-					break;
+					return false;
 				}
 				}
 				return false;
