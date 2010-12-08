@@ -133,4 +133,11 @@ public class Deal implements Serializable {
 		coinchedMultiplicator = d.coinchedMultiplicator;
 		shuffleDeal = d.shuffleDeal;
 	}
+	
+	public static String betToString(int bet) {
+		if (bet == CAPOT_BET)
+			return "Capot !";
+		else
+			return Integer.toString(bet);
+	}
 }
