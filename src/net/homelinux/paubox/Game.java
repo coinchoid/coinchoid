@@ -62,7 +62,7 @@ public class Game implements Serializable {
 			if (d.winner == Game.Us) {
 				score_Us += d.bet*d.coinchedMultiplicator;
 			}
-			else {
+			else if (d.winner == Game.Them) {
 				score_Them += d.bet*d.coinchedMultiplicator;
 			}
 		}
