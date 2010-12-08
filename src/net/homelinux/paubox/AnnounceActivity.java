@@ -7,7 +7,6 @@ import java.io.ObjectOutputStream;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
@@ -26,23 +25,10 @@ public class AnnounceActivity extends BaseMenuActivity {
 	/************************
 	 **** CLASS VARIABLE ****
 	 ************************/
-	TextView debug_text;
 	TextView current_score;
 	TextView distribution;
 
 	PowerManager.WakeLock wl;
-
-	/**************************
-	 **** PRIVATE METHODS *****
-	 **************************/
-	private void updateDebugText() {
-		// Since we're in the same package, we can use this context to get
-		// the default shared preferences
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		final String winning_score = sharedPref.getString("winning_score", "coucou");
-		Deal current_deal = current_game.currentDeal();
-		debug_text.setText("Current: " + current_deal.getAnnounce(this) + " (max = " + winning_score + ")");
-	}
 
 	/****************************
 	 **** PROTECTED METHODDS ****
@@ -65,7 +51,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 		switch (requestCode) {
 		case REQUEST_CODE_PREFERENCES:
 			// Read a sample value they have set
-			updateDebugText();
 			updatePreferences();
 			break;
 		case REQUEST_CODE_WAITING:
@@ -91,7 +76,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}	
 
 		current_score.setText("Us : " + current_game.getScore_Us() + "\nThem : " + current_game.getScore_Them());		
-		distribution.setText("distribution : " + current_game.getPlayer_Distribution());
+		distribution.setText("distribution : " + current_game.getPlayer_Distribution() + "\n");
 	}
 
 	private void updatePreferences() {
@@ -148,7 +133,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		current_score.setText("Us : " + current_game.getScore_Us() + "\nThem : " + current_game.getScore_Them());
 
 		distribution = (TextView) findViewById(R.id.distribution);
-		distribution.setText("distribution : " + current_game.getPlayer_Distribution());
+		distribution.setText("distribution : " + current_game.getPlayer_Distribution() + "\n");
 
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
@@ -195,10 +180,9 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		final SeekBar bet_seekbar = (SeekBar) a.findViewById(R.id.bet_seekbar);
 		final TextView progress_text = (TextView) a.findViewById(R.id.progress_text);
-		final TextView tracking_text = (TextView) a.findViewById(R.id.tracking_text);
 		final Button coinche_button = (Button) a.findViewById(R.id.coinche_button);
 
-		final BetSeekBarListener bet_listener = new BetSeekBarListener(a, bet_seekbar, progress_text, tracking_text);
+		final BetSeekBarListener bet_listener = new BetSeekBarListener(a, bet_seekbar, progress_text);
 		bet_seekbar.setOnSeekBarChangeListener(bet_listener);
 		bet_seekbar.setProgress(ItemIdFromBet(d.bet));
 

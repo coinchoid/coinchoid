@@ -66,4 +66,5 @@
 <string name="seekbar_tracking_on">Changing</string>
 <string name="seekbar_tracking_off">Not Changing</string>
 <string name="seekbar_announce">Annonce</string>
+<string name="welcome">Bienvenue dans Coinchoid !\n</string>
 </resources>

@@ -10,15 +10,13 @@ public class BetSeekBarListener implements SeekBar.OnSeekBarChangeListener {
 	int bet;
 	SeekBar seek_bar;
 	TextView progress_text;
-	TextView tracking_text;
 	Context c;
 
-	public BetSeekBarListener(Activity a, SeekBar _seek_bar, TextView _progress_text, TextView _tracking_text) {
+	public BetSeekBarListener(Activity a, SeekBar _seek_bar, TextView _progress_text) {
 		super();
 
 		seek_bar = _seek_bar;
 		progress_text = _progress_text;
-		tracking_text = _tracking_text;
 		c = a.getApplicationContext();
 	}
 
@@ -27,11 +25,11 @@ public class BetSeekBarListener implements SeekBar.OnSeekBarChangeListener {
 	}
 
 	public void onStartTrackingTouch(SeekBar seekBar) {
-		tracking_text.setText(c.getString(R.string.seekbar_tracking_on));
+		progress_text.setBackgroundResource(R.color.solid_red);
 	}
 
 	public void onStopTrackingTouch(SeekBar seekBar) {
-		tracking_text.setText(c.getString(R.string.seekbar_tracking_off));
+		progress_text.setBackgroundResource(R.color.black);
 	}
 
 }
