@@ -3,22 +3,16 @@ package net.homelinux.paubox;
 import java.io.Serializable;
 
 import android.app.Activity;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 
+@SuppressWarnings("serial")
 public class Deal implements Serializable {
-
-	// To be serializable
-	public static final long serialVersionUID = 1L;
 
 	int team_betting;
 	int bet;
 	int dealer;
 	int winner;
 	int coinchedMultiplicator;
-	Boolean shuffleDeal;
+	boolean shuffleDeal;
 
 	protected int getCoinchedMultiplicator() {
 		return coinchedMultiplicator;
@@ -85,7 +79,7 @@ public class Deal implements Serializable {
 			return a.getApplicationContext().getText(R.string.better_to_string_us).toString();
 
 		if (team_betting == Game.Them)
-			return a.getApplicationContext().getText(R.string.better_to_string_us).toString();
+			return a.getApplicationContext().getText(R.string.better_to_string_them).toString();
 
 		return "ERROR";
 	}
@@ -137,6 +131,6 @@ public class Deal implements Serializable {
 		dealer = d.dealer;
 		winner = d.winner;
 		coinchedMultiplicator = d.coinchedMultiplicator;
-		Boolean shuffleDeal = d.shuffleDeal;
+		shuffleDeal = d.shuffleDeal;
 	}
 }

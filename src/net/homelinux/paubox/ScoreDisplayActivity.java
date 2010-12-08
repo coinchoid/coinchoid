@@ -3,7 +3,6 @@ package net.homelinux.paubox;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 
 public class ScoreDisplayActivity extends Activity  {
 
-	private static final int EDIT = 0;
 	private Game game;
 	private TableLayout table;
 	private TableRow.LayoutParams ll;
@@ -82,7 +80,6 @@ public class ScoreDisplayActivity extends Activity  {
 				if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
 					TableRow tr = new TableRow(this);
 					tr.setOnClickListener(new OnClickListener() {
-						@Override
 						public void onClick(View v) {
 							selected_deal = d;
 							ScoreDisplayActivity.launchEditActivity(ScoreDisplayActivity.this, d);

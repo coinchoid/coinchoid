@@ -3,10 +3,8 @@ package net.homelinux.paubox;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Inning implements Serializable {
-
-	// To be serializable
-	public static final long serialVersionUID = 1L;
 
 	ArrayList<Deal> deals;
 	

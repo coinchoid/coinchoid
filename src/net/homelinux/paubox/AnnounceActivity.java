@@ -14,10 +14,9 @@ import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.Spinner;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -125,21 +124,14 @@ public class AnnounceActivity extends BaseMenuActivity {
 	 **** PUBLIC METHODDS ****
 	 *************************/
 
-	static private int coincheMultiplicatorFromItemId(int position){
-		switch(position) {
-			case 0: return 1;
-			case 1: return 2;
-			case 2: return 4;
-			default: return -1;
-		}
-	}
-
 	@Override
 	public void onResume() {
 		super.onResume();
 		if (wl!=null) {
 			wl.acquire();
 		}
+		configureAnnounceView();
+		
 	}
 
 	@Override
@@ -160,13 +152,13 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
-		final Spinner score_spinner = (Spinner) findViewById(R.id.bet_spinner);
+		final SeekBar bet_seekbar = (SeekBar) findViewById(R.id.bet_seekbar);
 		final Button coinche_button = (Button) findViewById(R.id.coinche_button);
 		final Deal d = current_game.currentDeal();
 		Button button_go = ((Button) findViewById(R.id.button_go));
 		button_go.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {
-						saveDeal(AnnounceActivity.this, d, radio_us, radio_them, score_spinner,
+						saveDeal(AnnounceActivity.this, d, radio_us, radio_them, bet_seekbar,
 								coinche_button);
 						launchWaitingActivity();
 					}});
@@ -174,7 +166,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 	
 	public static void saveDeal(final Activity a, final Deal d,
 			final RadioButton radio_us, final RadioButton radio_them,
-			final Spinner score_spinner, final Button coinche_button) {
+			final SeekBar bet_seekbar, final Button coincheButton) {
 		//Save the current team betting
 		if (radio_us.isChecked())
 			d.setTeam_betting(Game.Us);
@@ -187,12 +179,11 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 
 		//Save the current bet and the multiplicator
-		d.setBet(BetFromItemId(score_spinner.getSelectedItemPosition()));
-		d.setCoinchedMultiplicator(multiplicatorFromText(a,coinche_button.getText().toString()));
+		d.setBet(BetFromItemId(bet_seekbar.getProgress()));
+		d.setCoinchedMultiplicator(multiplicatorFromText(a,coincheButton.getText().toString()));
 	}
 	
 	public static void configureDealView(final Activity a,final Deal d) {
-
 		final RadioButton radio_us = (RadioButton) a.findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) a.findViewById(R.id.button_Them);
 		if (d.team_betting == Game.Us) {
@@ -201,14 +192,15 @@ public class AnnounceActivity extends BaseMenuActivity {
 		else if (d.team_betting == Game.Them){
 			radio_them.setChecked(true);
 		}
-		final Spinner bet_spinner = (Spinner) a.findViewById(R.id.bet_spinner);
+
+		final SeekBar bet_seekbar = (SeekBar) a.findViewById(R.id.bet_seekbar);
+		final TextView progress_text = (TextView) a.findViewById(R.id.progress_text);
+		final TextView tracking_text = (TextView) a.findViewById(R.id.tracking_text);
 		final Button coinche_button = (Button) a.findViewById(R.id.coinche_button);
 
-		ArrayAdapter<CharSequence> bet_adapter = ArrayAdapter.createFromResource(
-				a, R.array.points, android.R.layout.simple_spinner_item);
-		bet_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		bet_spinner.setAdapter(bet_adapter);
-		bet_spinner.setSelection(ItemIdFromBet(d.bet));
+		final BetSeekBarListener bet_listener = new BetSeekBarListener(a, bet_seekbar, progress_text, tracking_text);
+		bet_seekbar.setOnSeekBarChangeListener(bet_listener);
+		bet_seekbar.setProgress(ItemIdFromBet(d.bet));
 
 		coinche_button.setText(resIdFromMultiplicator(d.coinchedMultiplicator));
 		coinche_button.setOnClickListener(new OnClickListener() {
@@ -245,7 +237,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 		current_game = (Game)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 
 		AnnounceActivity.configureDealView(this, current_game.currentDeal());
-		configureAnnounceView();
 		
 	}
 
