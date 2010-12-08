@@ -15,79 +15,65 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class ScoreDisplayActivity extends Activity  {
+interface DealEditor {
+	public void prepareEdit();
+	public void setEditListener(Deal d, TableRow tr);
+}
+
+public class ScoreDisplayActivity extends Activity implements DealEditor {
 
 	private Game game;
-	private TableLayout table;
-	private TableRow.LayoutParams ll;
-	private TableRow.LayoutParams lr;
-	private Deal selected_deal;
 	
-	View makeDisplayView() {
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	private View root;
+	private Deal selected_deal;
+
+	private OnTouchListener highlightListener;
+	
+	static View makeDisplayView(Activity a) {
+		LayoutInflater inflater = (LayoutInflater) a.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View root = inflater.inflate(R.layout.score_display, null, false);
-		table = (TableLayout) root.findViewById(R.id.display_table);
-		ll = new TableRow.LayoutParams();
-		ll.rightMargin = 1;
-		ll.bottomMargin = 1;
-		lr = new TableRow.LayoutParams();
-		lr.bottomMargin = 1;
-		
 		return root;
 	}
 
 	public void onResume() {
 		super.onResume();
-		clearScores();
-		displayScore();
+		displayScore(this, root, this.game);
 	}
-
-	private void clearScores() {
-		table.removeAllViews();
-	}
-
-	private void displayScore() {
-		OnTouchListener highlightListener = new OnTouchListener() {
-			public boolean onTouch(View v, MotionEvent event) {
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN: {
-					TableRow row = (TableRow) v;
-					for (int i = 0;i<row.getChildCount();i++) {
-						TextView child = (TextView) row.getChildAt(i);
-						child.setPressed(true);
-						child.setBackgroundColor(Color.LTGRAY);
-					}
-					return false;
-				}
-				case MotionEvent.ACTION_OUTSIDE:
-				case MotionEvent.ACTION_CANCEL:
-				case MotionEvent.ACTION_UP: {
-					TableRow row = (TableRow) v;
-					for (int i = 0;i<row.getChildCount();i++) {
-						TextView child = (TextView) row.getChildAt(i);
-						child.setPressed(false);
-						child.setBackgroundColor(Color.BLACK);
-					}
-					return false;
-				}
-				}
-				return false;
+	
+	public void setEditListener(Deal d, TableRow tr) {
+		tr.setOnTouchListener(highlightListener);
+		final Deal d_copy = d;
+		tr.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				selected_deal = d_copy;
+				ScoreDisplayActivity.launchEditActivity(ScoreDisplayActivity.this, d_copy);
 			}
-		};
+		});
+	}
+
+	public static void displayScore(Activity a, View displayView, Game game) {
+		TableRow.LayoutParams ll;
+		TableRow.LayoutParams lr;
+		ll = new TableRow.LayoutParams();
+		ll.rightMargin = 1;
+		ll.bottomMargin = 1;
+		lr = new TableRow.LayoutParams();
+		lr.bottomMargin = 1;
+		TableLayout table = (TableLayout) displayView.findViewById(R.id.display_table);
+		table.removeAllViews();
+		if (a instanceof DealEditor)
+			((DealEditor) a).prepareEdit();
+		
+		
 		int Us_score = 0, Them_score = 0;
 		for (final Inning i : game.innings) {
 			for (final Deal d : i.deals) {
 				if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
-					TableRow tr = new TableRow(this);
-					tr.setOnClickListener(new OnClickListener() {
-						public void onClick(View v) {
-							selected_deal = d;
-							ScoreDisplayActivity.launchEditActivity(ScoreDisplayActivity.this, d);
-						}
-					});
-					tr.setOnTouchListener(highlightListener);
-					TextView left = new TextView(this);
-					TextView right = new TextView(this);
+					TableRow tr = new TableRow(a);
+					if (a instanceof DealEditor)
+						((DealEditor) a).setEditListener(d, tr);
+					TextView left = new TextView(a);
+					TextView right = new TextView(a);
 					left.setBackgroundColor(Color.BLACK);
 					left.setGravity(Gravity.CENTER);
 					right.setBackgroundColor(Color.BLACK);
@@ -118,7 +104,8 @@ public class ScoreDisplayActivity extends Activity  {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		game = (Game) getIntent().getSerializableExtra("net.homelinux.paubox.Game");
-		setContentView(makeDisplayView());
+		root = makeDisplayView(this);
+		setContentView(root);
 	}
 
 	@Override
@@ -137,5 +124,38 @@ public class ScoreDisplayActivity extends Activity  {
 		super.onPause();
 		setResult(BaseMenuActivity.REQUEST_CODE_EDIT, new Intent().putExtra("net.homelinux.paubox.edit", game));
 	}
+
+	@Override
+	public void prepareEdit() {
+		// TODO Auto-generated method stub
+		highlightListener = new OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN: {
+					TableRow row = (TableRow) v;
+					for (int i = 0;i<row.getChildCount();i++) {
+						TextView child = (TextView) row.getChildAt(i);
+						child.setPressed(true);
+						child.setBackgroundColor(Color.LTGRAY);
+					}
+					return false;
+				}
+				case MotionEvent.ACTION_OUTSIDE:
+				case MotionEvent.ACTION_CANCEL:
+				case MotionEvent.ACTION_UP: {
+					TableRow row = (TableRow) v;
+					for (int i = 0;i<row.getChildCount();i++) {
+						TextView child = (TextView) row.getChildAt(i);
+						child.setPressed(false);
+						child.setBackgroundColor(Color.BLACK);
+					}
+					return false;
+				}
+				}
+				return false;
+			}
+		};
+	}
+
 }
 
