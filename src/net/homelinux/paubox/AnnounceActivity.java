@@ -144,6 +144,8 @@ public class AnnounceActivity extends BaseMenuActivity {
 		if (wl!=null) {
 			wl.acquire();
 		}
+		configureAnnounceView();
+		
 	}
 
 	@Override
@@ -230,7 +232,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 		current_game = (Game)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 
 		AnnounceActivity.configureDealView(this, current_game.currentDeal());
-		configureAnnounceView();
 		
 	}
 
