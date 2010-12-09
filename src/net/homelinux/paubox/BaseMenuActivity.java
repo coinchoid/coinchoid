@@ -74,7 +74,11 @@ public class BaseMenuActivity extends Activity {
 			launchPreferencesActivity();
 			return true;
 		case R.id.display_scores:
-			launchDisplayActivity();
+			if (current_game == null)
+				Toast.makeText(getApplicationContext(), "Not available now",
+					Toast.LENGTH_SHORT).show();
+			else
+				launchDisplayActivity();
 			return true;
 		}
 		return false;
