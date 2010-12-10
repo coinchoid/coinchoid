@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 	/************************
 	 **** CLASS VARIABLE ****
 	 ************************/
-	ScrollView scoreDisplayView;
+	LinearLayout scoreDisplayView;
 	TextView current_score;
 	TextView distribution;
 
@@ -150,9 +151,14 @@ public class AnnounceActivity extends BaseMenuActivity {
 								coinche_button);
 						launchWaitingActivity();
 					}});
-		ScoreDisplayActivity.displayScore(this, scoreDisplayView, this.current_game);
-		//TODO: EUX/NOUS should not scroll
-		scoreDisplayView.scrollTo(scoreDisplayView.getScrollX(),scoreDisplayView.getChildAt(0).getHeight());
+		final ScrollView scoreScrollView = (ScrollView)findViewById(R.id.ScrollView01);
+		final TableLayout scoreTable = (TableLayout) findViewById(R.id.display_table);
+		ScoreDisplayActivity.displayScore(this, scoreTable, this.current_game);
+		scoreScrollView.post(new Runnable() {
+			public void run() {
+				scoreScrollView.fullScroll(View.FOCUS_DOWN);
+			}
+		});
 	}
 	
 	public static void saveDeal(final Activity a, final Deal d,
@@ -223,8 +229,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.announce_layout);
-		scoreDisplayView = (ScrollView) ScoreDisplayActivity.makeDisplayView(this);
-		((LinearLayout) findViewById(R.id.announce_linear_layout)).addView(scoreDisplayView);
 		updatePreferences();
 		current_game = (Game)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 

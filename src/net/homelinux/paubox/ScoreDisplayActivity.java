@@ -3,7 +3,9 @@ package net.homelinux.paubox;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -56,18 +58,62 @@ public class ScoreDisplayActivity extends Activity implements DealEditor {
 		TableRow.LayoutParams lr;
 		ll = new TableRow.LayoutParams();
 		ll.rightMargin = 1;
-		ll.bottomMargin = 1;
 		lr = new TableRow.LayoutParams();
-		lr.bottomMargin = 1;
 		TableLayout table = (TableLayout) displayView.findViewById(R.id.display_table);
 		table.removeAllViews();
 		if (a instanceof DealEditor)
 			((DealEditor) a).prepareEdit();
 		
+		//Didn't find a way to do this in xml..
+		TextView header_left = (TextView) a.findViewById(R.id.display_header_left);
+		TextView header_right = (TextView) a.findViewById(R.id.display_header_right);
+		Resources res = a.getResources();
+		String us = res.getString(R.string.Us);
+		String them = res.getString(R.string.Them);
+		int diff = us.length() - them.length();
+		int pad_left = diff/2, pad_right = diff/2;
+		StringBuilder pad = new StringBuilder();
+		String them_padded;
+		String us_padded;
+		if (diff>0) {
+			if (diff%2!=0)
+				pad_left += 1;
+		} else if (diff<0) {
+			if (diff%2!=0)
+				pad_right += 1;
+		}
+		for (int i=0;i<pad_left;i++)
+			pad.append(" ");
+		if (diff>0) {
+			pad.append(them);
+		} else if (diff<0) {
+			pad.append(us);
+
+		}
+		for (int i=0;i<pad_right;i++)
+			pad.append(" ");
 		
+		if (diff>0) {
+			us_padded = us;
+			them_padded = new String(pad);
+		} else if (diff<0) {
+			us_padded = new String(pad);
+			them_padded = them;
+		} else {
+			us_padded = us;
+			them_padded = them;
+		}
+
+		header_left.setText(them_padded);
+		header_right.setText(us_padded);
+		header_left.setTextSize(header_left.getTextSize()*2);
+		header_right.setTextSize(header_right.getTextSize()*2);
+
 		int Us_score = 0, Them_score = 0;
-		for (final Inning i : game.innings) {
-			for (final Deal d : i.deals) {
+		for (int index=0;index<game.innings.size();index++) {
+			final Inning i =game.innings.get(index);
+			for (int j=0;j<i.deals.size();j++) {
+				final Deal d = i.deals.get(j);
 				if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
 					TableRow tr = new TableRow(a);
 					if (a instanceof DealEditor)
@@ -86,6 +132,13 @@ public class ScoreDisplayActivity extends Activity implements DealEditor {
 					}
 					left.setText(Integer.toString(Them_score));
 					right.setText(Integer.toString(Us_score));
+					if (((j==i.deals.size()-2) && (i.deals.get(j+1).winner==Game.UNPLAYED))
+					  || j==i.deals.size()-1) {
+						left.setTextSize(left.getTextSize()*2);
+						right.setTextSize(right.getTextSize()*2);
+						left.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+						right.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+					}
 					tr.addView(left,ll);
 					tr.addView(right,lr);
 					table.addView(tr);
