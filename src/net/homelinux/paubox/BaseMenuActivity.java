@@ -31,6 +31,13 @@ public class BaseMenuActivity extends Activity {
 		startActivityForResult(myIntent, REQUEST_CODE_EDIT);
 	}
 
+	protected void launchNewGameActivity() {
+		Intent myIntent = new Intent(this,NewGameActivity.class);
+		myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		myIntent.setAction(Intent.ACTION_DELETE);
+		startActivity(myIntent);
+	}
+
 	/**
 	 * Invoked during initialization to give the Activity a chance to set up its Menu.
 	 *
@@ -55,9 +62,9 @@ public class BaseMenuActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.new_game:
-			current_game = new Game();
 			Toast.makeText(getApplicationContext(), "Starting new game",
-					Toast.LENGTH_SHORT).show();
+			               Toast.LENGTH_SHORT).show();
+			launchNewGameActivity();
 			return true;
 		case R.id.quit:
 			Toast.makeText(getApplicationContext(), "Exit",
@@ -67,7 +74,11 @@ public class BaseMenuActivity extends Activity {
 			launchPreferencesActivity();
 			return true;
 		case R.id.display_scores:
-			launchDisplayActivity();
+			if (current_game == null)
+				Toast.makeText(getApplicationContext(), "Not available now",
+					Toast.LENGTH_SHORT).show();
+			else
+				launchDisplayActivity();
 			return true;
 		}
 		return false;

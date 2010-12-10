@@ -69,11 +69,15 @@ public class NewGameActivity extends BaseMenuActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_game_layout);
-		current_game = readGame();
+		
+		current_game = null;
+		
+		// Try to read saved game only if we have not clicked "new game"
+		if (!getIntent().getAction().equals(Intent.ACTION_DELETE))
+			current_game = readGame();
 
-		if (current_game == null) {
+		if (current_game == null)
 			current_game = new Game();
-		}
 
 		final Button button_start = (Button) findViewById(R.id.button_new_game_go);
 		button_start.setOnClickListener(new OnClickListener() {
