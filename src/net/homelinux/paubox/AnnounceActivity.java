@@ -29,7 +29,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 	 **** CLASS VARIABLE ****
 	 ************************/
 	LinearLayout scoreDisplayView;
-	TextView current_score;
 	TextView distribution;
 
 	PowerManager.WakeLock wl;
@@ -79,7 +78,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 			}
 		}	
 
-		current_score.setText("Us : " + current_game.getScore_Us() + "\nThem : " + current_game.getScore_Them());		
 		distribution.setText("distribution : " + current_game.getPlayer_Distribution() + "\n");
 	}
 
@@ -133,8 +131,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 	}
 
 	public void configureAnnounceView() {
-		current_score = (TextView) findViewById(R.id.current_score);                    
-		current_score.setText("Us : " + current_game.getScore_Us() + "\nThem : " + current_game.getScore_Them());
 
 		distribution = (TextView) findViewById(R.id.distribution);
 		distribution.setText("distribution : " + current_game.getPlayer_Distribution() + "\n");
