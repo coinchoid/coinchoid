@@ -146,7 +146,7 @@ public class Deal implements Serializable {
 	public int scoreWithoutTrumps(int what) {
 		if (bet == CAPOT_BET)
 			return (what == TO_MAKE_LOSE) ? 1 : 130;
-		
+
 		int todo = (bet * 130 + 161) / 162;
 		return (what == TO_MAKE_LOSE) ? (131 - todo) : todo;
 	}
@@ -154,7 +154,7 @@ public class Deal implements Serializable {
 	public int scoreWithTrumps(int what) {
 		if (bet == CAPOT_BET)
 			return (what == TO_MAKE_LOSE) ? 1 : 262;
-		
+
 		int todo = (bet * 262 + 161) / 162;
 		return (what == TO_MAKE_LOSE) ? (263 - todo) : todo;
 	}
