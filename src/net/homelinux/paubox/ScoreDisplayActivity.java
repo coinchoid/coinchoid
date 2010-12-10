@@ -67,45 +67,6 @@ public class ScoreDisplayActivity extends Activity implements DealEditor {
 		//Didn't find a way to do this in xml..
 		TextView header_left = (TextView) a.findViewById(R.id.display_header_left);
 		TextView header_right = (TextView) a.findViewById(R.id.display_header_right);
-		Resources res = a.getResources();
-		String us = res.getString(R.string.Us);
-		String them = res.getString(R.string.Them);
-		int diff = us.length() - them.length();
-		int pad_left = diff/2, pad_right = diff/2;
-		StringBuilder pad = new StringBuilder();
-		String them_padded;
-		String us_padded;
-		if (diff>0) {
-			if (diff%2!=0)
-				pad_left += 1;
-		} else if (diff<0) {
-			if (diff%2!=0)
-				pad_right += 1;
-		}
-		for (int i=0;i<pad_left;i++)
-			pad.append(" ");
-		if (diff>0) {
-			pad.append(them);
-		} else if (diff<0) {
-			pad.append(us);
-
-		}
-		for (int i=0;i<pad_right;i++)
-			pad.append(" ");
-		
-		if (diff>0) {
-			us_padded = us;
-			them_padded = new String(pad);
-		} else if (diff<0) {
-			us_padded = new String(pad);
-			them_padded = them;
-		} else {
-			us_padded = us;
-			them_padded = them;
-		}
-
-		header_left.setText(them_padded);
-		header_right.setText(us_padded);
 
 		int Us_score = 0, Them_score = 0;
 		for (int index=0;index<game.innings.size();index++) {
@@ -128,18 +89,37 @@ public class ScoreDisplayActivity extends Activity implements DealEditor {
 					else {
 						Them_score += d.bet*d.coinchedMultiplicator;
 					}
-					left.setText(Integer.toString(Them_score));
-					right.setText(Integer.toString(Us_score));
+
 					if (((j==i.deals.size()-2) && (i.deals.get(j+1).winner==Game.UNPLAYED))
 					  || j==i.deals.size()-1) {
 						left.setTextSize(left.getTextSize()*2);
 						right.setTextSize(right.getTextSize()*2);
-						left.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-						right.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+						left.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+						right.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
 					}
+					left.setText(Integer.toString(Them_score));
+					right.setText(Integer.toString(Us_score));
 					tr.addView(left,ll);
 					tr.addView(right,lr);
 					table.addView(tr);
+
+					if (((j==i.deals.size()-2) && (i.deals.get(j+1).winner==Game.UNPLAYED))
+					  || j==i.deals.size()-1) {
+						TableRow endtr = new TableRow(a);
+						TextView t = new TextView(a);
+						t.setHeight(0);
+						t.setText("                   ");
+						TextView t1 = new TextView(a);
+						t1.setText("                   ");
+						t1.setHeight(0);
+						TableRow.LayoutParams ll1;
+						TableRow.LayoutParams lr1;
+						ll1 = new TableRow.LayoutParams();
+						lr1 = new TableRow.LayoutParams();
+						endtr.addView(t,ll1);
+						endtr.addView(t1,lr1);
+						table.addView(endtr);
+					}
 				}
 			}
 		}
