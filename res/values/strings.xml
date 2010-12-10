@@ -63,8 +63,11 @@
 <string name="better_to_string_us">pour nous</string>
 <string name="better_to_string_them">pour eux</string>
 <string name="who_take">Qui prend ?</string>
-<string name="seekbar_tracking_on">Changing</string>
-<string name="seekbar_tracking_off">Not Changing</string>
 <string name="seekbar_announce">Annonce</string>
 <string name="welcome">Bienvenue dans Coinchoid !\n</string>
+<string name="to_fail">Pour faire chuter :</string>
+<string name="to_win">Pour réussir :</string>
+<string name="with_trumps">Tout Atout :</string>
+<string name="without_trumps">Sans Atout :</string>
+<string name="current_annouce">Annonce en cours :</string>
 </resources>

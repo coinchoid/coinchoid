@@ -97,7 +97,9 @@ public class Deal implements Serializable {
 	public static final int MIN_BET = 80;
 	public static final int MAX_BET = 180;
 	public static final int CAPOT_BET = 250; // 250 means "capot" useful for some functions
-
+	public static final int TO_MAKE_LOSE = 0;
+	public static final int TO_WIN = 1;
+	
 	public Deal() {
 		newDeal();
 	}
@@ -139,5 +141,21 @@ public class Deal implements Serializable {
 			return "Capot !";
 		else
 			return Integer.toString(bet);
+	}
+	
+	public int scoreWithoutTrumps(int what) {
+		if (bet == CAPOT_BET)
+			return (what == TO_MAKE_LOSE) ? 1 : 130;
+		
+		int todo = (bet * 130 + 161) / 162;
+		return (what == TO_MAKE_LOSE) ? (131 - todo) : todo;
+	}
+
+	public int scoreWithTrumps(int what) {
+		if (bet == CAPOT_BET)
+			return (what == TO_MAKE_LOSE) ? 1 : 262;
+		
+		int todo = (bet * 262 + 161) / 162;
+		return (what == TO_MAKE_LOSE) ? (263 - todo) : todo;
 	}
 }
