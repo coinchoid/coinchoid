@@ -62,13 +62,12 @@ public class BaseMenuActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.new_game:
-			Toast.makeText(getApplicationContext(), "Starting new game",
+			Toast.makeText(getApplicationContext(), "Lancement d'une nouvelle partie",
 			               Toast.LENGTH_SHORT).show();
 			launchNewGameActivity();
 			return true;
 		case R.id.quit:
-			Toast.makeText(getApplicationContext(), "Exit",
-					Toast.LENGTH_SHORT).show();
+			this.finish();
 			return true;
 		case R.id.preferences:
 			launchPreferencesActivity();
