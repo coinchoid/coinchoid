@@ -29,10 +29,25 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 
-
-		<RadioGroup android:layout_width="fill_parent"
+		<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="fill_parent" >
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/who_takes"
+				android:layout_weight="1"
+				android:layout_centerVertical="true" />
+				
+		</RelativeLayout>
+		
+		<RadioGroup android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:layout_weight="1"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="10sp">
 
 			<RadioButton android:id="@+id/button_Us"
 				android:layout_width="wrap_content"

@@ -16,24 +16,33 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 
-		<TextView
+		<RelativeLayout
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/who_takes" />
+			android:layout_height="fill_parent" >
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/who_won"
+				android:layout_weight="1"
+				android:layout_centerVertical="true" />
+		</RelativeLayout>
 	
-		<RadioGroup android:layout_width="fill_parent"
+		<RadioGroup android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:layout_weight="1"
+			android:layout_marginLeft="10sp">
 
 			<RadioButton android:id="@+id/winner_Us"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Us" />
+				android:text="@string/Us" />
 
 			<RadioButton android:id="@+id/winner_Them"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Them" />
+				android:text="@string/Them" />
 
 		</RadioGroup>
 	</LinearLayout>
