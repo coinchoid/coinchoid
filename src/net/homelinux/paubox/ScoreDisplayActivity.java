@@ -106,8 +106,6 @@ public class ScoreDisplayActivity extends Activity implements DealEditor {
 
 		header_left.setText(them_padded);
 		header_right.setText(us_padded);
-		header_left.setTextSize(header_left.getTextSize()*2);
-		header_right.setTextSize(header_right.getTextSize()*2);
 
 		int Us_score = 0, Them_score = 0;
 		for (int index=0;index<game.innings.size();index++) {
