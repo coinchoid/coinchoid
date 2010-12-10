@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Coinche</string>
+    <string name="app_name">Coinchoid</string>
 <string name="go">Ok</string>
 <string name="hello">Hello World, CoincheActivity!</string>
 <string name="lost">C\'est chu !</string>
