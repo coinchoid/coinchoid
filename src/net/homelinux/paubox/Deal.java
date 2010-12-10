@@ -144,18 +144,12 @@ public class Deal implements Serializable {
 	}
 	
 	public int scoreWithoutTrumps(int what) {
-		if (bet == CAPOT_BET)
-			return (what == TO_MAKE_LOSE) ? 1 : 130;
-
 		int todo = (bet * 130 + 161) / 162;
-		return (what == TO_MAKE_LOSE) ? (131 - todo) : todo;
+		return (what == TO_MAKE_LOSE) ? Math.max(1,(131 - todo)) : Math.min(130,todo);
 	}
 
 	public int scoreWithTrumps(int what) {
-		if (bet == CAPOT_BET)
-			return (what == TO_MAKE_LOSE) ? 1 : 262;
-
 		int todo = (bet * 262 + 161) / 162;
-		return (what == TO_MAKE_LOSE) ? (263 - todo) : todo;
+		return (what == TO_MAKE_LOSE) ? Math.max(1,(263 - todo)) : Math.min(262,todo);
 	}
 }
