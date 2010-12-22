@@ -108,9 +108,9 @@ public class ScoreDisplayActivity extends Activity implements DealEditor {
 						TableRow endtr = new TableRow(a);
 						TextView t = new TextView(a);
 						t.setHeight(0);
-						t.setText("                   ");
+						t.setText("                                                 ");
 						TextView t1 = new TextView(a);
-						t1.setText("                   ");
+						t1.setText("                                                 ");
 						t1.setHeight(0);
 						TableRow.LayoutParams ll1;
 						TableRow.LayoutParams lr1;

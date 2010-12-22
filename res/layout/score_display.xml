@@ -13,13 +13,13 @@
 				android:background="#000000"
 				android:textSize="25sp"
 				android:height="0px"
-				android:text="                   "
+				android:text="                                                 "
 				android:gravity="center" android:typeface="monospace"/>
 			<TextView 	
 				android:background="#000000"
 				android:textSize="25sp"
 				android:height="0px"
-				android:text="                   "
+				android:text="                                                 "
 				android:gravity="center" android:typeface="monospace"/>
 		</TableRow>
 		<TableRow>
