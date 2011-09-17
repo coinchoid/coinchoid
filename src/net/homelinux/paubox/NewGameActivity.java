@@ -23,10 +23,10 @@ public class NewGameActivity extends BaseMenuActivity {
 	/************************
 	 **** CLASS VARIABLE ****
 	 ************************/
-	EditText text_player1;
-	EditText text_player2;
-	EditText text_player3;
-	EditText text_player4;
+	EditText text_players[] = new EditText[4];
+	private static final int text_players_ids[] = {
+		R.id.name_player1, R.id.name_player2, R.id.name_player3, R.id.name_player4
+	};
 	CheckBox shuffle_game;
 	
 	/**************************
@@ -82,19 +82,17 @@ public class NewGameActivity extends BaseMenuActivity {
 		final Button button_start = (Button) findViewById(R.id.button_new_game_go);
 		button_start.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				current_game.setPlayer_name(text_player1.getText().toString(), Game.Us_1);
-				current_game.setPlayer_name(text_player2.getText().toString(), Game.Them_1);
-				current_game.setPlayer_name(text_player3.getText().toString(), Game.Us_2);
-				current_game.setPlayer_name(text_player4.getText().toString(), Game.Them_2);
+				for (int i = 0; i<Game.players_cnt; i++) {
+					current_game.setPlayer_name(text_players[i].getText().toString(), Game.players[i]);
+				}
 				current_game.currentDeal().setShuffleDeal(shuffle_game.isChecked());
 				launchAnnouceActivity();
 			}
 		});
 
-		text_player1 = (EditText) findViewById(R.id.name_player1);		
-		text_player2 = (EditText) findViewById(R.id.name_player2);		
-		text_player3 = (EditText) findViewById(R.id.name_player3);		
-		text_player4 = (EditText) findViewById(R.id.name_player4);		
+		for (int i = 0; i < Game.players_cnt; i++) {
+			text_players[i] = (EditText) findViewById(text_players_ids[i]);
+		}
 		shuffle_game = (CheckBox) findViewById(R.id.shuffle_game);
 	}
 

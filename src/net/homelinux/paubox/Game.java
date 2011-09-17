@@ -13,6 +13,9 @@ public class Game implements Serializable {
 	public static final int Them_1 = 1;
 	public static final int Us_2 = 2;
 	public static final int Them_2 = 3;
+	public static final int players[] = { Us_1, Them_1, Us_2, Them_2 };
+	public static final int players_cnt = 4;
+
 	public static final int Us = 0;
 	public static final int Them = 1;
 	//This goes in the winner field, along with "Us" and "Them" so the values must be different
