@@ -3,7 +3,6 @@ package net.homelinux.paubox;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -64,9 +63,8 @@ public class ScoreDisplayActivity extends Activity implements DealEditor {
 		if (a instanceof DealEditor)
 			((DealEditor) a).prepareEdit();
 		
-		//Didn't find a way to do this in xml..
-		TextView header_left = (TextView) a.findViewById(R.id.display_header_left);
-		TextView header_right = (TextView) a.findViewById(R.id.display_header_right);
+		a.findViewById(R.id.display_header_left);
+		a.findViewById(R.id.display_header_right);
 
 		int Us_score = 0, Them_score = 0;
 		for (int index=0;index<game.innings.size();index++) {
