@@ -138,8 +138,9 @@ public class AnnounceActivity extends BaseMenuActivity {
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
 		final SeekBar bet_seekbar = (SeekBar) findViewById(R.id.bet_seekbar);
-		final Button coinche_button = (Button) findViewById(R.id.coinche_button);
 		final Deal d = current_game.currentDeal();
+		final Button coinche_button = (Button) findViewById(R.id.coinche_button);
+		coinche_button.setText(resIdFromMultiplicator(d.coinchedMultiplicator));
 		Button button_go = ((Button) findViewById(R.id.button_go));
 		button_go.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {
