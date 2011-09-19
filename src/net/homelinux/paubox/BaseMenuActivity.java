@@ -33,7 +33,6 @@ public class BaseMenuActivity extends Activity {
 
 	protected void launchNewGameActivity() {
 		Intent myIntent = new Intent(this,NewGameActivity.class);
-		myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		myIntent.setAction(Intent.ACTION_DELETE);
 		startActivity(myIntent);
 	}

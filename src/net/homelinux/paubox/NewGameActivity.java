@@ -1,9 +1,5 @@
 package net.homelinux.paubox;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,8 +13,6 @@ public class NewGameActivity extends BaseMenuActivity {
 	/*******************
 	 **** CONSTANTS ****
 	 *******************/
-	// To be serializable
-	public static final String FILENAME = "coinchoid_current_game.ser";
 
 	/************************
 	 **** CLASS VARIABLE ****
@@ -32,23 +26,6 @@ public class NewGameActivity extends BaseMenuActivity {
 	/**************************
 	 **** PRIVATE METHODS *****
 	 **************************/
-	private Game readGame() {
-		Game game = null;
-		try {
-			FileInputStream fis = openFileInput(FILENAME);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			game = (Game) ois.readObject();
-			fis.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return game;
-	}
-
 
 	/****************************
 	 **** PROTECTED METHODDS ****
@@ -56,6 +33,8 @@ public class NewGameActivity extends BaseMenuActivity {
 	// Call the waiting activity
 	protected void launchAnnouceActivity() {
 		Intent annouce_intent = new Intent(this, AnnounceActivity.class);
+		annouce_intent.setAction(Intent.ACTION_DELETE);
+		annouce_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		annouce_intent.putExtra("net.homelinux.paubox.Game", current_game);
 		startActivity(annouce_intent);
 	}
@@ -69,13 +48,8 @@ public class NewGameActivity extends BaseMenuActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_game_layout);
-		
-		// Try to read saved game only if we have not clicked "new game"
-		if (!getIntent().getAction().equals(Intent.ACTION_DELETE))
-			current_game = readGame();
 
-		if (current_game == null)
-			current_game = new Game();
+		current_game = new Game();
 
 		final Button button_start = (Button) findViewById(R.id.button_new_game_go);
 		button_start.setOnClickListener(new OnClickListener() {

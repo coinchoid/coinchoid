@@ -1,7 +1,9 @@
 package net.homelinux.paubox;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import android.app.Activity;
@@ -227,22 +229,19 @@ public class AnnounceActivity extends BaseMenuActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.announce_layout);
 		updatePreferences();
-		current_game = (Game)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
-
+		if (getIntent().getAction().equals(Intent.ACTION_DELETE)) {
+			current_game = (Game)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
+		} else {
+			try {
+				current_game = readGame();
+			}
+			catch (Exception e) {
+				//Something went wrong, start a new game
+				launchNewGameActivity();
+			}
+		}
 		AnnounceActivity.configureDealView(this, current_game.currentDeal());
 		
-	}
-
-	private void writeGame(Game game) {
-		try {
-			FileOutputStream fos = openFileOutput(NewGameActivity.FILENAME, Context.MODE_PRIVATE);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(game);
-			fos.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -260,5 +259,28 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 		return false;
 	}
+
+	// To be serializable
+	private static final String FILENAME = "coinchoid_current_game.ser";
+	private Game readGame() throws Exception {
+		Game game = null;
+		FileInputStream fis = openFileInput(FILENAME);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		game = (Game) ois.readObject();
+		fis.close();
+		return game;
+	}
+	private void writeGame(Game game) {
+		try {
+			FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(game);
+			fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
 
