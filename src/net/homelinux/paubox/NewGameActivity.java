@@ -58,7 +58,7 @@ public class NewGameActivity extends BaseMenuActivity {
 					if ((text_players[i].getText().toString() != null) && (text_players[i].getText().toString().trim().length()>0))
 						current_game.setPlayer_name(text_players[i].getText().toString().trim(), Game.players[i]);
 					else
-						current_game.setPlayer_name(text_players[i].getHint().toString(), Game.players[i]);	
+						current_game.setPlayer_name(text_players[i].getHint().toString(), Game.players[i]);
 				}
 				current_game.currentDeal().setShuffleDeal(shuffle_game.isChecked());
 				launchAnnouceActivity();
