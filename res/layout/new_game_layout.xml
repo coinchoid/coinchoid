@@ -26,25 +26,25 @@
 			<EditText android:id="@+id/name_player1"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/name_player1"
+				android:hint="@string/name_player1"
 				android:inputType="textPersonName"/>
 
 			<EditText android:id="@+id/name_player2"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/name_player2"
+				android:hint="@string/name_player2"
 				android:inputType="textPersonName"/>
 
 			<EditText android:id="@+id/name_player3"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/name_player3"
+				android:hint="@string/name_player3"
 				android:inputType="textPersonName"/>
 
 			<EditText android:id="@+id/name_player4"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/name_player4"
+				android:hint="@string/name_player4"
 				android:inputType="textPersonName"/>
 
 		</LinearLayout>

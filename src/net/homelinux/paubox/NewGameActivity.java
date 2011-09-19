@@ -5,12 +5,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -29,9 +26,6 @@ public class NewGameActivity extends BaseMenuActivity {
 	EditText text_players[] = new EditText[4];
 	private static final int text_players_ids[] = {
 		R.id.name_player1, R.id.name_player2, R.id.name_player3, R.id.name_player4
-	};
-	private static final int text_players_defaults[] = {
-		R.string.name_player1, R.string.name_player2, R.string.name_player3, R.string.name_player4
 	};
 	CheckBox shuffle_game;
 	
@@ -87,7 +81,10 @@ public class NewGameActivity extends BaseMenuActivity {
 		button_start.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				for (int i = 0; i<Game.players_cnt; i++) {
-					current_game.setPlayer_name(text_players[i].getText().toString(), Game.players[i]);
+					if ((text_players[i].getText().toString() != null) && (text_players[i].getText().toString().trim().length()>0))
+						current_game.setPlayer_name(text_players[i].getText().toString().trim(), Game.players[i]);
+					else
+						current_game.setPlayer_name(text_players[i].getHint().toString(), Game.players[i]);	
 				}
 				current_game.currentDeal().setShuffleDeal(shuffle_game.isChecked());
 				launchAnnouceActivity();
@@ -96,34 +93,8 @@ public class NewGameActivity extends BaseMenuActivity {
 
 		for (int i = 0; i < Game.players_cnt; i++) {
 			text_players[i] = (EditText) findViewById(text_players_ids[i]);
-			setDefaultFormatting(text_players[i]);
-			final String default_text = getResources().getString(text_players_defaults[i]);
-			text_players[i].setOnFocusChangeListener( new OnFocusChangeListener() {
-				public void onFocusChange(View v, boolean hasFocus) {
-					EditText et = (EditText) v;
-					if (hasFocus && et.getText().toString().equals(default_text)) {
-						et.setText("");
-					} else {
-						if (et.getText().length() == 0) {
-							et.setText(default_text);
-							setDefaultFormatting(et);
-						} else {
-							setDoneFormatting(et);
-						}
-					}
-				}
-			});
 		}
 		shuffle_game = (CheckBox) findViewById(R.id.shuffle_game);
-	}
-
-	private static void setDefaultFormatting(EditText et) {
-		et.setTextColor(Color.GRAY);
-		et.setTypeface(null, Typeface.ITALIC);
-	}
-	private static void setDoneFormatting(EditText et) {
-		et.setTextColor(Color.BLACK);
-		et.setTypeface(null, Typeface.NORMAL);
 	}
 
 }
