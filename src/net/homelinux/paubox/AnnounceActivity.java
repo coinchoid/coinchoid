@@ -26,6 +26,9 @@ import android.widget.Toast;
 
 public class AnnounceActivity extends BaseMenuActivity {
 
+	private static final int text_players_defaults[] = {
+		R.string.name_player1, R.string.name_player2, R.string.name_player3, R.string.name_player4
+	};
 
 	/************************
 	 **** CLASS VARIABLE ****
@@ -223,6 +226,11 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 	}
 
+	private void setDefaultNames(Game g) {
+		for (int i=0; i<4; i++)
+			g.player_names[i] = this.getResources().getString(text_players_defaults[i]);
+	}
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -237,7 +245,8 @@ public class AnnounceActivity extends BaseMenuActivity {
 			}
 			catch (Exception e) {
 				//Something went wrong, start a new game
-				launchNewGameActivity();
+				current_game = new Game();
+				setDefaultNames(current_game);
 			}
 		}
 		AnnounceActivity.configureDealView(this, current_game.currentDeal());
