@@ -13,16 +13,14 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.ScrollView;
 import android.widget.SeekBar;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +34,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 	 **** CLASS VARIABLE ****
 	 ************************/
 	LinearLayout scoreDisplayView;
+	GameView gw;
 	TextView distribution;
 
 	PowerManager.WakeLock wl;
@@ -82,6 +81,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 				final Game g = (Game) data.getSerializableExtra("net.homelinux.paubox.edit");
 				current_game.setAs(g);
 				current_game.recomputeScores();
+				gw.notifyDataSetChanged();
 			}
 		}	
 
@@ -157,14 +157,8 @@ public class AnnounceActivity extends BaseMenuActivity {
 								coinche_button);
 						launchWaitingActivity();
 					}});
-		final ScrollView scoreScrollView = (ScrollView)findViewById(R.id.ScrollView01);
-		final TableLayout scoreTable = (TableLayout) findViewById(R.id.display_table);
-		ScoreDisplayActivity.displayScore(this, scoreTable, this.current_game);
-		scoreScrollView.post(new Runnable() {
-			public void run() {
-				scoreScrollView.fullScroll(View.FOCUS_DOWN);
-			}
-		});
+		gw = (GameView) findViewById(R.id.game_view);
+		gw.initGame(this.current_game, false);
 	}
 	
 	public static void saveDeal(final Activity a, final Deal d,

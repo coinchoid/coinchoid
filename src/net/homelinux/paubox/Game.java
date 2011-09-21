@@ -176,4 +176,9 @@ public class Game implements Serializable {
 		}
 	}
 
+	public int dealCnt() {
+		//TODO change this when multiple innings are supported
+		if (innings.isEmpty()) return 0;
+		else return innings.get(0).deals.size();
+	}
 }

@@ -47,4 +47,11 @@ public class EditActivity extends Activity {
 		setContentView(R.layout.edit_layout);
 		configureEditView();
 	}
+
+	static void launchEditActivity(Activity activity,Deal d) {
+		Intent editIntent = new Intent(activity, EditActivity.class);
+		editIntent.putExtra("net.homelinux.paubox.Editable", d);
+		activity.startActivityForResult(editIntent,BaseMenuActivity.REQUEST_CODE_EDIT);
+	}
+
 }

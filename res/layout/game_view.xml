@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/score_header">
+        <TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:text="@string/Them" style="@style/score.header" android:layout_weight="1" android:layout_width="0dp"></TextView>
+        <View android:layout_height="fill_parent" android:layout_width="1dip" android:background="@color/grey"></View>
+        <TextView android:id="@+id/textView2" android:layout_height="wrap_content" android:text="@string/Us" style="@style/score.header" android:layout_weight="1" android:layout_width="0dp"></TextView>
+    </LinearLayout>
+    <View android:layout_width="fill_parent"
+	android:layout_height="1dip" android:background="@color/grey"></View>
+    <ListView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/list" android:divider="@android:color/transparent" android:transcriptMode="alwaysScroll" android:stackFromBottom="true">
+        <!-- Preview:
+            listfooter=@layout/score_footer
+            listitem=@layout/score_display_item
+         -->
+    </ListView>
+    <!--  LOL can't declare my footer here, it has to be a separate layout, in score_footer.xml -->
+
+</LinearLayout>

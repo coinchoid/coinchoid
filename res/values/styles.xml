@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="score" parent="@android:style/TextAppearance.Medium">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:gravity">center</item>
+	</style>
+	<style name="score.last">
+		<item name="android:textSize">50dip</item>
+	</style>
+	<style name="score.header">
+		<item name="android:textSize">50dip</item>
+	</style>
+</resources>
