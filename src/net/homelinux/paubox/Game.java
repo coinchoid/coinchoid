@@ -147,6 +147,10 @@ public class Game implements Serializable {
 	    player_names[player] = name;
 	}
 
+	public void setPlayer(int _player) {
+	    player = _player;
+	}
+
 	public void setAs(Game g) {
 		for (int i=0;i<innings.size();i++) {
 			(innings.get(i)).setAs(g.innings.get(i));

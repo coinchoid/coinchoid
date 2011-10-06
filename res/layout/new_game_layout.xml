@@ -5,63 +5,37 @@
 	android:layout_height="fill_parent">
 
 	<TextView android:id="@+id/title"
-		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="@string/title_new_game"
 		android:shadowColor="#80FF0000"
 		android:textSize="35sp"
-		android:textStyle="bold" />
-
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-
-		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			android:orientation="vertical"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_weight="10">
-
-			<EditText android:id="@+id/name_player1"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:hint="@string/name_player1"
-				android:inputType="textPersonName"/>
-
-			<EditText android:id="@+id/name_player2"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:hint="@string/name_player2"
-				android:inputType="textPersonName"/>
-
-			<EditText android:id="@+id/name_player3"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:hint="@string/name_player3"
-				android:inputType="textPersonName"/>
-
-			<EditText android:id="@+id/name_player4"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:hint="@string/name_player4"
-				android:inputType="textPersonName"/>
-
+		android:textStyle="bold" android:layout_width="fill_parent" android:layout_gravity="center" android:gravity="center" android:layout_marginBottom="40sp"/>
+	<LinearLayout android:orientation="vertical" android:layout_height="fill_parent" android:gravity="center" android:layout_width="fill_parent" android:layout_gravity="left">
+		<LinearLayout
+		    android:id="@+id/left_text"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content">
+		    <TextView android:textSize="13sp" android:layout_height="wrap_content" android:shadowColor="#80FF0000" android:id="@+id/title" android:text="@string/distribution" android:gravity="fill|left" android:layout_width="90sp"></TextView>
 		</LinearLayout>
-
-		<Button android:id="@+id/button_new_game_go"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center"			
-			android:text="@string/new_game_go" />
-			
+		<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_weight="1.0" android:layout_height="wrap_content">
+			<RadioGroup android:layout_weight="1" android:layout_marginLeft="10sp" android:orientation="vertical" android:layout_height="wrap_content" android:layout_width="wrap_content">
+				<RadioButton android:id="@+id/first_distribution1" android:layout_height="wrap_content" android:layout_width="wrap_content"></RadioButton>
+				<RadioButton android:id="@+id/first_distribution2" android:layout_height="wrap_content" android:layout_width="wrap_content"></RadioButton>
+				<RadioButton android:id="@+id/first_distribution3" android:layout_height="wrap_content" android:layout_width="wrap_content"></RadioButton>
+				<RadioButton android:id="@+id/first_distribution4" android:layout_height="wrap_content" android:layout_width="wrap_content"></RadioButton>
+			</RadioGroup>
+			<LinearLayout android:layout_weight="10" android:orientation="vertical" android:layout_height="wrap_content" android:layout_width="wrap_content">
+				<EditText android:id="@+id/name_player1" android:layout_height="wrap_content" android:hint="@string/name_player1" android:inputType="textPersonName" android:layout_width="fill_parent">
+					<requestFocus></requestFocus>
+				</EditText>
+				<EditText android:id="@+id/name_player2" android:layout_height="wrap_content" android:hint="@string/name_player2" android:inputType="textPersonName" android:layout_width="fill_parent"></EditText>
+				<EditText android:id="@+id/name_player3" android:layout_height="wrap_content" android:hint="@string/name_player3" android:inputType="textPersonName" android:layout_width="fill_parent"></EditText>
+				<EditText android:id="@+id/name_player4" android:layout_height="wrap_content" android:hint="@string/name_player4" android:inputType="textPersonName" android:layout_width="fill_parent"></EditText>
+			</LinearLayout>
+		</LinearLayout>
+		<CheckBox android:text="@string/shuffle_game" android:gravity="center|fill_horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/shuffle_game" android:layout_weight="1.0"></CheckBox>
+		<Button android:id="@+id/button_new_game_go" android:text="@string/new_game_go" android:layout_gravity="center" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="0.8"></Button>
 	</LinearLayout>
-
-	<CheckBox android:id="@+id/shuffle_game"
-		android:defaultValue="true"
-		android:layout_height="wrap_content"
-		android:layout_width="fill_parent"
-		android:text="@string/shuffle_game" />
 
 
 </LinearLayout>

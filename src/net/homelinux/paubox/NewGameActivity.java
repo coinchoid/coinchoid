@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 public class NewGameActivity extends BaseMenuActivity {
 
@@ -18,8 +19,12 @@ public class NewGameActivity extends BaseMenuActivity {
 	 **** CLASS VARIABLE ****
 	 ************************/
 	EditText text_players[] = new EditText[4];
+	RadioButton first_distribution[] = new RadioButton[4];
 	private static final int text_players_ids[] = {
 		R.id.name_player1, R.id.name_player2, R.id.name_player3, R.id.name_player4
+	};
+	private static final int first_distribution_ids[] = {
+		R.id.first_distribution1, R.id.first_distribution2, R.id.first_distribution3, R.id.first_distribution4
 	};
 	CheckBox shuffle_game;
 	
@@ -59,6 +64,8 @@ public class NewGameActivity extends BaseMenuActivity {
 						current_game.setPlayer_name(text_players[i].getText().toString().trim(), Game.players[i]);
 					else
 						current_game.setPlayer_name(text_players[i].getHint().toString(), Game.players[i]);
+					if (first_distribution[i].isChecked())
+						current_game.setPlayer(i);
 				}
 				current_game.currentDeal().setShuffleDeal(shuffle_game.isChecked());
 				launchAnnouceActivity();
@@ -67,6 +74,7 @@ public class NewGameActivity extends BaseMenuActivity {
 
 		for (int i = 0; i < Game.players_cnt; i++) {
 			text_players[i] = (EditText) findViewById(text_players_ids[i]);
+			first_distribution[i] = (RadioButton) findViewById(first_distribution_ids[i]);
 		}
 		shuffle_game = (CheckBox) findViewById(R.id.shuffle_game);
 	}
