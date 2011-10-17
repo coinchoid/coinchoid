@@ -2,9 +2,12 @@ package net.homelinux.paubox;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Toast;
 
 public class BaseMenuActivity extends Activity {
@@ -50,6 +53,14 @@ public class BaseMenuActivity extends Activity {
 		return true;
 	}
 
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		menu.setHeaderTitle(R.string.distribution_current);
+		menu.add(Menu.NONE, Game.Us_1, 1, current_game.getPlayer_name(Game.players[Game.Us_1]));
+		menu.add(Menu.NONE, Game.Them_1, 2, current_game.getPlayer_name(Game.players[Game.Them_1]));
+		menu.add(Menu.NONE, Game.Us_2, 3, current_game.getPlayer_name(Game.players[Game.Us_2]));
+		menu.add(Menu.NONE, Game.Them_2, 4, current_game.getPlayer_name(Game.players[Game.Them_2]));
+	}
 	/**
 	 * Invoked when the user selects an item from the Menu.
 	 *
@@ -80,5 +91,19 @@ public class BaseMenuActivity extends Activity {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean onContextItemSelected(MenuItem item) {
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+			case Game.Us_1:
+			case Game.Us_2:
+			case Game.Them_1:
+			case Game.Them_2:
+				current_game.setPlayer(item.getItemId());
+				return true;
+			default:
+				return false;
+		}
 	}
 }

@@ -143,6 +143,10 @@ public class Game implements Serializable {
 		return score_Them;
 	}
 
+	public String getPlayer_name(int player) {
+	    return player_names[player];
+	}
+
 	public void setPlayer_name(String name, int player) {
 	    player_names[player] = name;
 	}

@@ -12,8 +12,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -139,6 +141,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		distribution = (TextView) findViewById(R.id.distribution);
 		distribution.setText("distribution : " + current_game.getPlayer_Distribution() + "\n");
+		registerForContextMenu(distribution);
 
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
@@ -253,6 +256,11 @@ public class AnnounceActivity extends BaseMenuActivity {
 		
 	}
 
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		super.onOptionsItemSelected(item);
@@ -267,6 +275,21 @@ public class AnnounceActivity extends BaseMenuActivity {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		super.onContextItemSelected(item);
+		switch (item.getItemId()) {
+			case Game.Us_1:
+			case Game.Us_2:
+			case Game.Them_1:
+			case Game.Them_2:
+				configureAnnounceView();
+				return true;
+			default:
+				return false;
+		}
 	}
 
 	// To be serializable

@@ -72,5 +72,6 @@
 <string name="current_annouce">Annonce en cours :</string>
 <string name="who_takes">Qui prend ? </string>
 <string name="who_won">Qui a gagné ? </string>
-<string name="distribution">Qui distribue en premier ?</string>
+<string name="distribution_start">Qui distribue en premier ?</string>
+<string name="distribution_current">Qui distribue en ce moment ?</string>
 </resources>
