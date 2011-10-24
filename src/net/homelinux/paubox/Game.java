@@ -49,25 +49,25 @@ public class Game implements Serializable {
 		}
 	}
 
-	private void update_score(){
-		if (currentDeal().isShuffleDeal())
+	private void update_score(Deal d){
+		if (d.isShuffleDeal())
 		    return;
 
-		if (currentDeal().winner == Game.Us)
-			score_Us = score_Us + currentDeal().bet*currentDeal().getCoinchedMultiplicator();
+		if (d.winner == Game.Us)
+			score_Us = score_Us + d.bet*d.getCoinchedMultiplicator();
 		else
-			score_Them = score_Them + currentDeal().bet*currentDeal().getCoinchedMultiplicator();			
+			score_Them = score_Them + d.bet*d.getCoinchedMultiplicator();			
 	}
+
+	private void update_score(){
+		update_score(currentDeal());
+	}
+
 	public void recomputeScores() {
 		//We only support 1 inning for now
 		score_Us = score_Them = 0;
 		for (Deal d : innings.get(0).deals) {
-			if (d.winner == Game.Us) {
-				score_Us += d.bet*d.coinchedMultiplicator;
-			}
-			else if (d.winner == Game.Them) {
-				score_Them += d.bet*d.coinchedMultiplicator;
-			}
+			update_score(d);
 		}
 	}
 
