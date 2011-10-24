@@ -3,24 +3,8 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	>
 	<PreferenceCategory
-		android:title="Préférences Système"
+		android:title="@string/title_system_preferences"
 	>
-		
-		<ListPreference
-			android:key="winning_score"
-			android:title="@string/title_winning_score"
-			android:summary="@string/summary_winning_score"
-			android:defaultValue="1000"
-			android:entries="@array/score_entries_list"
-			android:entryValues="@array/score_entryvalues_list"
-		/>
-
-		<CheckBoxPreference
-			android:key="bergel_rule"
-			android:title="@string/title_bergel_rule"
-			android:summaryOn="@string/summary_on_bergel_rule"
-			android:summaryOff="@string/summary_off_bergel_rule"
-		/>
 
 		<CheckBoxPreference
 			android:key="wake_lock_enable"
@@ -29,5 +13,9 @@
 			android:summaryOff="@string/summary_off_wake_lock_enable"
 			android:defaultValue="true"
 		/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="@string/title_score_preferences" android:summary="@string/summary_score_preferences">
+		<ListPreference android:key="winning_score" android:title="@string/title_winning_score" android:summary="@string/summary_winning_score" android:defaultValue="1000" android:entries="@array/score_entries_list" android:entryValues="@array/score_entryvalues_list" />
+		<CheckBoxPreference android:key="loose_160" android:title="@string/title_loose_160" android:summaryOn="@string/summary_on_loose_160" android:summaryOff="@string/summary_off_loose_160" />
 	</PreferenceCategory>
 </PreferenceScreen>

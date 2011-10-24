@@ -81,12 +81,19 @@ public class ScoreDisplayActivity extends Activity implements DealEditor {
 					left.setGravity(Gravity.CENTER);
 					right.setBackgroundColor(Color.BLACK);
 					right.setGravity(Gravity.CENTER);
-					if (d.winner == Game.Us) {
-						Us_score += d.bet*d.coinchedMultiplicator;
-					}
-					else {
-						Them_score += d.bet*d.coinchedMultiplicator;
-					}
+
+					boolean loose;
+					int score;
+					loose = d.team_betting != d.winner;
+					if (loose && game.loose_160)
+						score = 160;
+					else
+						score = d.bet;
+
+					if (d.winner == Game.Us)
+						Us_score += score*d.coinchedMultiplicator;
+					else
+						Them_score += score*d.coinchedMultiplicator;
 
 					if (((j==i.deals.size()-2) && (i.deals.get(j+1).winner==Game.UNPLAYED))
 					  || j==i.deals.size()-1) {

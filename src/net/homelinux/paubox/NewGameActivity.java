@@ -2,6 +2,7 @@ package net.homelinux.paubox;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -55,6 +56,7 @@ public class NewGameActivity extends BaseMenuActivity {
 		setContentView(R.layout.new_game_layout);
 
 		current_game = new Game();
+		current_game.setLoose_160(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("loose_160", false));
 
 		final Button button_start = (Button) findViewById(R.id.button_new_game_go);
 		button_start.setOnClickListener(new OnClickListener() {

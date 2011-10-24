@@ -88,6 +88,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		distribution.setText("distribution : " + current_game.getPlayer_Distribution() + "\n");
 	}
 
+	// We don't update score preferences here as they are used only when creating a new game.
 	private void updatePreferences() {
 		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("wake_lock_enable", false)) {
 			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);

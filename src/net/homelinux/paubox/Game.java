@@ -30,6 +30,7 @@ public class Game implements Serializable {
 	int score_Us;
 	int score_Them;
 	int player;
+	boolean loose_160;
 
 	/**************************
 	 **** PRIVATE METHODDS ****
@@ -50,13 +51,22 @@ public class Game implements Serializable {
 	}
 
 	private void update_score(Deal d){
+		boolean loose;
+		int score;
+
 		if (d.isShuffleDeal())
 		    return;
 
-		if (d.winner == Game.Us)
-			score_Us = score_Us + d.bet*d.getCoinchedMultiplicator();
+		loose = d.team_betting != d.winner;
+		if (loose && loose_160)
+			score = 160;
 		else
-			score_Them = score_Them + d.bet*d.getCoinchedMultiplicator();			
+			score = d.bet;
+
+		if (d.winner == Game.Us)
+			score_Us = score_Us + score*d.getCoinchedMultiplicator();
+		else
+			score_Them = score_Them + score*d.getCoinchedMultiplicator();
 	}
 
 	private void update_score(){
@@ -95,6 +105,7 @@ public class Game implements Serializable {
 		innings = new ArrayList<Inning>();
 		innings.add(new Inning());
 		player_names = new String[4];
+		loose_160 = false;
 	}
 
 	/*************************
@@ -153,6 +164,10 @@ public class Game implements Serializable {
 
 	public void setPlayer(int _player) {
 	    player = _player;
+	}
+
+	public void setLoose_160(boolean _loose_160) {
+	    loose_160 = _loose_160;
 	}
 
 	public void setAs(Game g) {

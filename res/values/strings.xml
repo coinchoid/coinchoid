@@ -26,9 +26,9 @@
 <string name="win">C\'est fait !</string>
 <string name="title_winning_score">Partie en ?</string>
 <string name="summary_winning_score">Score à atteindre pour terminer la partie</string>
-<string name="title_bergel_rule">La règle du Bergel</string>
-<string name="summary_on_bergel_rule">Avec la règle du Bergel</string>
-<string name="summary_off_bergel_rule">Sans la règle du Bergel</string>
+<string name="title_loose_160">Défaite à 160</string>
+<string name="summary_on_loose_160">Partie chutée =&gt; 160 points pour l\'adversaire</string>
+<string name="summary_off_loose_160">Partie chutée =&gt; points annoncés pour l\'adversaire</string>
 <string name="title_wake_lock_enable">Mise en veille</string>
 <string name="summary_on_wake_lock_enable">Empêche la veille</string>
 <string name="summary_off_wake_lock_enable">Autorise la veille</string>
@@ -74,4 +74,7 @@
 <string name="who_won">Qui a gagné ? </string>
 <string name="distribution_start">Qui distribue en premier ?</string>
 <string name="distribution_current">Qui distribue en ce moment ?</string>
+<string name="title_system_preferences">Système</string>
+<string name="title_score_preferences">Score</string>
+<string name="summary_score_preferences">"Ces préférences ne sont prises en compte que lors d'une nouvelle partie"</string>
 </resources>
