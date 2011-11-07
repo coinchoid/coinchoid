@@ -7,7 +7,7 @@
 		<item>1000</item>
 		<item>2000</item>
 	</string-array>
-	
+
 	<string-array
 		name="score_entryvalues_list"
 		>
@@ -15,4 +15,21 @@
 		<item>1000</item>
 		<item>2000</item>
 	</string-array>
-</resources>
+
+	<string-array
+		name="win_score_entries_list"
+		>
+		<item>L\'annonce</item>
+		<item>Les points faits</item>
+		<item>Annonce + points faits</item>
+	</string-array>
+
+		<string-array
+		name="win_score_values_list"
+		>
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
+
+	</resources>

@@ -77,4 +77,7 @@
 <string name="title_system_preferences">Système</string>
 <string name="title_score_preferences">Score</string>
 <string name="summary_score_preferences">"Ces préférences ne sont prises en compte que lors d'une nouvelle partie"</string>
+<string name="announce_difference">Écart à l\'annonce:</string>
+<string name="preference_win_score">Points de victoire</string>
+<string name="preference_win_score_summary">Pour une annonce réussie, combien de points sont gagnés</string>
 </resources>

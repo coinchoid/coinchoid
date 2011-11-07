@@ -64,12 +64,14 @@ public class AnnounceActivity extends BaseMenuActivity {
 			break;
 		case REQUEST_CODE_WAITING:
 			if (resultCode != RESULT_CANCELED) {
-				boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);			
+				boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);
+				int difference = data.getIntExtra("net.homelinux.paubox.difference", 0);
 				current_game.currentDeal().setWon(won);
+				current_game.currentDeal().announce_difference = difference;
 				current_game.updateResult();
 				current_game.newDeal();
 				//button_coinche.setText(CoincheButtonTextId(current_game.currentDeal().getCoinchedMultiplicator()));
-				Toast.makeText(getApplicationContext(), "The game was " + (won ? "won !" : "lost :("),
+				Toast.makeText(getApplicationContext(), "The game was " + (won ? "won " : "lost ") + "by " + difference + ".",
 						Toast.LENGTH_SHORT).show();
 			} else {
 				Toast.makeText(getApplicationContext(), "Cancel",

@@ -51,6 +51,8 @@
 		</RadioGroup>
 	</LinearLayout>
 
+	<include layout="@layout/score_difference" />
+
 	<Button android:id="@+id/edit_button_ok"
 		android:layout_width="100sp"
 		android:layout_height="wrap_content"

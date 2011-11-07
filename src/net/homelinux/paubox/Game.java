@@ -31,6 +31,17 @@ public class Game implements Serializable {
 	int score_Them;
 	int player;
 	boolean loose_160;
+	public int win_score_mode;
+	//Should match the xml: arrays.xml
+	public static int SCORE_BETONLY = 0;
+	public static int SCORE_RESULTONLY = 1;
+	public static int SCORE_SUMBETRESULT = 2;
+
+	static int parseScoreString(String s) {
+			int i = Integer.parseInt(s);
+			if (i<SCORE_BETONLY || i>SCORE_SUMBETRESULT) return SCORE_BETONLY;
+			return i;
+	}
 
 	/**************************
 	 **** PRIVATE METHODDS ****

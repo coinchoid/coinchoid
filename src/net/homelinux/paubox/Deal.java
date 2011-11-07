@@ -12,6 +12,7 @@ public class Deal implements Serializable {
 	int dealer;
 	int winner;
 	int coinchedMultiplicator;
+	int announce_difference;
 	boolean shuffleDeal;
 
 	protected int getCoinchedMultiplicator() {
@@ -134,6 +135,7 @@ public class Deal implements Serializable {
 		winner = d.winner;
 		coinchedMultiplicator = d.coinchedMultiplicator;
 		shuffleDeal = d.shuffleDeal;
+		announce_difference = d.announce_difference;
 	}
 	
 	public static String betToString(int bet) {

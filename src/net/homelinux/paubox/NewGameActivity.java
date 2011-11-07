@@ -57,6 +57,7 @@ public class NewGameActivity extends BaseMenuActivity {
 
 		current_game = new Game();
 		current_game.setLoose_160(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("loose_160", false));
+		current_game.win_score_mode = Game.parseScoreString(PreferenceManager.getDefaultSharedPreferences(this).getString("win_score", Integer.toString(Game.SCORE_BETONLY)));
 
 		final Button button_start = (Button) findViewById(R.id.button_new_game_go);
 		button_start.setOnClickListener(new OnClickListener() {

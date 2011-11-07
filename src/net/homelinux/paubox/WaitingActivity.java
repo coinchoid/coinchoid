@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class WaitingActivity extends BaseMenuActivity {
@@ -44,11 +45,14 @@ public class WaitingActivity extends BaseMenuActivity {
 		);
 		
 		final Button winButton = (Button) findViewById(R.id.button_win);
+		final EditText et = (EditText) findViewById(R.id.announce_difference);
 		
 		winButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				setResult(AnnounceActivity.REQUEST_CODE_WAITING, new Intent().putExtra("net.homelinux.paubox.won",true));
-				
+				Intent i = new Intent()
+						.putExtra("net.homelinux.paubox.won",true)
+						.putExtra("net.homelinux.paubox.difference", validateAnnounceDifference(et));
+				setResult(AnnounceActivity.REQUEST_CODE_WAITING, i);
 				finish();
 			}
 		});
@@ -58,9 +62,22 @@ public class WaitingActivity extends BaseMenuActivity {
 		
 		lostButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				setResult(AnnounceActivity.REQUEST_CODE_WAITING, new Intent().putExtra("net.homelinux.paubox.won",false));
+				Intent i = new Intent()
+						.putExtra("net.homelinux.paubox.won",false)
+						.putExtra("net.homelinux.paubox.difference", validateAnnounceDifference(et));
+				setResult(AnnounceActivity.REQUEST_CODE_WAITING, i);
 				finish();
 			}
 		});
+
+	}
+
+	static int validateAnnounceDifference(EditText et) {
+		String s = et.getText().toString();
+		s.replaceAll("[^0-9]", "");
+		if (s.equals(""))
+			return 0;
+		else
+			return Integer.parseInt(s);
 	}
 }

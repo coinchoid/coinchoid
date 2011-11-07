@@ -34,10 +34,18 @@ public class GameAdapterWrapper {
 					boolean loose;
 					int score;
 					loose = d.team_betting != d.winner;
-					if (loose && game.loose_160)
-						score = 160;
+					if (loose)
+						if (game.loose_160)
+							score = 160;
+						else
+							score = d.bet;
 					else
-						score = d.bet;
+						if (game.win_score_mode == Game.SCORE_SUMBETRESULT)
+							score = d.bet + d.bet + d.announce_difference;
+						else if (game.win_score_mode == Game.SCORE_RESULTONLY)
+							score = d.bet + d.announce_difference;
+						else
+							score = d.bet;
 
 					if (d.winner == Game.Us)
 						Us_score += score*d.coinchedMultiplicator;

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 
@@ -27,11 +28,15 @@ public class EditActivity extends Activity {
 			winner_them.setChecked(true);
 		}
 
+		final EditText et = (EditText) findViewById(R.id.announce_difference);
+		et.setText(Integer.toString(d.announce_difference));
+
 		Button edit_ok = ((Button) findViewById(R.id.edit_button_ok));
 		edit_ok.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {
 						AnnounceActivity.saveDeal(EditActivity.this, d, radio_us, radio_them, score_seekbar,
 								coinche_button);
+						d.announce_difference = WaitingActivity.validateAnnounceDifference(et);
 						if (winner_us.isChecked()) {
 							d.setWinner(Game.Us);
 						} else if (winner_them.isChecked()) {
