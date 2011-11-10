@@ -33,10 +33,9 @@
 <string name="summary_on_wake_lock_enable">Empêche la veille</string>
 <string name="summary_off_wake_lock_enable">Autorise la veille</string>
 
-
-
-
-
+<string name="deal_won">faite</string>
+<string name="deal_lost">chutée</string>
+<string name="deal_summary">Partie %1$s,  de %2$d points.</string>
 
 
 <string name="new_game">Nouvelle Partie</string>

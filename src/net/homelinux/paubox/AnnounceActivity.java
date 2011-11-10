@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
@@ -71,7 +72,10 @@ public class AnnounceActivity extends BaseMenuActivity {
 				current_game.updateResult();
 				current_game.newDeal();
 				//button_coinche.setText(CoincheButtonTextId(current_game.currentDeal().getCoinchedMultiplicator()));
-				Toast.makeText(getApplicationContext(), "The game was " + (won ? "won " : "lost ") + "by " + difference + ".",
+				int resultId = won ? R.string.deal_won : R.string.deal_lost;
+				Resources r = getResources();
+				String s = r.getString(R.string.deal_summary, r.getString(resultId), difference);
+				Toast.makeText(getApplicationContext(), s,
 						Toast.LENGTH_SHORT).show();
 			} else {
 				Toast.makeText(getApplicationContext(), "Cancel",
