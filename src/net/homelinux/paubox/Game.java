@@ -182,6 +182,8 @@ public class Game implements Serializable {
 	}
 
 	public void setAs(Game g) {
+		this.loose_160 = g.loose_160;
+		this.win_score_mode = g.win_score_mode;
 		for (int i=0;i<innings.size();i++) {
 			(innings.get(i)).setAs(g.innings.get(i));
 		}

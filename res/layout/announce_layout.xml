@@ -30,6 +30,9 @@
 	android:layout_height="4dip" android:background="@color/white" android:layout_marginBottom="4dip"></View>
 	
 
-	<include layout="@layout/score_display" />
+	<net.homelinux.paubox.GameView
+	    android:id="@+id/game_view"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" />
 
 </LinearLayout>

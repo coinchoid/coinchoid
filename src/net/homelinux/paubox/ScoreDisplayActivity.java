@@ -3,6 +3,10 @@ package net.homelinux.paubox;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class ScoreDisplayActivity extends Activity {
 	
@@ -16,6 +20,13 @@ public class ScoreDisplayActivity extends Activity {
 		setContentView(R.layout.score_display);
 		gw = (GameView) findViewById(R.id.game_view);
 		gw.initGame(game, true);
+		Button b = ((Button) findViewById(R.id.force_counting_system));
+		b.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				NewGameActivity.forcePreferencesCounting(ScoreDisplayActivity.this, game);
+				gw.notifyDataSetChanged();
+			}
+		});
 	}
 
 	@Override
@@ -31,8 +42,12 @@ public class ScoreDisplayActivity extends Activity {
 		}
 	}
 
-	public void onPause() {
-		super.onPause();
-		setResult(BaseMenuActivity.REQUEST_CODE_EDIT, new Intent().putExtra("net.homelinux.paubox.edit", game));
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+	    if ((keyCode == KeyEvent.KEYCODE_BACK))
+	    {
+			setResult(BaseMenuActivity.REQUEST_CODE_EDIT, new Intent().putExtra("net.homelinux.paubox.edit", game));
+	    }
+	    return super.onKeyDown(keyCode, event);
 	}
 }
