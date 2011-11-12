@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
@@ -24,6 +25,7 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.PorterDuff;
 
 public class AnnounceActivity extends BaseMenuActivity {
 
@@ -205,14 +207,27 @@ public class AnnounceActivity extends BaseMenuActivity {
 		bet_seekbar.setProgress(ItemIdFromBet(d.bet));
 
 		coinche_button.setText(resIdFromMultiplicator(d.coinchedMultiplicator));
+		coinche_button.getBackground().setColorFilter(coincheColorFromMultiplicator(d.coinchedMultiplicator), PorterDuff.Mode.MULTIPLY);
 		coinche_button.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				int newMultiplicator = multiplicatorFromText(a, coinche_button.getText().toString());
 				newMultiplicator *= 2;
 				if (newMultiplicator > 4) newMultiplicator = 1;
 				coinche_button.setText(resIdFromMultiplicator(newMultiplicator));
+				coinche_button.getBackground().setColorFilter(coincheColorFromMultiplicator(newMultiplicator), PorterDuff.Mode.MULTIPLY);
 			}
 		});
+	}
+
+	public static int coincheColorFromMultiplicator(int multiplicator) {
+		switch (multiplicator) {
+		case 2:
+			return Color.YELLOW;
+		case 4:
+			return Color.RED;
+		default:
+			return Color.WHITE;
+		}
 	}
 
     private static int multiplicatorFromText(Context c, String text) {
