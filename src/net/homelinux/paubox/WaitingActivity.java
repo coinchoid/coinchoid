@@ -74,10 +74,23 @@ public class WaitingActivity extends BaseMenuActivity {
 
 	static int validateAnnounceDifference(EditText et) {
 		String s = et.getText().toString();
+		return validateAnnounceDifference(s);
+	}
+	static int validateAnnounceDifference(String s) {
 		s.replaceAll("[^0-9]", "");
 		if (s.equals(""))
 			return 0;
-		else
-			return Integer.parseInt(s);
+		else {
+			return validateAnnounceDifference(Integer.parseInt(s));
+		}
+	}
+	static int validateAnnounceDifference(int i) {
+		return Math.max(0, i);
+	}
+	static void setValidatedScore(EditText et, int i) {
+		et.setText(Integer.toString(validateAnnounceDifference(i)));
+	}
+	static void setValidatedScore(EditText et, String s) {
+		et.setText(Integer.toString(validateAnnounceDifference(s)));
 	}
 }

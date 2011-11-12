@@ -20,13 +20,13 @@ public class ScoreInputView extends LinearLayout {
 		button_incr.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				int i = WaitingActivity.validateAnnounceDifference(et);
-				et.setText(Integer.toString(i+10));
+				WaitingActivity.setValidatedScore(et,i+10);
 			}
 		});
 		button_decr.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				int i = WaitingActivity.validateAnnounceDifference(et);
-				et.setText(Integer.toString(i-10));
+				WaitingActivity.setValidatedScore(et,i-10);
 			}
 		});
 	}

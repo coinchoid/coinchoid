@@ -29,7 +29,7 @@ public class EditActivity extends Activity {
 		}
 
 		final EditText et = (EditText) findViewById(R.id.announce_difference);
-		et.setText(Integer.toString(d.announce_difference));
+		WaitingActivity.setValidatedScore(et,d.announce_difference);
 
 		Button edit_ok = ((Button) findViewById(R.id.edit_button_ok));
 		edit_ok.setOnClickListener(new OnClickListener() {
