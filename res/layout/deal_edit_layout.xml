@@ -8,7 +8,8 @@
 	<TextView android:id="@+id/progress_text"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:gravity="center" />
+		android:text="Annonce = 110"
+		android:gravity="center" android:textSize="30sp"/>
 
 	<SeekBar android:id="@+id/bet_seekbar"
 		android:layout_width="fill_parent"
@@ -17,12 +18,14 @@
 		android:paddingRight="20dip"
 		android:drawSelectorOnTop="true"
 		android:max="11"
-		android:progress="0"/>
+		android:progress="0" android:paddingBottom="10dip"/>
 
-	<Button android:id="@+id/coinche_button"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:text="@string/uncoinched" />
+	<Button
+	    android:id="@+id/coinche_button"
+	    android:layout_width="130dip"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_horizontal"
+	    android:text="@string/uncoinched" />
 
 	<LinearLayout
 		android:orientation="horizontal"

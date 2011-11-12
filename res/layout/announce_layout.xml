@@ -5,27 +5,25 @@
 	android:layout_height="fill_parent"
 	android:id="@+id/announce_linear_layout">
 
-	<TextView android:id="@+id/welcome_text"
-		android:textStyle="bold"
-		android:textSize="20sp"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:text="@string/welcome"
-		android:gravity="center_horizontal" />
-
-	<TextView android:id="@+id/distribution"
-		android:layout_width="fill_parent"
-		android:text="distribution : Us_1"
-		android:layout_height="wrap_content"
-		android:gravity="center_horizontal" />
-
 	<include layout="@layout/deal_edit_layout" />
 
-	<Button android:id="@+id/button_go"
-		android:layout_width="100sp"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"			
-		android:text="@string/go" />
+	<Button
+	    android:id="@+id/button_go"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:text="@string/go" />
+
+	<TextView
+	    android:id="@+id/distribution"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_horizontal"
+	    android:text="distribution : Us_1" />
+	
+	    <View android:layout_width="fill_parent"
+	android:layout_height="4dip" android:background="@color/white" android:layout_marginBottom="10dip"></View>
+	
 
 	<include layout="@layout/score_display" />
 
