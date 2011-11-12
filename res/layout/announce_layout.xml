@@ -14,15 +14,18 @@
 	    android:layout_gravity="center"
 	    android:text="@string/go" />
 
+		    <View android:layout_width="fill_parent"
+	android:layout_height="4dip" android:background="@color/white"></View>
+
 	<TextView
 	    android:id="@+id/distribution"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:gravity="center_horizontal"
+	    android:gravity="center"
 	    android:text="distribution : Us_1" />
 	
 	    <View android:layout_width="fill_parent"
-	android:layout_height="4dip" android:background="@color/white" android:layout_marginBottom="10dip"></View>
+	android:layout_height="4dip" android:background="@color/white" android:layout_marginBottom="4dip"></View>
 	
 
 	<include layout="@layout/score_display" />

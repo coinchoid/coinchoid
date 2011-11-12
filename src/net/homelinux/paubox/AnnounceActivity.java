@@ -149,7 +149,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 	public void configureAnnounceView() {
 
 		distribution = (TextView) findViewById(R.id.distribution);
-		distribution.setText("distribution : " + current_game.getPlayer_Distribution() + "\n");
+		distribution.setText("distribution : " + current_game.getPlayer_Distribution());
 		registerForContextMenu(distribution);
 
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
