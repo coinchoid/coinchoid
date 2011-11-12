@@ -58,8 +58,8 @@ public class GameAdapterWrapper {
 				} else {
 					m = adapter_data.get(j);
 				}
-				m.put(from[Us], Integer.toString(Them_score));
-				m.put(from[Them], Integer.toString(Us_score));
+				m.put(from[Us], Integer.toString(Us_score));
+				m.put(from[Them], Integer.toString(Them_score));
 			}
 		}
 	}
