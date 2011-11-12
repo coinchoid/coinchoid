@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
@@ -207,26 +206,26 @@ public class AnnounceActivity extends BaseMenuActivity {
 		bet_seekbar.setProgress(ItemIdFromBet(d.bet));
 
 		coinche_button.setText(resIdFromMultiplicator(d.coinchedMultiplicator));
-		coinche_button.getBackground().setColorFilter(coincheColorFromMultiplicator(d.coinchedMultiplicator), PorterDuff.Mode.MULTIPLY);
+		coinche_button.getBackground().setColorFilter(coincheColorFromMultiplicator(a, d.coinchedMultiplicator), PorterDuff.Mode.MULTIPLY);
 		coinche_button.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				int newMultiplicator = multiplicatorFromText(a, coinche_button.getText().toString());
 				newMultiplicator *= 2;
 				if (newMultiplicator > 4) newMultiplicator = 1;
 				coinche_button.setText(resIdFromMultiplicator(newMultiplicator));
-				coinche_button.getBackground().setColorFilter(coincheColorFromMultiplicator(newMultiplicator), PorterDuff.Mode.MULTIPLY);
+				coinche_button.getBackground().setColorFilter(coincheColorFromMultiplicator(a, newMultiplicator), PorterDuff.Mode.MULTIPLY);
 			}
 		});
 	}
 
-	public static int coincheColorFromMultiplicator(int multiplicator) {
+	public static int coincheColorFromMultiplicator(Activity a, int multiplicator) {
 		switch (multiplicator) {
 		case 2:
-			return Color.YELLOW;
+			return a.getResources().getColor(R.color.orange);
 		case 4:
-			return Color.RED;
+			return a.getResources().getColor(R.color.solid_red);
 		default:
-			return Color.WHITE;
+			return a.getResources().getColor(R.color.green);
 		}
 	}
 
