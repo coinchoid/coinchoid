@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="true"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/announce_difference_label"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:text="@string/announce_difference" >
+
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/score_input_decr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/announce_decr" />
+
+        <EditText
+            android:id="@+id/announce_difference"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="0"
+            android:inputType="numberDecimal" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/score_input_incr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/announce_incr" />
+
+    </LinearLayout>
+
+</LinearLayout>

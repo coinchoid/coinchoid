@@ -79,4 +79,6 @@
 <string name="announce_difference">Écart à l\'annonce:</string>
 <string name="preference_win_score">Points de victoire</string>
 <string name="preference_win_score_summary">Pour une annonce réussie, combien de points sont gagnés</string>
+<string name="announce_incr">+</string>
+<string name="announce_decr">-</string>
 </resources>
