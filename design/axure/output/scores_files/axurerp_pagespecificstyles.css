@@ -1,0 +1,794 @@
+body {
+    margin: 0px;
+}
+
+div {
+    background-repeat: no-repeat;
+}
+
+.raw_image {
+    width: 100%;
+    height: 100%;
+}
+
+.preload {
+    display: none;
+}
+div.main_container {
+}
+
+.form_sketch {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.u0_original {
+    background-image: url('../scores_files/u0_original.png');
+}
+
+.u0_container {
+    position:absolute;
+    left:3px;
+    top:0px;
+    width:417px;
+    height:812px;
+}
+
+#u0_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:417px;
+    height:812px;
+}
+
+.u1 {
+    position:absolute;
+    left:2px;
+    top:398px;
+    width:413px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u0 {
+    position:absolute;
+    left:3px;
+    top:0px;
+    width:417px;
+    height:812px
+}
+
+.u2_original {
+    background-image: url('../scores_files/u2_original.png');
+}
+
+.u2_container {
+    position:absolute;
+    left:43px;
+    top:162px;
+    width:319px;
+    height:430px;
+}
+
+#u2_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:325px;
+    height:436px;
+}
+
+.u3 {
+    position:absolute;
+    left:2px;
+    top:207px;
+    width:315px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u2 {
+    position:absolute;
+    left:43px;
+    top:162px;
+    width:319px;
+    height:430px
+}
+
+.u4_original {
+    background-image: url('../scores_files/u4_original.png');
+}
+
+.u4_container {
+    position:absolute;
+    left:43px;
+    top:137px;
+    width:319px;
+    height:25px;
+}
+
+#u4_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:325px;
+    height:31px;
+}
+
+.u5 {
+    position:absolute;
+    left:2px;
+    top:4px;
+    width:315px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u4 {
+    position:absolute;
+    left:43px;
+    top:137px;
+    width:319px;
+    height:25px
+}
+
+.u6 {
+    position:absolute;
+    left:81px;
+    top:142px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u7_original {
+    background-image: url('../scores_files/u7_original.png');
+}
+
+.u7_container {
+    position:absolute;
+    left:50px;
+    top:140px;
+    width:21px;
+    height:21px;
+}
+
+#u7_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:21px;
+    height:21px;
+}
+
+.u8 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:17px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u7 {
+    position:absolute;
+    left:50px;
+    top:140px;
+    width:21px;
+    height:21px
+}
+
+.u9_original {
+    background-image: url('../scores_files/u9_original.png');
+}
+
+.u9_container {
+    position:absolute;
+    left:335px;
+    top:141px;
+    width:19px;
+    height:19px;
+}
+
+#u9_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:19px;
+    height:19px;
+}
+
+.u10 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:15px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u9 {
+    position:absolute;
+    left:335px;
+    top:141px;
+    width:19px;
+    height:19px
+}
+
+.u11_original {
+    background-image: url('../scores_files/u11_original.png');
+}
+
+.u11_container {
+    position:absolute;
+    left:43px;
+    top:112px;
+    width:320px;
+    height:26px;
+}
+
+#u11_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:320px;
+    height:26px;
+}
+
+.u12 {
+    position:absolute;
+    left:2px;
+    top:5px;
+    width:316px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u11 {
+    position:absolute;
+    left:43px;
+    top:112px;
+    width:320px;
+    height:26px
+}
+
+.u13 {
+    position:absolute;
+    left:57px;
+    top:180px;
+    width:150px;
+    height:17px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u14_original {
+    background-image: url('../scores_files/u14_original.png');
+}
+
+.u14_container {
+    position:absolute;
+    left:53px;
+    top:230px;
+    width:300px;
+    height:220px;
+}
+
+#u14_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:226px;
+}
+
+.u15 {
+    position:absolute;
+    left:2px;
+    top:102px;
+    width:296px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u14 {
+    position:absolute;
+    left:53px;
+    top:230px;
+    width:300px;
+    height:220px
+}
+
+.u16_original {
+    background-image: url('../scores_files/u16_original.png');
+}
+
+.u16_container {
+    position:absolute;
+    left:53px;
+    top:210px;
+    width:300px;
+    height:18px;
+}
+
+#u16_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:24px;
+}
+
+.u17 {
+    position:absolute;
+    left:2px;
+    top:0px;
+    width:296px;
+    height:17px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u16 {
+    position:absolute;
+    left:53px;
+    top:210px;
+    width:300px;
+    height:18px
+}
+
+.u18 {
+    position:absolute;
+    left:60px;
+    top:402px;
+    width:300px;
+    height:33px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u19 {
+    position:absolute;
+    left:118px;
+    top:248px;
+    width:202px;
+    height:154px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u20_original {
+    background-image: url('../scores_files/u20_original.png');
+}
+
+.u20_container {
+    position:absolute;
+    left:53px;
+    top:470px;
+    width:300px;
+    height:40px;
+}
+
+#u20_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:306px;
+    height:46px;
+}
+
+.u21 {
+    position:absolute;
+    left:2px;
+    top:4px;
+    width:296px;
+    height:32px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u20 {
+    position:absolute;
+    left:53px;
+    top:470px;
+    width:300px;
+    height:40px
+}
+
+.u22_original {
+    background-image: url('../resources/images/transparent.gif');
+}
+
+.u22_container {
+    position:absolute;
+    left:37px;
+    top:648px;
+    width:50px;
+    height:20px;
+}
+
+#u22_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:56px;
+    height:26px;
+}
+
+.u23 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:46px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u22 {
+    position:absolute;
+    left:37px;
+    top:648px;
+    width:50px;
+    height:20px
+}
+
+.u24_original {
+    background-image: url('../resources/images/transparent.gif');
+}
+
+.u24_container {
+    position:absolute;
+    left:224px;
+    top:647px;
+    width:50px;
+    height:20px;
+}
+
+#u24_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:56px;
+    height:26px;
+}
+
+.u25 {
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:46px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u24 {
+    position:absolute;
+    left:224px;
+    top:647px;
+    width:50px;
+    height:20px
+}
+
+.u27_original {
+    background-image: url('../scores_files/u27_original.png');
+}
+
+.u27_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:106px;
+    height:70px;
+}
+
+#u27_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:112px;
+    height:76px;
+}
+
+.u28 {
+    position:absolute;
+    left:2px;
+    top:11px;
+    width:102px;
+    height:48px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u27 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:106px;
+    height:70px
+}
+
+.u29_original {
+    background-image: url('../scores_files/u29_original.png');
+}
+
+.u29_container {
+    position:absolute;
+    left:106px;
+    top:0px;
+    width:107px;
+    height:70px;
+}
+
+#u29_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:113px;
+    height:76px;
+}
+
+.u30 {
+    position:absolute;
+    left:2px;
+    top:11px;
+    width:103px;
+    height:48px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u29 {
+    position:absolute;
+    left:106px;
+    top:0px;
+    width:107px;
+    height:70px
+}
+
+.u31_original {
+    background-image: url('../scores_files/u27_original.png');
+}
+
+.u31_container {
+    position:absolute;
+    left:213px;
+    top:0px;
+    width:106px;
+    height:70px;
+}
+
+#u31_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:112px;
+    height:76px;
+}
+
+.u32 {
+    position:absolute;
+    left:2px;
+    top:11px;
+    width:102px;
+    height:48px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u31 {
+    position:absolute;
+    left:213px;
+    top:0px;
+    width:106px;
+    height:70px
+}
+
+.u33_original {
+    background-image: url('../scores_files/u33_original.png');
+}
+
+.u33_container {
+    position:absolute;
+    left:38px;
+    top:9px;
+    width:30px;
+    height:30px;
+}
+
+#u33_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:30px;
+    height:30px;
+}
+
+.u34 {
+    position:absolute;
+    left:2px;
+    top:7px;
+    width:26px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u33 {
+    position:absolute;
+    left:38px;
+    top:9px;
+    width:30px;
+    height:30px
+}
+
+.u35_original {
+    background-image: url('../scores_files/u35_original.png');
+}
+
+.u35_container {
+    position:absolute;
+    left:257px;
+    top:10px;
+    width:30px;
+    height:27px;
+}
+
+#u35_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:30px;
+    height:27px;
+}
+
+.u36 {
+    position:absolute;
+    left:2px;
+    top:6px;
+    width:26px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u35 {
+    position:absolute;
+    left:257px;
+    top:10px;
+    width:30px;
+    height:27px
+}
+
+.u37_original {
+    background-image: url('../scores_files/u37_original.png');
+}
+
+.u37_container {
+    position:absolute;
+    left:145px;
+    top:9px;
+    width:28px;
+    height:30px;
+}
+
+#u37_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:28px;
+    height:30px;
+}
+
+.u38 {
+    position:absolute;
+    left:2px;
+    top:7px;
+    width:24px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u37 {
+    position:absolute;
+    left:145px;
+    top:9px;
+    width:28px;
+    height:30px
+}
+
