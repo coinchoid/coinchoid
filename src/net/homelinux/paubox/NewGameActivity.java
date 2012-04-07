@@ -25,6 +25,9 @@ public class NewGameActivity extends BaseMenuActivity {
 	private static final int text_players_ids[] = {
 		R.id.name_player1, R.id.name_player2, R.id.name_player3, R.id.name_player4
 	};
+	private static final int text_players_defaults[] = {
+		R.string.name_player1, R.string.name_player2, R.string.name_player3, R.string.name_player4
+	};
 	private static final int first_distribution_ids[] = {
 		R.id.first_distribution1, R.id.first_distribution2, R.id.first_distribution3, R.id.first_distribution4
 	};
@@ -90,6 +93,14 @@ public class NewGameActivity extends BaseMenuActivity {
 				text_players[i].setHint(previous_game.getPlayer_name(i));
 			}
 		}
+		((Button) (findViewById(R.id.clear_names))).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (int i = 0; i < Game.players_cnt; i++) {
+					text_players[i].setHint(text_players_defaults[i]);
+				}
+			}
+		});
 		shuffle_game = (CheckBox) findViewById(R.id.shuffle_game);
 	}
 

@@ -83,4 +83,5 @@
 <string name="announce_decr">-</string>
 
 <string name="force_counting_description">Forcer le système de comptage pour cette Partie à la valeur des préférences</string>
+<string name="clear_names">"Noms par défaut"</string>
 </resources>
