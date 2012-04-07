@@ -20,7 +20,14 @@ public class BaseMenuActivity extends Activity {
 	public static final int REQUEST_CODE_WAITING = RESULT_FIRST_USER + 2;
 	public static final int REQUEST_CODE_EDIT = RESULT_FIRST_USER + 3;
 
+	protected static final String game_key = "net.homelinux.paubox.Game";
 	Game current_game;
+	protected Game getIntentGame() {
+		return (Game)getIntent().getSerializableExtra(game_key);
+	}
+	protected void putIntentGame(Intent i, Game g) {
+		i.putExtra(game_key,g);
+	}
 
 	// Call the preferences activity
 	protected void launchPreferencesActivity() {
@@ -30,13 +37,14 @@ public class BaseMenuActivity extends Activity {
 	}
 	protected void launchDisplayActivity() {
 		Intent myIntent = new Intent(this,ScoreDisplayActivity.class);
-		myIntent.putExtra("net.homelinux.paubox.Game",current_game);
+		putIntentGame(myIntent, current_game);
 		startActivityForResult(myIntent, REQUEST_CODE_EDIT);
 	}
 
 	protected void launchNewGameActivity() {
 		Intent myIntent = new Intent(this,NewGameActivity.class);
 		myIntent.setAction(Intent.ACTION_DELETE);
+		putIntentGame(myIntent, current_game);
 		startActivity(myIntent);
 	}
 

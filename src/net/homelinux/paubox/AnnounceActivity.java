@@ -256,7 +256,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		setContentView(R.layout.announce_layout);
 		updatePreferences();
 		if (getIntent().getAction().equals(Intent.ACTION_DELETE)) {
-			current_game = (Game)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
+			current_game = getIntentGame();
 		} else {
 			try {
 				current_game = readGame();

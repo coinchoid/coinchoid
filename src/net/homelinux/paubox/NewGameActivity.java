@@ -42,7 +42,7 @@ public class NewGameActivity extends BaseMenuActivity {
 		Intent annouce_intent = new Intent(this, AnnounceActivity.class);
 		annouce_intent.setAction(Intent.ACTION_DELETE);
 		annouce_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		annouce_intent.putExtra("net.homelinux.paubox.Game", current_game);
+		putIntentGame(annouce_intent, current_game);
 		startActivity(annouce_intent);
 	}
 
@@ -82,6 +82,13 @@ public class NewGameActivity extends BaseMenuActivity {
 		for (int i = 0; i < Game.players_cnt; i++) {
 			text_players[i] = (EditText) findViewById(text_players_ids[i]);
 			first_distribution[i] = (RadioButton) findViewById(first_distribution_ids[i]);
+		}
+
+		Game previous_game = getIntentGame();
+		if (previous_game!=null){
+			for (int i = 0; i <Game.players_cnt; i++) {
+				text_players[i].setHint(previous_game.getPlayer_name(i));
+			}
 		}
 		shuffle_game = (CheckBox) findViewById(R.id.shuffle_game);
 	}
