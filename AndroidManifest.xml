@@ -51,6 +51,7 @@
 	</uses-permission>
 	
 	<uses-sdk
+	    android:targetSdkVersion="15"
 		android:minSdkVersion="4">
 	</uses-sdk>
 </manifest>

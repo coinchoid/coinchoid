@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 
 public class EditActivity extends Activity {
@@ -19,7 +20,7 @@ public class EditActivity extends Activity {
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
 		final SeekBar score_seekbar = (SeekBar) findViewById(R.id.bet_seekbar);
-		final Button coinche_button = (Button) findViewById(R.id.coinche_button);
+		final RadioGroup coinche_radiogroup = (RadioGroup) findViewById(R.id.coinched_group);
 		final RadioButton winner_us = (RadioButton) findViewById(R.id.winner_Us);
 		final RadioButton winner_them = (RadioButton) findViewById(R.id.winner_Them);
 		if (d.winner==Game.Us) {
@@ -35,7 +36,7 @@ public class EditActivity extends Activity {
 		edit_ok.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {
 						AnnounceActivity.saveDeal(EditActivity.this, d, radio_us, radio_them, score_seekbar,
-								coinche_button);
+								coinche_radiogroup);
 						d.announce_difference = WaitingActivity.validateAnnounceDifference(et);
 						if (winner_us.isChecked()) {
 							d.setWinner(Game.Us);

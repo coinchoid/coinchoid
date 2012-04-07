@@ -1,68 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dip" >
 
-	<TextView android:id="@+id/progress_text"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:text="Annonce = 110"
-		android:gravity="center" android:textSize="30sp"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-	<SeekBar android:id="@+id/bet_seekbar"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:paddingLeft="20dip"
-		android:paddingRight="20dip"
-		android:drawSelectorOnTop="true"
-		android:max="11"
-		android:progress="0" android:paddingBottom="10dip"/>
+        <TextView
+            android:id="@+id/progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Annonce" />
 
-	<Button
-	    android:id="@+id/coinche_button"
-	    android:layout_width="130dip"
-	    android:layout_height="wrap_content"
-	    android:layout_gravity="center_horizontal"
-	    android:text="@string/uncoinched" />
+        <TextView
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="110" />
+    </LinearLayout>
 
-	<LinearLayout
-		android:orientation="horizontal"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
+    <SeekBar
+        android:id="@+id/bet_seekbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true"
+        android:max="11"
+        android:paddingBottom="10dip"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:progress="0" />
+    
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="?android:attr/listDivider" />
 
-		<RelativeLayout
-			android:layout_width="wrap_content"
-			android:layout_height="fill_parent" >
-			
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/who_takes"
-				android:layout_weight="1"
-				android:layout_centerVertical="true" />
-				
-		</RelativeLayout>
-		
-		<RadioGroup android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:layout_weight="1"
-			android:layout_centerVertical="true"
-			android:layout_marginLeft="10sp">
+    <RadioGroup
+        android:id="@+id/coinched_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-			<RadioButton android:id="@+id/button_Us"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/Us" />
+        <RadioButton
+            android:id="@+id/radio_uncoinched"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N/A" />
 
-			<RadioButton android:id="@+id/button_Them"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/Them" />
+        <RadioButton
+            android:id="@+id/radio_coinched"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coinché" />
 
-		</RadioGroup>
+        <RadioButton
+            android:id="@+id/radio_overcoinched"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Surcoinché" />
 
-	</LinearLayout>
+    </RadioGroup>
+       <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:text="@string/who_takes" />
+        </RelativeLayout>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10sp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/button_Us"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Us" />
+
+            <RadioButton
+                android:id="@+id/button_Them"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Them" />
+        </RadioGroup>
+    </LinearLayout>
+
 </LinearLayout>

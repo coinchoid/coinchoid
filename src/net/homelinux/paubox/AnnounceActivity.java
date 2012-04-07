@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -155,13 +156,13 @@ public class AnnounceActivity extends BaseMenuActivity {
 		final RadioButton radio_them = (RadioButton) findViewById(R.id.button_Them);
 		final SeekBar bet_seekbar = (SeekBar) findViewById(R.id.bet_seekbar);
 		final Deal d = current_game.currentDeal();
-		final Button coinche_button = (Button) findViewById(R.id.coinche_button);
-		coinche_button.setText(resIdFromMultiplicator(d.coinchedMultiplicator));
+		final RadioGroup coinche_radiogroup = (RadioGroup) findViewById(R.id.coinched_group);
+		//FIXME set checked coinche_radiogroup;
 		Button button_go = ((Button) findViewById(R.id.button_go));
 		button_go.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {
 						saveDeal(AnnounceActivity.this, d, radio_us, radio_them, bet_seekbar,
-								coinche_button);
+								coinche_radiogroup);
 						launchWaitingActivity();
 					}});
 		gw = (GameView) findViewById(R.id.game_view);
@@ -170,7 +171,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 	
 	public static void saveDeal(final Activity a, final Deal d,
 			final RadioButton radio_us, final RadioButton radio_them,
-			final SeekBar bet_seekbar, final Button coincheButton) {
+			final SeekBar bet_seekbar, final RadioGroup coinchegroup) {
 		//Save the current team betting
 		if (radio_us.isChecked())
 			d.setTeam_betting(Game.Us);
@@ -184,7 +185,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		//Save the current bet and the multiplicator
 		d.setBet(BetFromItemId(bet_seekbar.getProgress()));
-		d.setCoinchedMultiplicator(multiplicatorFromText(a,coincheButton.getText().toString()));
+		d.setCoinchedMultiplicator(multiplicatorFromId(a,coinchegroup.getCheckedRadioButtonId()));
 	}
 	
 	public static void configureDealView(final Activity a,final Deal d) {
@@ -199,23 +200,13 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		final SeekBar bet_seekbar = (SeekBar) a.findViewById(R.id.bet_seekbar);
 		final TextView progress_text = (TextView) a.findViewById(R.id.progress_text);
-		final Button coinche_button = (Button) a.findViewById(R.id.coinche_button);
+		final RadioGroup coinche_radiogroup = (RadioGroup) a.findViewById(R.id.coinched_group);
 
 		final BetSeekBarListener bet_listener = new BetSeekBarListener(a, bet_seekbar, progress_text);
 		bet_seekbar.setOnSeekBarChangeListener(bet_listener);
 		bet_seekbar.setProgress(ItemIdFromBet(d.bet));
 
-		coinche_button.setText(resIdFromMultiplicator(d.coinchedMultiplicator));
-		coinche_button.getBackground().setColorFilter(coincheColorFromMultiplicator(a, d.coinchedMultiplicator), PorterDuff.Mode.MULTIPLY);
-		coinche_button.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				int newMultiplicator = multiplicatorFromText(a, coinche_button.getText().toString());
-				newMultiplicator *= 2;
-				if (newMultiplicator > 4) newMultiplicator = 1;
-				coinche_button.setText(resIdFromMultiplicator(newMultiplicator));
-				coinche_button.getBackground().setColorFilter(coincheColorFromMultiplicator(a, newMultiplicator), PorterDuff.Mode.MULTIPLY);
-			}
-		});
+		//FIXME coinche_button.setText(resIdFromMultiplicator(d.coinchedMultiplicator));
 	}
 
 	public static int coincheColorFromMultiplicator(Activity a, int multiplicator) {
@@ -229,6 +220,23 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 	}
 
+	private static int coinched_radiobuttons_ids[] = { 
+		R.id.radio_uncoinched,
+		R.id.radio_coinched,
+		R.id.radio_overcoinched,
+	};
+	private static int multiplicatorFromId(Context c, int id) {
+		int i;
+		for (i=0; i< coinched_radiobuttons_ids.length; i++) {
+			if (id == coinched_radiobuttons_ids[i])
+				break;
+		}
+		switch(i) {
+		case 1: return 2;
+		case 2: return 4;
+		default: return 1;
+		}
+	}
     private static int multiplicatorFromText(Context c, String text) {
 		if (text.equals(c.getString(R.string.uncoinched))) return 1;
 		else if (text.equals(c.getString(R.string.coinched))) return 2;
