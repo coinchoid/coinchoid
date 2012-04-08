@@ -13,4 +13,6 @@
 	</style>
 
 	<style name="LightThemeSelector" parent="android:Theme.Light"></style>
+	<style name="CoinchoidTheme" parent="LightThemeSelector">
+	</style>
 </resources>

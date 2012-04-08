@@ -19,21 +19,21 @@ public class BetSeekBarListener implements SeekBar.OnSeekBarChangeListener {
 		seek_bar = _seek_bar;
 		progress_text = _progress_text;
 		c = a.getApplicationContext();
-		progress_text.setText(c.getString(R.string.seekbar_announce) + " = " + Deal.betToString(Deal.MIN_BET));
+		progress_text.setText(Deal.betToString(Deal.MIN_BET));
 	}
 
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
-		progress_text.setText(c.getString(R.string.seekbar_announce) + " = " + Deal.betToString(AnnounceActivity.BetFromItemId(progress)));
+		progress_text.setText(Deal.betToString(AnnounceActivity.BetFromItemId(progress)));
 	}
 
 	public void onStartTrackingTouch(SeekBar seekBar) {
-		progress_text.setBackgroundResource(R.color.green);
-		progress_text.setTextColor(Color.BLACK);
+//		progress_text.setBackgroundResource(R.color.green);
+//		progress_text.setTextColor(Color.BLACK);
 	}
 
 	public void onStopTrackingTouch(SeekBar seekBar) {
-		progress_text.setBackgroundResource(R.color.black);
-		progress_text.setTextColor(Color.LTGRAY);
+//		progress_text.setBackgroundResource(R.color.black);
+//		progress_text.setTextColor(Color.LTGRAY);
 	}
 
 }

@@ -6,12 +6,39 @@
 	android:padding="10dip"
 	android:id="@+id/announce_linear_layout">
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="0dip"
+        android:paddingLeft="5dip"
+        android:text="Nouvelle Donne"
+        android:textColor="@color/grey"
+        android:textSize="20dip" />
+
+        <View android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:background="?android:attr/listDivider" />
+    	
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     	<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="left"
+	    android:layout_weight="1"
+	    android:padding="5dip"
+	    android:text="Distribution"/>
+    	    	<TextView
 	    android:id="@+id/distribution"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:gravity="center"
-	    android:text="distribution : Us_1" />
+	    android:gravity="right"
+	    android:layout_weight="1"
+	    android:text="Eme"/>
+    	
+    	</LinearLayout>
     <View android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:background="?android:attr/listDivider" />
@@ -26,6 +53,19 @@
 	    android:layout_gravity="center"
 	    android:text="@string/go" />
 
+	    <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="5dip"
+	        android:paddingTop="15dip"
+	        android:text="Scores"
+	        android:textColor="@color/grey"
+	        android:textSize="20dip" />
+
+	       <View android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:background="?android:attr/listDivider" />
+    	
 	<net.homelinux.paubox.GameView
 	    android:id="@+id/game_view"
 	    android:layout_width="fill_parent"

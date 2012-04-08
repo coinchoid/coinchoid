@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Coinchoid</string>
-<string name="go">Ok</string>
+<string name="go">Jouer la donne !</string>
 <string name="hello">Hello World, CoincheActivity!</string>
 <string name="lost">C\'est chu !</string>
 <string name="menu_new_game">Nouvelle partie</string>

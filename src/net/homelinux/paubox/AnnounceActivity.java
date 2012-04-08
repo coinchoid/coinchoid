@@ -149,7 +149,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 	public void configureAnnounceView() {
 
 		distribution = (TextView) findViewById(R.id.distribution);
-		distribution.setText("distribution : " + current_game.getPlayer_Distribution());
+		distribution.setText(current_game.getPlayer_Distribution());
 		registerForContextMenu(distribution);
 
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
@@ -157,7 +157,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 		final SeekBar bet_seekbar = (SeekBar) findViewById(R.id.bet_seekbar);
 		final Deal d = current_game.currentDeal();
 		final RadioGroup coinche_radiogroup = (RadioGroup) findViewById(R.id.coinched_group);
-		//FIXME set checked coinche_radiogroup;
 		Button button_go = ((Button) findViewById(R.id.button_go));
 		button_go.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {
@@ -185,7 +184,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		//Save the current bet and the multiplicator
 		d.setBet(BetFromItemId(bet_seekbar.getProgress()));
-		d.setCoinchedMultiplicator(multiplicatorFromId(a,coinchegroup.getCheckedRadioButtonId()));
+		d.setCoinchedMultiplicator(multiplicatorFromId(coinchegroup.getCheckedRadioButtonId()));
 	}
 	
 	public static void configureDealView(final Activity a,final Deal d) {
@@ -206,7 +205,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		bet_seekbar.setOnSeekBarChangeListener(bet_listener);
 		bet_seekbar.setProgress(ItemIdFromBet(d.bet));
 
-		//FIXME coinche_button.setText(resIdFromMultiplicator(d.coinchedMultiplicator));
+		((RadioButton) a.findViewById(idFromMultiplicator(d.getCoinchedMultiplicator()))).setChecked(true);
 	}
 
 	public static int coincheColorFromMultiplicator(Activity a, int multiplicator) {
@@ -225,7 +224,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 		R.id.radio_coinched,
 		R.id.radio_overcoinched,
 	};
-	private static int multiplicatorFromId(Context c, int id) {
+	private static int multiplicatorFromId(int id) {
 		int i;
 		for (i=0; i< coinched_radiobuttons_ids.length; i++) {
 			if (id == coinched_radiobuttons_ids[i])
@@ -236,6 +235,15 @@ public class AnnounceActivity extends BaseMenuActivity {
 		case 2: return 4;
 		default: return 1;
 		}
+	}
+	private static int idFromMultiplicator(int multiplicator) {
+		int idx;
+		switch(multiplicator) {
+		case 2: idx = 1; break;
+		case 4: idx = 2; break;
+		default: idx = 0; break;
+		}
+		return coinched_radiobuttons_ids[idx];
 	}
     private static int multiplicatorFromText(Context c, String text) {
 		if (text.equals(c.getString(R.string.uncoinched))) return 1;
