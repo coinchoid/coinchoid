@@ -11,4 +11,6 @@
 	<style name="score.header">
 		<item name="android:textSize">50dip</item>
 	</style>
+
+	<style name="LightThemeSelector" parent="android:Theme.Light"></style>
 </resources>

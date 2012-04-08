@@ -3,8 +3,20 @@
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
+	android:padding="10dip"
 	android:id="@+id/announce_linear_layout">
 
+    	<TextView
+	    android:id="@+id/distribution"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	    android:text="distribution : Us_1" />
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="?android:attr/listDivider" />
+    	
+    		
 	<include layout="@layout/deal_edit_layout" />
 
 	<Button
@@ -13,22 +25,6 @@
 	    android:layout_height="wrap_content"
 	    android:layout_gravity="center"
 	    android:text="@string/go" />
-
-		    <View android:layout_width="fill_parent"
-	android:layout_height="4dip" android:background="@color/white"></View>
-
-	<TextView
-	    android:id="@+id/distribution"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:gravity="center"
-	    android:text="distribution : Us_1"
-	    android:paddingTop="10dip"
-	    android:paddingBottom="10dip" />
-	
-	    <View android:layout_width="fill_parent"
-	android:layout_height="4dip" android:background="@color/white" android:layout_marginBottom="4dip"></View>
-	
 
 	<net.homelinux.paubox.GameView
 	    android:id="@+id/game_view"

@@ -56,20 +56,20 @@ public class GameView extends LinearLayout {
 				}
 			});
 		} else {
-			lv.setSelector(android.R.color.transparent);
-			lv.post(new Runnable() {
-				public void run() {
-					for (int i=0; i<lv.getChildCount();i++) {
-						LinearLayout ll = (LinearLayout) lv.getChildAt(i);
-						for (int j=0; j<ll.getChildCount(); j++) {
-							View v = ll.getChildAt(j);
-							if (v instanceof TextView) {
-								((TextView) v).setTextColor(getResources().getColor(R.color.white));
-							}
-						}
-					}
-				}
-			});
+//			lv.setSelector(android.R.color.transparent);
+//			lv.post(new Runnable() {
+//				public void run() {
+//					for (int i=0; i<lv.getChildCount();i++) {
+//						LinearLayout ll = (LinearLayout) lv.getChildAt(i);
+//						for (int j=0; j<ll.getChildCount(); j++) {
+//							View v = ll.getChildAt(j);
+//							if (v instanceof TextView) {
+//								((TextView) v).setTextColor(getResources().getColor(R.color.white));
+//							}
+//						}
+//					}
+//				}
+//			});
 		}
 	}
 
