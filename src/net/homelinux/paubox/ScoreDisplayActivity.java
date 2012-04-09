@@ -19,7 +19,7 @@ public class ScoreDisplayActivity extends Activity {
 		game = (Game) getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 		setContentView(R.layout.score_display);
 		gw = (GameView) findViewById(R.id.game_view);
-		gw.initGame(game, true);
+		gw.initGame(game);
 		Button b = ((Button) findViewById(R.id.force_counting_system));
 		b.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {

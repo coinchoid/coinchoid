@@ -42,35 +42,18 @@ public class GameView extends LinearLayout {
 
 	}
 
-	public void initGame(final Game game, boolean editable) {
+	public void initGame(final Game game) {
 		gaw = new GameAdapterWrapper(c, game);
 		lv.setAdapter(gaw.getAdapter());
 		notifyDataSetChanged();
 
-		if (editable) {
-			lv.setOnItemClickListener(new OnItemClickListener() {
-				public void onItemClick(AdapterView<?> parent, View view, int pos,
-						long id) {
-					selected_deal = game.innings.get(0).deals.get(pos);
-					EditActivity.launchEditActivity((Activity)c, selected_deal);
-				}
-			});
-		} else {
-//			lv.setSelector(android.R.color.transparent);
-//			lv.post(new Runnable() {
-//				public void run() {
-//					for (int i=0; i<lv.getChildCount();i++) {
-//						LinearLayout ll = (LinearLayout) lv.getChildAt(i);
-//						for (int j=0; j<ll.getChildCount(); j++) {
-//							View v = ll.getChildAt(j);
-//							if (v instanceof TextView) {
-//								((TextView) v).setTextColor(getResources().getColor(R.color.white));
-//							}
-//						}
-//					}
-//				}
-//			});
-		}
+		lv.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view, int pos,
+					long id) {
+				selected_deal = game.innings.get(0).deals.get(pos);
+				EditActivity.launchEditActivity((Activity)c, selected_deal);
+			}
+		});
 	}
 
 	public void notifyDataSetChanged() {

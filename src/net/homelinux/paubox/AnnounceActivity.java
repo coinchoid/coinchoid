@@ -88,11 +88,16 @@ public class AnnounceActivity extends BaseMenuActivity {
 				final Game g = (Game) data.getSerializableExtra("net.homelinux.paubox.edit");
 				current_game.setAs(g);
 				current_game.recomputeScores();
-//		FIXME		gw.notifyDataSetChanged();
+				updateScoresDisplay();
 			}
 		}	
 
 		distribution.setText("distribution : " + current_game.getPlayer_Distribution() + "\n");
+	}
+
+	private void updateScoresDisplay() {
+		((TextView) findViewById(R.id.score_them)).setText(Integer.toString(current_game.score_Them));
+		((TextView) findViewById(R.id.score_us)).setText(Integer.toString(current_game.score_Us));
 	}
 
 	// We don't update score preferences here as they are used only when creating a new game.
@@ -163,8 +168,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 								coinche_radiogroup);
 						launchWaitingActivity();
 					}});
-		((TextView) findViewById(R.id.score_them)).setText(Integer.toString(current_game.score_Them));
-		((TextView) findViewById(R.id.score_us)).setText(Integer.toString(current_game.score_Us));
+		updateScoresDisplay();
 		((LinearLayout) findViewById(R.id.scores)).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				launchDisplayActivity();
