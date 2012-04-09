@@ -65,7 +65,7 @@ public class Game implements Serializable {
 		boolean loose;
 		int score;
 
-		if (d.isShuffleDeal())
+		if (d.isShuffleDeal() || d.winner == Game.UNPLAYED)
 		    return;
 
 		loose = d.team_betting != d.winner;
