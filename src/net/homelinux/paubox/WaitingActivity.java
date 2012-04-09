@@ -32,17 +32,11 @@ public class WaitingActivity extends BaseMenuActivity {
 		current_deal = (Deal)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 
 		annouce_reminder = (TextView) findViewById(R.id.announce_reminder);
-		annouce_reminder.setText(c.getString(R.string.current_annouce) + " " + current_deal.getAnnounce(this) + "\n");
-		annouce_info = (TextView) findViewById(R.id.announce_info);
-		annouce_info.setText(
-				c.getString(R.string.to_fail) + "\n" +
-				"   * " + c.getString(R.string.without_trumps) + " " + current_deal.scoreWithoutTrumps(Deal.TO_MAKE_LOSE) + "\n" +
-				"   * " + c.getString(R.string.with_trumps)    + " " + current_deal.scoreWithTrumps(Deal.TO_MAKE_LOSE) + "\n" +
-				"\n" +
-				c.getString(R.string.to_win) + "\n" +
-				"   * " + c.getString(R.string.without_trumps) + " " + current_deal.scoreWithoutTrumps(Deal.TO_WIN) + "\n" +
-				"   * " + c.getString(R.string.with_trumps)    + " " + current_deal.scoreWithTrumps(Deal.TO_WIN) + "\n"
-		);
+		annouce_reminder.setText(current_deal.getAnnounce(this));
+		((TextView) findViewById(R.id.no_oudler_lose)).setText(Integer.toString(current_deal.scoreWithoutTrumps(Deal.TO_MAKE_LOSE)));
+		((TextView) findViewById(R.id.all_oudler_lose)).setText(Integer.toString(current_deal.scoreWithTrumps(Deal.TO_MAKE_LOSE)));
+		((TextView) findViewById(R.id.no_oudler_win)).setText(Integer.toString(current_deal.scoreWithoutTrumps(Deal.TO_WIN)));
+		((TextView) findViewById(R.id.all_oudler_win)).setText(Integer.toString(current_deal.scoreWithTrumps(Deal.TO_WIN)));
 		
 		final Button winButton = (Button) findViewById(R.id.button_win);
 		final EditText et = (EditText) findViewById(R.id.announce_difference);

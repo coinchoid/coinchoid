@@ -36,6 +36,7 @@
 	    android:layout_height="wrap_content"
 	    android:gravity="right"
 	    android:layout_weight="1"
+	    android:padding="5dip"
 	    android:text="Eme"/>
     	
     	</LinearLayout>
@@ -44,7 +45,7 @@
         android:background="?android:attr/listDivider" />
     	
 	<include
-	    android:layout_width="wrap_content"
+	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    layout="@layout/deal_edit_layout" />
 

@@ -9,10 +9,16 @@
         android:id="@+id/announce_difference_label"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
+        android:textSize="15dip"
+        android:color="@color/grey"
         android:text="@string/announce_difference" >
 
     </TextView>
 
+    	      <View android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:background="?android:attr/listDivider" />
+    
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
