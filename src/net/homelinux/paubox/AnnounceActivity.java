@@ -37,7 +37,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 	 **** CLASS VARIABLE ****
 	 ************************/
 	LinearLayout scoreDisplayView;
-	GameView gw;
 	TextView distribution;
 
 	PowerManager.WakeLock wl;
@@ -89,7 +88,7 @@ public class AnnounceActivity extends BaseMenuActivity {
 				final Game g = (Game) data.getSerializableExtra("net.homelinux.paubox.edit");
 				current_game.setAs(g);
 				current_game.recomputeScores();
-				gw.notifyDataSetChanged();
+//		FIXME		gw.notifyDataSetChanged();
 			}
 		}	
 
@@ -164,8 +163,13 @@ public class AnnounceActivity extends BaseMenuActivity {
 								coinche_radiogroup);
 						launchWaitingActivity();
 					}});
-		gw = (GameView) findViewById(R.id.game_view);
-		gw.initGame(this.current_game, false);
+		((TextView) findViewById(R.id.score_them)).setText(Integer.toString(current_game.score_Them));
+		((TextView) findViewById(R.id.score_us)).setText(Integer.toString(current_game.score_Us));
+		((LinearLayout) findViewById(R.id.scores)).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				launchDisplayActivity();
+			}
+		});
 	}
 	
 	public static void saveDeal(final Activity a, final Deal d,
