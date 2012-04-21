@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Toast;
 
-public class BaseMenuActivity extends Activity {
+public abstract class BaseMenuActivity extends Activity {
 
 	/*******************
 	 **** CONSTANTS ****

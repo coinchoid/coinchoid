@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="wrap_content"
 	android:id="@+id/score_footer">
-	<TextView android:text="310" style="@style/score.last"
+	<TextView style="@style/score.last"
 		android:id="@+id/last_score_them" android:layout_weight="1"
 		android:layout_width="0dp"></TextView>
 	<View android:layout_height="fill_parent" android:layout_width="1dip"
 		android:background="@color/grey"></View>
-	<TextView android:text="280" style="@style/score.last"
+	<TextView style="@style/score.last"
 		android:id="@+id/last_score_us" android:layout_weight="1"
 		android:layout_width="0dp"></TextView>
 </LinearLayout>

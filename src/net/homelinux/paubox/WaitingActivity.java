@@ -1,6 +1,5 @@
 package net.homelinux.paubox;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +26,6 @@ public class WaitingActivity extends BaseMenuActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.waiting_layout);
-		Context c = getApplicationContext();
 
 		current_deal = (Deal)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
 

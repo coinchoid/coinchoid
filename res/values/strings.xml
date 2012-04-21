@@ -4,26 +4,10 @@
     <string name="app_name">Coinchoid</string>
 <string name="go">Jouer la donne !</string>
 <string name="save_edit">Sauver</string>
-<string name="hello">Hello World, CoincheActivity!</string>
 <string name="lost">C\'est chu !</string>
-<string name="menu_new_game">Nouvelle partie</string>
-<string name="menu_preferences">Preferences</string>
-<string name="planet_prompt">TOTO</string>
-<string-array name="points">
-<item>80</item>
-<item>90</item>
-<item>100</item>
-<item>110</item>
-<item>120</item>
-<item>130</item>
-<item>140</item>
-<item>150</item>
-<item>160</item>
-<item>170</item>
-<item>180</item>
-<item>Capot</item>
-</string-array>
+<string name="null_difference">"0"</string>
 
+<string name="scores">Scores</string>
 <string name="win">C\'est fait !</string>
 <string name="title_winning_score">Partie en ?</string>
 <string name="summary_winning_score">Score à atteindre pour terminer la partie</string>
@@ -43,16 +27,19 @@
 <string name="quit">Quitter :(</string>
 <string name="display_scores">Éditer Scores</string>
 <string name="preferences">Préférences</string>
-<string name="Us">Nous</string>
-<string name="Them">Eux</string>
+<string name="Us">NOUS</string>
+<string name="Them">EUX</string>
 
 <string name="select_team">Please select a team</string>
 
-<string name="uncoinched">Non coinché</string>
+<string name="edit">Édition</string>
+<string name="new_deal">Nouvelle Donne</string>
+<string name="uncoinched">Normal</string>
 <string name="coinched">Coinché</string>
-<string name="overcoinched">Surcoinché!</string>
+<string name="overcoinched">Surcoinché</string>
 <string name="shuffle_game">Mélangeante ?</string>
 
+<string name="distribution">Distribution</string>
 
 <string name="name_player1">Vous !</string>
 <string name="name_player2">À gauche</string>
@@ -62,14 +49,12 @@
 <string name="new_game_go">Start!</string>
 <string name="better_to_string_us">pour nous</string>
 <string name="better_to_string_them">pour eux</string>
-<string name="who_take">Qui prend ?</string>
 <string name="seekbar_announce">Annonce</string>
-<string name="welcome">Bienvenue dans Coinchoid !\n</string>
-<string name="to_fail">Pour faire chuter :</string>
-<string name="to_win">Pour réussir :</string>
-<string name="with_trumps">Tout Atout :</string>
-<string name="without_trumps">Sans Atout :</string>
-<string name="current_annouce">Annonce en cours :</string>
+<string name="to_fail">POUR FAIRE CHUTER</string>
+<string name="to_win">POUR RÉUSSIR</string>
+<string name="with_trumps">Tout atout</string>
+<string name="without_trumps">Sans atout</string>
+<string name="current_annouce">Annonce en cours</string>
 <string name="who_takes">Qui prend ? </string>
 <string name="who_won">Qui a gagné ? </string>
 <string name="distribution_start">Qui distribue en premier ?</string>

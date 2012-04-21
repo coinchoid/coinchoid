@@ -25,7 +25,6 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.graphics.PorterDuff;
 
 public class AnnounceActivity extends BaseMenuActivity {
 
@@ -207,7 +206,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		final SeekBar bet_seekbar = (SeekBar) a.findViewById(R.id.bet_seekbar);
 		final TextView progress_text = (TextView) a.findViewById(R.id.progress_text);
-		final RadioGroup coinche_radiogroup = (RadioGroup) a.findViewById(R.id.coinched_group);
 
 		final BetSeekBarListener bet_listener = new BetSeekBarListener(a, bet_seekbar, progress_text);
 		bet_seekbar.setOnSeekBarChangeListener(bet_listener);
@@ -252,20 +250,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 		default: idx = 0; break;
 		}
 		return coinched_radiobuttons_ids[idx];
-	}
-    private static int multiplicatorFromText(Context c, String text) {
-		if (text.equals(c.getString(R.string.uncoinched))) return 1;
-		else if (text.equals(c.getString(R.string.coinched))) return 2;
-		else if (text.equals(c.getString(R.string.overcoinched))) return 4;
-		else return -1;
-    }
-	private static int resIdFromMultiplicator(int coinchedMultiplicator) {
-		switch (coinchedMultiplicator) {
-			case 1: return R.string.uncoinched;
-			case 2: return R.string.coinched;
-			case 4: return R.string.overcoinched;
-			default: return -1;
-		}
 	}
 
 	private void setDefaultNames(Game g) {

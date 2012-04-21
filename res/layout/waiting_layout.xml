@@ -13,19 +13,18 @@
 	<TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Annonce en cours" 
+        android:text="@string/current_annouce" 
         android:layout_weight="1"/>
 <TextView android:id="@+id/announce_reminder"
 		android:layout_width="fill_parent"
 		android:layout_weight="1"
 		android:gravity="right"
-		android:text="X"
 		android:layout_height="wrap_content" />
 </LinearLayout>
 <TextView
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:text="POUR FAIRE CHUTER"
+    android:text="@string/to_fail"
     android:textSize="15dip"
     android:color="@color/grey" />
 
@@ -42,7 +41,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sans atout" />
+            android:text="@string/without_trumps" />
 
         <TextView
             android:id="@+id/no_oudler_lose"
@@ -64,7 +63,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tout atout" />
+            android:text="@string/with_trumps" />
 
         <TextView
             android:id="@+id/all_oudler_lose"
@@ -77,7 +76,7 @@
 <TextView
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:text="POUR RÉUSSIR"
+    android:text="@string/to_win"
     android:textSize="15dip"
     android:color="@color/grey" />
 	
@@ -95,7 +94,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sans atout" />
+            android:text="@string/without_trumps" />
 
         <TextView
             android:id="@+id/no_oudler_win"
@@ -118,7 +117,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tout atout" />
+            android:text="@string/with_trumps" />
 
         <TextView
             android:id="@+id/all_oudler_win"
@@ -134,7 +133,6 @@
 	<LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:orientation="horizontal" >
 
         <Button

@@ -1,91 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:padding="10dip"
-	android:id="@+id/announce_linear_layout">
+    android:id="@+id/announce_linear_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dip" >
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="0dip"
         android:paddingLeft="5dip"
-        android:text="Nouvelle Donne"
+        android:text="@string/new_deal"
         android:textColor="@color/grey"
         android:textSize="20dip" />
 
-        <View android:layout_width="fill_parent"
+    <View
+        android:layout_width="fill_parent"
         android:layout_height="3dip"
         android:background="?android:attr/listDivider" />
-    	
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    	<TextView
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:gravity="left"
-	    android:layout_weight="1"
-	    android:padding="5dip"
-	    android:text="Distribution"/>
-    	    	<TextView
-	    android:id="@+id/distribution"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:gravity="right"
-	    android:layout_weight="1"
-	    android:padding="5dip"
-	    android:text="Eme"/>
-    	
-    	</LinearLayout>
-    <View android:layout_width="fill_parent"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:padding="5dip"
+            android:text="@string/distribution" />
+
+        <TextView
+            android:id="@+id/distribution"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:padding="5dip" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:background="?android:attr/listDivider" />
-    	
-	<include
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    layout="@layout/deal_edit_layout" />
 
-	<Button
-	    android:id="@+id/button_go"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_gravity="center"
-	    android:text="@string/go" />
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/deal_edit_layout" />
 
-	    <TextView
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:paddingLeft="5dip"
-	        android:paddingTop="15dip"
-	        android:text="Scores"
-	        android:textColor="@color/grey"
-	        android:textSize="20dip" />
+    <Button
+        android:id="@+id/button_go"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/go" />
 
-	       <View android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dip"
+        android:paddingTop="15dip"
+        android:text="@string/scores"
+        android:textColor="@color/grey"
+        android:textSize="20dip" />
+
+    <View
+        android:layout_width="fill_parent"
         android:layout_height="3dip"
         android:background="?android:attr/listDivider" />
-    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="EUX" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="NOUS" />
- 
-    </LinearLayout>
-    
     <LinearLayout
         android:id="@+id/scores"
         android:layout_width="fill_parent"
@@ -98,12 +85,31 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/Them" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/Us" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
                 android:id="@+id/score_them"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="2410"
                 android:textColor="@color/grey"
                 android:textSize="20dip" />
 
@@ -113,10 +119,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="0"
                 android:textColor="@color/grey"
                 android:textSize="20dip" />
         </LinearLayout>
     </LinearLayout>
-    
+
 </LinearLayout>
