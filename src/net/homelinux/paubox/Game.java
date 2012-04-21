@@ -62,22 +62,26 @@ public class Game implements Serializable {
 	}
 
 	private void update_score(Deal d){
-		boolean loose;
-		int score;
+	     boolean loose;
+         int score;
+         loose = d.team_betting != d.winner;
+         if (loose)
+             if (loose_160)
+                 score = 160;
+             else
+                 score = d.bet;
+         else
+             if (win_score_mode == Game.SCORE_SUMBETRESULT)
+                 score = d.bet + d.bet + d.announce_difference;
+             else if (win_score_mode == Game.SCORE_RESULTONLY)
+                 score = d.bet + d.announce_difference;
+             else
+                 score = d.bet;
 
-		if (d.isShuffleDeal() || d.winner == Game.UNPLAYED)
-		    return;
-
-		loose = d.team_betting != d.winner;
-		if (loose && loose_160)
-			score = 160;
-		else
-			score = d.bet;
-
-		if (d.winner == Game.Us)
-			score_Us = score_Us + score*d.getCoinchedMultiplicator();
-		else
-			score_Them = score_Them + score*d.getCoinchedMultiplicator();
+         if (d.winner == Game.Us)
+             score_Us += score*d.coinchedMultiplicator;
+         else
+             score_Them += score*d.coinchedMultiplicator;
 	}
 
 	private void update_score(){
@@ -85,11 +89,17 @@ public class Game implements Serializable {
 	}
 
 	public void recomputeScores() {
-		//We only support 1 inning for now
-		score_Us = score_Them = 0;
-		for (Deal d : innings.get(0).deals) {
-			update_score(d);
-		}
+	    //We only support 1 inning for now
+	    score_Us = score_Them = 0;
+	    for (int index=0;index<innings.size();index++) {
+	        final Inning i = innings.get(index);
+	        for (int j=0;j<i.deals.size()-1;j++) {
+	            final Deal d = i.deals.get(j);
+	            if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
+	                update_score(d);
+	            }
+	        }
+	    }
 	}
 
 	private void update_distribution(){

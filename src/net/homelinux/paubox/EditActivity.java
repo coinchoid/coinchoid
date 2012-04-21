@@ -1,8 +1,10 @@
 package net.homelinux.paubox;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -11,10 +13,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 
-public class EditActivity extends Activity {
+public class EditActivity extends BaseMenuActivity {
 
 	Deal d;
 	public void configureEditView() {
+
+	    current_game = getIntentGame();
 
 		AnnounceActivity.configureDealView(this,d);
 		final RadioButton radio_us = (RadioButton) findViewById(R.id.button_Us);
@@ -54,10 +58,24 @@ public class EditActivity extends Activity {
 		configureEditView();
 	}
 
-	static void launchEditActivity(Activity activity,Deal d) {
-		Intent editIntent = new Intent(activity, EditActivity.class);
-		editIntent.putExtra("net.homelinux.paubox.Editable", d);
-		activity.startActivityForResult(editIntent,BaseMenuActivity.REQUEST_CODE_EDIT);
-	}
-
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.edit_menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+        case R.id.new_game:
+            return true;
+        case R.id.quit:
+            return true;
+        case R.id.preferences:
+            return true;
+        }
+        return false;
+    }
 }

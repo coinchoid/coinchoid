@@ -2,6 +2,7 @@ package net.homelinux.paubox;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -39,6 +40,7 @@ public class WaitingActivity extends BaseMenuActivity {
 				Intent i = new Intent()
 						.putExtra("net.homelinux.paubox.won",true)
 						.putExtra("net.homelinux.paubox.difference", validateAnnounceDifference(et));
+				putIntentGame(i, current_game);
 				setResult(AnnounceActivity.REQUEST_CODE_WAITING, i);
 				finish();
 			}
@@ -52,6 +54,7 @@ public class WaitingActivity extends BaseMenuActivity {
 				Intent i = new Intent()
 						.putExtra("net.homelinux.paubox.won",false)
 						.putExtra("net.homelinux.paubox.difference", validateAnnounceDifference(et));
+                putIntentGame(i, current_game);
 				setResult(AnnounceActivity.REQUEST_CODE_WAITING, i);
 				finish();
 			}
@@ -80,4 +83,15 @@ public class WaitingActivity extends BaseMenuActivity {
 	static void setValidatedScore(EditText et, String s) {
 		et.setText(Integer.toString(validateAnnounceDifference(s)));
 	}
+	
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            Intent i = new Intent();
+            putIntentGame(i, current_game);
+            setResult(RESULT_CANCELED, i);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

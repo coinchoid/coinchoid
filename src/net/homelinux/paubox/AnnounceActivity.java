@@ -11,8 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.preference.PreferenceManager;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
@@ -38,8 +36,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 	LinearLayout scoreDisplayView;
 	TextView distribution;
 
-	PowerManager.WakeLock wl;
-
 	/****************************
 	 **** PROTECTED METHODDS ****
 	 ****************************/
@@ -56,14 +52,14 @@ public class AnnounceActivity extends BaseMenuActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-
-		// The preferences returned if the request code is what we had given
-		// earlier in startSubActivity
+		if (requestCode != REQUEST_CODE_PREFERENCES) {
+		    final Game g = getIntentGame(data);
+		    current_game.setAs(g);
+		}
+        forcePreferencesCounting(current_game);
+        current_game.recomputeScores();
+        updateScoresDisplay();
 		switch (requestCode) {
-		case REQUEST_CODE_PREFERENCES:
-			// Read a sample value they have set
-			updatePreferences();
-			break;
 		case REQUEST_CODE_WAITING:
 			if (resultCode != RESULT_CANCELED) {
 				boolean won = data.getBooleanExtra("net.homelinux.paubox.won", false);
@@ -72,7 +68,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 				current_game.currentDeal().announce_difference = difference;
 				current_game.updateResult();
 				current_game.newDeal();
-				//button_coinche.setText(CoincheButtonTextId(current_game.currentDeal().getCoinchedMultiplicator()));
 				int resultId = won ? R.string.deal_won : R.string.deal_lost;
 				Resources r = getResources();
 				String s = r.getString(R.string.deal_summary, r.getString(resultId), difference);
@@ -82,32 +77,12 @@ public class AnnounceActivity extends BaseMenuActivity {
 				Toast.makeText(getApplicationContext(), "Cancel",
 						Toast.LENGTH_SHORT).show();
 			}
-			break;
-		case REQUEST_CODE_EDIT:
-			if (data!=null) {
-				final Game g = (Game) data.getSerializableExtra("net.homelinux.paubox.edit");
-				current_game.setAs(g);
-				current_game.recomputeScores();
-				updateScoresDisplay();
-			}
 		}	
-
-		distribution.setText("distribution : " + current_game.getPlayer_Distribution() + "\n");
 	}
 
 	private void updateScoresDisplay() {
 		((TextView) findViewById(R.id.score_them)).setText(Integer.toString(current_game.score_Them));
 		((TextView) findViewById(R.id.score_us)).setText(Integer.toString(current_game.score_Us));
-	}
-
-	// We don't update score preferences here as they are used only when creating a new game.
-	private void updatePreferences() {
-		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("wake_lock_enable", false)) {
-			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-			wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "AnnounceActivity");
-		} else {
-			wl = null;
-		}
 	}
 
 	static protected int BetFromItemId(int adapter_view_id) {
@@ -134,20 +109,13 @@ public class AnnounceActivity extends BaseMenuActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (wl!=null) {
-			wl.acquire();
-		}
 		configureAnnounceView();
-		
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		writeGame(current_game);
-		if (wl!=null) {
-			wl.release();
-		}
 	}
 
 	public void configureAnnounceView() {
@@ -168,6 +136,9 @@ public class AnnounceActivity extends BaseMenuActivity {
 								coinche_radiogroup);
 						launchWaitingActivity();
 					}});
+
+        forcePreferencesCounting(current_game);
+        current_game.recomputeScores();
 		updateScoresDisplay();
 		((LinearLayout) findViewById(R.id.scores)).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -263,7 +234,6 @@ public class AnnounceActivity extends BaseMenuActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.announce_layout);
-		updatePreferences();
 		if (getIntent().getAction().equals(Intent.ACTION_DELETE)) {
 			current_game = getIntentGame();
 		} else {

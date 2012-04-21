@@ -1,9 +1,7 @@
 package net.homelinux.paubox;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -49,11 +47,6 @@ public class NewGameActivity extends BaseMenuActivity {
 		startActivity(annouce_intent);
 	}
 
-
-	static void forcePreferencesCounting(Activity a, Game g) {
-		g.setLoose_160(PreferenceManager.getDefaultSharedPreferences(a).getBoolean("loose_160", false));
-		g.win_score_mode = Game.parseScoreString(PreferenceManager.getDefaultSharedPreferences(a).getString("win_score", Integer.toString(Game.SCORE_BETONLY)));
-	}
 	/*************************
 	 **** PUBLIC METHODDS ****
 	 *************************/
@@ -64,7 +57,7 @@ public class NewGameActivity extends BaseMenuActivity {
 		setContentView(R.layout.new_game_layout);
 
 		current_game = new Game();
-		forcePreferencesCounting(this, current_game);
+		forcePreferencesCounting(current_game);
 
 		final Button button_start = (Button) findViewById(R.id.button_new_game_go);
 		button_start.setOnClickListener(new OnClickListener() {

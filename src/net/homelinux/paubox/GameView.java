@@ -1,6 +1,5 @@
 package net.homelinux.paubox;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 
 public class GameView extends LinearLayout {
 
-	Context c;
+	BaseMenuActivity activity;
 
 	TextView last_score_them; 
 	TextView last_score_us; 
@@ -29,10 +28,10 @@ public class GameView extends LinearLayout {
 		last_score_us.setText(gaw.getLastScore().get(GameAdapterWrapper.from[GameAdapterWrapper.Us]));
 	}
 
-	public GameView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		this.c = context;
-		li = LayoutInflater.from(c);
+	public GameView(Context activity, AttributeSet attrs) {
+		super(activity, attrs);
+		this.activity = (BaseMenuActivity) activity;
+		li = LayoutInflater.from(activity);
 		li.inflate(R.layout.game_view, this);
 		lv = (ListView) findViewById(R.id.list);
 		LinearLayout score_footer = (LinearLayout) li.inflate(R.layout.score_footer, null);
@@ -43,7 +42,7 @@ public class GameView extends LinearLayout {
 	}
 
 	public void initGame(final Game game) {
-		gaw = new GameAdapterWrapper(c, game);
+		gaw = new GameAdapterWrapper(activity, game);
 		lv.setAdapter(gaw.getAdapter());
 		notifyDataSetChanged();
 
@@ -51,7 +50,7 @@ public class GameView extends LinearLayout {
 			public void onItemClick(AdapterView<?> parent, View view, int pos,
 					long id) {
 				selected_deal = game.innings.get(0).deals.get(pos);
-				EditActivity.launchEditActivity((Activity)c, selected_deal);
+				activity.launchEditActivity(selected_deal);
 			}
 		});
 	}

@@ -2,6 +2,7 @@ package net.homelinux.paubox;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +26,9 @@ public abstract class BaseMenuActivity extends Activity {
 	protected Game getIntentGame() {
 		return (Game)getIntent().getSerializableExtra(game_key);
 	}
+	protected Game getIntentGame(Intent i) {
+        return (Game)i.getSerializableExtra(game_key);
+    }
 	protected void putIntentGame(Intent i, Game g) {
 		i.putExtra(game_key,g);
 	}
@@ -47,6 +51,13 @@ public abstract class BaseMenuActivity extends Activity {
 		putIntentGame(myIntent, current_game);
 		startActivity(myIntent);
 	}
+
+	protected void launchEditActivity(Deal d) {
+        Intent editIntent = new Intent(this, EditActivity.class);
+        editIntent.putExtra("net.homelinux.paubox.Editable", d);
+        putIntentGame(editIntent, current_game);
+        startActivityForResult(editIntent,BaseMenuActivity.REQUEST_CODE_EDIT);
+    }
 
 	/**
 	 * Invoked during initialization to give the Activity a chance to set up its Menu.
@@ -114,4 +125,9 @@ public abstract class BaseMenuActivity extends Activity {
 				return false;
 		}
 	}
+	
+	protected void forcePreferencesCounting(Game g) {
+        g.setLoose_160(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("loose_160", false));
+        g.win_score_mode = Game.parseScoreString(PreferenceManager.getDefaultSharedPreferences(this).getString("win_score", Integer.toString(Game.SCORE_BETONLY)));
+    }
 }
