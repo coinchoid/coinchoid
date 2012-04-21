@@ -46,7 +46,8 @@ public class AnnounceActivity extends BaseMenuActivity {
 	// Call the waiting activity
 	protected void launchWaitingActivity() {
 		Intent waiting_intent = new Intent(this, WaitingActivity.class);
-		waiting_intent.putExtra("net.homelinux.paubox.Game", current_game.currentDeal());
+		putIntentGame(waiting_intent, current_game);
+		waiting_intent.putExtra("net.homelinux.paubox.Deal", current_game.currentDeal());
 		startActivityForResult(waiting_intent, REQUEST_CODE_WAITING);
 	}
 

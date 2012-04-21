@@ -14,12 +14,6 @@ public class WaitingActivity extends BaseMenuActivity {
 	TextView annouce_reminder;
 	TextView annouce_info;
 
-	// Call the announce activity
-	protected void launchAnnouceActivity() {
-		Intent i = new Intent(this, AnnounceActivity.class);
-		startActivity(i);
-	}
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +21,8 @@ public class WaitingActivity extends BaseMenuActivity {
 
 		setContentView(R.layout.waiting_layout);
 
-		current_deal = (Deal)getIntent().getSerializableExtra("net.homelinux.paubox.Game");
+		current_deal = (Deal)getIntent().getSerializableExtra("net.homelinux.paubox.Deal");
+		current_game = getIntentGame();
 
 		annouce_reminder = (TextView) findViewById(R.id.announce_reminder);
 		annouce_reminder.setText(current_deal.getAnnounce(this));
