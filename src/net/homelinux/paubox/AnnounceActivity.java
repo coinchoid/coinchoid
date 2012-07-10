@@ -163,10 +163,19 @@ public class AnnounceActivity extends BaseMenuActivity {
 
 		//Save the current bet and the multiplicator
 		d.setBet(BetFromItemId(bet_seekbar.getProgress()));
-		d.setCoinchedMultiplicator(multiplicatorFromId(coinchegroup.getCheckedRadioButtonId()));
+		d.setCoinchedMultiplicator(multiplicatorFromId(getCoinchedRadioButtonId(a)));
 	}
 	
-	public static void configureDealView(final Activity a,final Deal d) {
+	private static int getCoinchedRadioButtonId(Activity a) {
+        for (int i=0; i<coinched_radiobuttons_ids.length;i++) {
+            RadioButton rb = (RadioButton) a.findViewById(coinched_radiobuttons_ids[i]);
+            if (rb.isChecked()) return rb.getId();
+        }
+        return -1;
+	}
+
+
+    public static void configureDealView(final Activity a,final Deal d) {
 		final RadioButton radio_us = (RadioButton) a.findViewById(R.id.button_Us);
 		final RadioButton radio_them = (RadioButton) a.findViewById(R.id.button_Them);
 		if (d.team_betting == Game.Us) {
@@ -174,6 +183,22 @@ public class AnnounceActivity extends BaseMenuActivity {
 		}
 		else if (d.team_betting == Game.Them){
 			radio_them.setChecked(true);
+		}
+
+		final RadioButton radio_buttons[] = new RadioButton[coinched_radiobuttons_ids.length];
+		for (int i=0; i<radio_buttons.length;i++) {
+            radio_buttons[i] = (RadioButton) a.findViewById(coinched_radiobuttons_ids[i]);
+        }
+		OnClickListener radio_emulator_listener = new OnClickListener() {
+            public void onClick(View v) {
+                for (RadioButton rb: radio_buttons) {
+                    if (v != rb)
+                        rb.setChecked(false);
+                }
+            }
+        };
+		for (RadioButton rb: radio_buttons) {
+		    rb.setOnClickListener(radio_emulator_listener);
 		}
 
 		final SeekBar bet_seekbar = (SeekBar) a.findViewById(R.id.bet_seekbar);
