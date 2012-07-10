@@ -95,9 +95,6 @@ public abstract class BaseMenuActivity extends Activity {
 			               Toast.LENGTH_SHORT).show();
 			launchNewGameActivity();
 			return true;
-		case R.id.quit:
-			this.finish();
-			return true;
 		case R.id.preferences:
 			launchPreferencesActivity();
 			return true;
