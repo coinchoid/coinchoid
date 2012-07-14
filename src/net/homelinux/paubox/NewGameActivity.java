@@ -2,6 +2,8 @@ package net.homelinux.paubox;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -45,6 +47,13 @@ public class NewGameActivity extends BaseMenuActivity {
 		annouce_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		putIntentGame(annouce_intent, current_game);
 		startActivity(annouce_intent);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.newgame_menu, menu);
+	    return true;
 	}
 
 	/*************************

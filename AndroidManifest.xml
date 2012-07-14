@@ -18,37 +18,36 @@
         android:theme="@style/CoinchoidTheme" >
         <activity
             android:name=".AnnounceActivity"
-            android:label="@string/app_name"
+            android:label="@string/main_title"
             android:screenOrientation="portrait" >
-            <intent-filter>
+            <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".NewGameActivity"
-            android:label="@string/app_name"
+            android:label="@string/new_game"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".WaitingActivity"
-            android:label="@string/app_name"
+            android:label="@string/annouce_title"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ScoreDisplayActivity"
-            android:label="@string/app_name"
+            android:label="@string/scores"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".PreferencesActivity"
-            android:label="@string/app_name"
+            android:label="@string/preferences"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".EditActivity"
-            android:label="@string/app_name"
+            android:label="@string/edit"
             android:screenOrientation="portrait" >
         </activity>
     </application>

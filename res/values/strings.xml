@@ -6,6 +6,9 @@
 <string name="save_edit">Sauver</string>
 <string name="lost">C\'est chu !</string>
 <string name="null_difference">"0"</string>
+<string name="annouce_title">"Annonce"</string>
+<string name="main_title">"Nouvelle Donne"</string>
+
 
 <string name="scores">Scores</string>
 <string name="win">C\'est fait !</string>
