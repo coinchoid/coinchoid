@@ -4,17 +4,18 @@
     <PreferenceCategory
         android:summary="@string/summary_score_preferences"
         android:title="@string/title_score_preferences" >
-        <CheckBoxPreference
-            android:key="loose_160"
-            android:summaryOff="@string/summary_off_loose_160"
-            android:summaryOn="@string/summary_on_loose_160"
-            android:title="@string/title_loose_160" />
+        <ListPreference
+            android:defaultValue="0"
+            android:key="@string/loss_mode_key"
+            android:entries="@array/loss_score_entries_list"
+            android:entryValues="@array/loss_score_values_list"
+            android:title="@string/title_loss_mode" />
 
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/win_score_entries_list"
             android:entryValues="@array/win_score_values_list"
-            android:key="win_score"
+            android:key="@string/win_mode_key"
             android:summary="@string/preference_win_score_summary"
             android:title="@string/preference_win_score" />
     </PreferenceCategory>

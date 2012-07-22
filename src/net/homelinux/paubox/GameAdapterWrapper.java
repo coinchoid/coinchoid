@@ -26,35 +26,40 @@ public class GameAdapterWrapper {
 		return last_score;
 	}
 
+	int LossFixedValue = 160;
 	void makeData() {
 		int Us_score = 0, Them_score = 0;
 		for (int index=0;index<game.innings.size();index++) {
-			final Inning i =game.innings.get(index);
-			for (int j=0;j<i.deals.size()-1;j++) {
-				final Deal d = i.deals.get(j);
-				if (d.winner!=null && !d.isShuffleDeal()) {
-					boolean loose;
-					int score;
-					loose = d.team_betting != d.winner;
-					if (loose)
-						if (game.loose_160)
-							score = 160;
-						else
-							score = d.bet;
-					else
-						if (game.win_score_mode == Game.SCORE_SUMBETRESULT)
-							score = d.bet + d.bet + d.announce_difference;
-						else if (game.win_score_mode == Game.SCORE_RESULTONLY)
-							score = d.bet + d.announce_difference;
-						else
-							score = d.bet;
-
-					if (d.winner == Team.US)
-						Us_score += score*d.coinchedMultiplicator.m;
-					else
-						Them_score += score*d.coinchedMultiplicator.m;
-				}
-				HashMap<String, String> m;
+		    final Inning i =game.innings.get(index);
+		    for (int j=0;j<i.deals.size()-1;j++) {
+		        final Deal d = i.deals.get(j);
+		        if (d.winner!=null && !d.isShuffleDeal()) {
+		            boolean loose;
+		            int score;
+		            loose = d.team_betting != d.winner;
+		            if (loose)
+		                switch (game.loss_score_mode) {
+		                case FIXED: score = LossFixedValue; break;
+		                case BET:
+		                default:
+		                    score = d.bet; break;
+		                }
+		            else
+		                switch (game.win_score_mode) {
+		                case SUMBETRESULT:
+		                    score = d.bet + d.bet + d.announce_difference; break;
+		                case RESULTONLY:
+		                    score = d.bet + d.announce_difference; break;
+		                case BETONLY:
+		                default:
+		                    score = d.bet;break;
+		                }
+		            if (d.winner == Team.US)
+		                Us_score += score*d.coinchedMultiplicator.m;
+		            else
+		                Them_score += score*d.coinchedMultiplicator.m;
+		        }
+		        HashMap<String, String> m;
 				if (j==i.deals.size()-2) {
 					m = last_score;
 				} else {

@@ -14,9 +14,6 @@
 <string name="win">C\'est fait !</string>
 <string name="title_winning_score">Partie en ?</string>
 <string name="summary_winning_score">Score à atteindre pour terminer la partie</string>
-<string name="title_loose_160">Défaite à 160</string>
-<string name="summary_on_loose_160">Partie chutée =&gt; 160 points pour l\'adversaire</string>
-<string name="summary_off_loose_160">Partie chutée =&gt; points annoncés pour l\'adversaire</string>
 <string name="title_wake_lock_enable">Mise en veille</string>
 <string name="summary_on_wake_lock_enable">Empêche la veille</string>
 <string name="summary_off_wake_lock_enable">Autorise la veille</string>
@@ -73,4 +70,13 @@
 
 <string name="force_counting_description">Forcer le système de comptage pour cette Partie à la valeur des préférences</string>
 <string name="clear_names">"Noms par défaut"</string>
+
+<string name="loss_mode_key">loose_160</string>
+<string name="win_mode_key">win_score</string>
+<string name="title_loss_mode">Points de defaite</string>
+<string name="pref_loss_score_mode_bet_value">0</string>
+<string name="pref_loss_score_mode_fixed_value">1</string>
+<string name="pref_win_score_mode_bet_value">0</string>
+<string name="pref_win_score_mode_actual_value">1</string>
+<string name="pref_win_score_mode_sum_value">2</string>
 </resources>

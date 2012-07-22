@@ -1,8 +1,11 @@
 package net.homelinux.paubox;
 
 import net.homelinux.paubox.Deal.Player;
+import net.homelinux.paubox.Game.LossScoreCountingMode;
+import net.homelinux.paubox.Game.WinScoreCountingMode;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -126,7 +129,18 @@ public abstract class BaseMenuActivity extends Activity {
 	}
 	
 	protected void forcePreferencesCounting(Game g) {
-        g.setLoose_160(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("loose_160", false));
-        g.win_score_mode = Game.parseScoreString(PreferenceManager.getDefaultSharedPreferences(this).getString("win_score", Integer.toString(Game.SCORE_BETONLY)));
-    }
+	    Resources r = getResources();
+        g.loss_score_mode = LossScoreCountingMode.fromStringValue(
+                PreferenceManager.getDefaultSharedPreferences(this).getString(
+                        r.getString(R.string.loss_mode_key),
+                        r.getString(R.string.pref_loss_score_mode_bet_value
+                )),
+                this);
+        g.win_score_mode = WinScoreCountingMode.fromStringValue(
+                PreferenceManager.getDefaultSharedPreferences(this).getString(
+                        r.getString(R.string.win_mode_key),
+                        r.getString(R.string.pref_win_score_mode_bet_value
+                )),
+                this);
+	}
 }

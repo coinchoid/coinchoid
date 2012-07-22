@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string-array
-		name="score_entries_list"
-		>
-		<item>500</item>
-		<item>1000</item>
-		<item>2000</item>
-	</string-array>
 
-	<string-array
-		name="score_entryvalues_list"
-		>
-		<item>500</item>
-		<item>1000</item>
-		<item>2000</item>
-	</string-array>
+    <string-array name="score_entries_list">
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+    </string-array>
+    <string-array name="score_entryvalues_list">
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+    </string-array>
+    <string-array name="win_score_entries_list">
+        <item>L\'annonce</item>
+        <item>Les points faits</item>
+        <item>Annonce + points faits</item>
+    </string-array>
+    <string-array name="win_score_values_list">
+        <item>@string/pref_win_score_mode_bet_value</item>
+        <item>@string/pref_win_score_mode_actual_value</item>
+        <item>@string/pref_win_score_mode_sum_value</item>
+    </string-array>
+    <string-array name="loss_score_entries_list">
+        <item>L\'annonce</item>
+        <item>Valeur fixe: 160</item>
+    </string-array>
+    <string-array name="loss_score_values_list">
+        <item>@string/pref_loss_score_mode_bet_value</item>
+        <item>@string/pref_loss_score_mode_fixed_value</item>
+    </string-array>
 
-	<string-array
-		name="win_score_entries_list"
-		>
-		<item>L\'annonce</item>
-		<item>Les points faits</item>
-		<item>Annonce + points faits</item>
-	</string-array>
-
-		<string-array
-		name="win_score_values_list"
-		>
-		<item>0</item>
-		<item>1</item>
-		<item>2</item>
-	</string-array>
-
-	</resources>
+</resources>

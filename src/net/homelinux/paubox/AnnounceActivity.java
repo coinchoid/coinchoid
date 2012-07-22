@@ -77,6 +77,7 @@ public class AnnounceActivity extends BaseMenuActivity {
                 Toast.makeText(getApplicationContext(), "Cancel",
                         Toast.LENGTH_SHORT).show();
             }
+            break;
         }   
     }
 
