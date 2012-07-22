@@ -35,20 +35,13 @@ public class Game implements Serializable {
 	/**************************
 	 **** PRIVATE METHODDS ****
 	 **************************/
-	private Player next_player (Player player) {
-		switch (player) {
-		case A:
-			return Player.B;
-		case B:
-			return Player.C;
-		case C:
-			return Player.D;
-		case D:
-			return Player.A;
-		default:
-		    return null;
-		}
-	}
+    private Player next_player (Player player) {
+        Player[] values = Player.values();
+            for (int i=0; i<values.length; i++)
+                if (values[i] == player)
+                    return values[(i+1)%values.length];
+        return null;
+    }
 
 	private void update_score(Deal d){
 	     boolean loose;
