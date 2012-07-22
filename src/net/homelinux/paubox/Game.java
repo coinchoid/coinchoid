@@ -2,34 +2,23 @@ package net.homelinux.paubox;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import net.homelinux.paubox.Deal.Player;
+import net.homelinux.paubox.Deal.Team;
 
 @SuppressWarnings("serial")
 public class Game implements Serializable {
-	/*******************
-	 **** CONSTANTS ****
-	 *******************/
-	// Players
-	public static final int Us_1 = 0; // player holding the phone
-	public static final int Them_1 = 1;
-	public static final int Us_2 = 2;
-	public static final int Them_2 = 3;
-	public static final int players[] = { Us_1, Them_1, Us_2, Them_2 };
-	public static final int players_cnt = 4;
-
-	public static final int Us = 0;
-	public static final int Them = 1;
-	//This goes in the winner field, along with "Us" and "Them" so the values must be different
-	public static final int UNPLAYED = 2;
 
 	/************************
 	 **** CLASS VARIABLE ****
 	 ************************/
-	String[] player_names;
-	ArrayList<Inning> innings;
+    HashMap<Player, String> player_names;
+    ArrayList<Inning> innings;
 	
 	int score_Us;
 	int score_Them;
-	int player;
+	Player player;
 	boolean loose_160;
 	public int win_score_mode;
 	//Should match the xml: arrays.xml
@@ -46,18 +35,18 @@ public class Game implements Serializable {
 	/**************************
 	 **** PRIVATE METHODDS ****
 	 **************************/
-	private int next_player (int player) {
+	private Player next_player (Player player) {
 		switch (player) {
-		case Us_1:
-			return Them_1;
-		case Them_1:
-			return Us_2;
-		case Us_2:
-			return Them_2;
-		case Them_2:
-			return Us_1;
+		case A:
+			return Player.B;
+		case B:
+			return Player.C;
+		case C:
+			return Player.D;
+		case D:
+			return Player.A;
 		default:
-			return -1;	
+		    return null;
 		}
 	}
 
@@ -78,10 +67,10 @@ public class Game implements Serializable {
              else
                  score = d.bet;
 
-         if (d.winner == Game.Us)
-             score_Us += score*d.coinchedMultiplicator;
+         if (d.winner == Team.US)
+             score_Us += score*d.coinchedMultiplicator.m;
          else
-             score_Them += score*d.coinchedMultiplicator;
+             score_Them += score*d.coinchedMultiplicator.m;
 	}
 
 	private void update_score(){
@@ -95,7 +84,7 @@ public class Game implements Serializable {
 	        final Inning i = innings.get(index);
 	        for (int j=0;j<i.deals.size()-1;j++) {
 	            final Deal d = i.deals.get(j);
-	            if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
+	            if (d.winner!=null && !d.isShuffleDeal()) {
 	                update_score(d);
 	            }
 	        }
@@ -104,10 +93,6 @@ public class Game implements Serializable {
 
 	private void update_distribution(){
 		player = next_player(player);
-	}
-
-	private String player_Distribution(){
-		return player_names[player];
 	}
 
 	/****************************
@@ -122,10 +107,10 @@ public class Game implements Serializable {
 	protected void newGame() {
 		score_Us = 0;
 		score_Them = 0;
-		player = 0;
+		player = Player.A;
 		innings = new ArrayList<Inning>();
 		innings.add(new Inning());
-		player_names = new String[4];
+		player_names = new HashMap<Deal.Player, String>();
 		loose_160 = false;
 	}
 
@@ -163,10 +148,6 @@ public class Game implements Serializable {
 		innings.add(new Inning());
 	}
 
-	protected String getPlayer_Distribution() {
-		return player_Distribution();
-	}
-
 	protected int getScore_Us() {
 		return score_Us;
 	}
@@ -175,15 +156,19 @@ public class Game implements Serializable {
 		return score_Them;
 	}
 
-	public String getPlayer_name(int player) {
-	    return player_names[player];
+	public String getPlayer_name(Player player) {
+        return player_names.get(player);
+	}
+	
+	public String getCurrentPlayer_name() {
+	    return player_names.get(player);
 	}
 
-	public void setPlayer_name(String name, int player) {
-	    player_names[player] = name;
+	public void setPlayer_name(String name, Player player) {
+	    player_names.put(player, name);
 	}
 
-	public void setPlayer(int _player) {
+	public void setPlayer(Player _player) {
 	    player = _player;
 	}
 

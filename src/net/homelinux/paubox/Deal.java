@@ -2,95 +2,62 @@ package net.homelinux.paubox;
 
 import java.io.Serializable;
 
+import net.homelinux.paubox.Deal.Team;
+
 import android.app.Activity;
+import android.content.Context;
 
 @SuppressWarnings("serial")
 public class Deal implements Serializable {
 
-	int team_betting;
+    public enum CoinchedMultiplicator {
+        UNCOINCHED(1, R.string.uncoinched_alt),
+        COINCHED(2, R.string.coinched),
+        OVERCOINCHED(4, R.string.overcoinched);
+        final public int m;
+        final public int tId;
+        CoinchedMultiplicator(int multiplicator, int textId) {
+            m = multiplicator;
+            tId = textId;
+        }
+    }
+    public enum Team {
+        US(R.string.Us), THEM(R.string.Them);
+        static int announce_tId = R.string.announce;
+        final public int bet_tId;
+        Team(int textId) {
+            bet_tId = textId;
+        }
+    }
+    
+    public enum Player {
+        A(Team.US, BaseMenuActivity.PlayerA_menuid, R.string.name_player1),
+        B(Team.THEM, BaseMenuActivity.PlayerB_menuid, R.string.name_player2),
+        C(Team.US, BaseMenuActivity.PlayerC_menuid, R.string.name_player3),
+        D(Team.THEM, BaseMenuActivity.PlayerD_menuid, R.string.name_player4);
+        public final Team t;
+        public final int id;
+        public final int default_name_id;
+        Player(Team team, int _id, int default_name_id) {
+            t = team;
+            id = _id;
+            this.default_name_id = default_name_id;
+        }
+    }
+    
+    Team team_betting;
 	int bet;
-	int dealer;
-	int winner;
-	int coinchedMultiplicator;
+	Player dealer;
+	Team winner;
+	CoinchedMultiplicator coinchedMultiplicator;
 	int announce_difference;
 	boolean shuffleDeal;
-
-	protected int getCoinchedMultiplicator() {
-		return coinchedMultiplicator;
-	}
-
-	protected void setCoinchedMultiplicator(int coinchedMultiplicator) {
-		this.coinchedMultiplicator = coinchedMultiplicator;
-	}
-
-	protected int getTeam_betting() {
-		return team_betting;
-	}
-
-	protected void setTeam_betting(int teamBetting) {
-		team_betting = teamBetting;
-	}
-
-	protected int getBet() {
-		return bet;
-	}
-
-	protected void setBet(int bet) {
-		this.bet = bet;
-	}
-
-	protected int getDealer() {
-		return dealer;
-	}
-
-	protected void setDealer(int dealer) {
-		this.dealer = dealer;
-	}
-
-	protected int getWinner() {
-		return winner;
-	}
-
-	protected void setWinner(int winner) {
-		this.winner = winner;
-	}
-
-	private String betToString() {
-		if (bet == CAPOT_BET)
-			return "Capot !";
-		else
-			return Integer.toString(bet);
-	}
-
-	private String coinchedMultiplicatorToString(Activity a) {
-		if (coinchedMultiplicator == 1)
-			return "";
-
-		if (coinchedMultiplicator == 2)
-			return " " + a.getApplicationContext().getText(R.string.coinched).toString();
-
-		if (coinchedMultiplicator == 4)
-			return " " + a.getApplicationContext().getText(R.string.overcoinched).toString();
-
-		return "ERROR";
-	}
-
-	private String betterToString(Activity a) {
-		if (team_betting == Game.Us)
-			return a.getApplicationContext().getText(R.string.better_to_string_us).toString();
-
-		if (team_betting == Game.Them)
-			return a.getApplicationContext().getText(R.string.better_to_string_them).toString();
-
-		return "ERROR";
-	}
-
+	
 	protected void newDeal() {
 		bet = 80;
-		team_betting = Game.Us; // of course
-		dealer = Game.Us_1;
-		coinchedMultiplicator = 1;
-		winner = Game.UNPLAYED;
+		team_betting = Team.US; // of course
+		dealer = Player.A;
+		coinchedMultiplicator = CoinchedMultiplicator.UNCOINCHED;
 		shuffleDeal = false;
 	}
 
@@ -104,16 +71,22 @@ public class Deal implements Serializable {
 	public Deal() {
 		newDeal();
 	}
-
-	protected void setWon(boolean won) {
-	    if (team_betting == Game.Us ^ won)       //XOR
-            winner = Game.Them;
-        else
-            winner = Game.Us;
+	
+	public int getCoinchedMultiplicator() {
+	    return coinchedMultiplicator.m;
+	}
+	public void setTeamBetting(Team t) {
+	    team_betting = t;
 	}
 
-	protected String getAnnounce(Activity a) {
-		return betToString() + coinchedMultiplicatorToString(a) + " " + betterToString(a);
+	protected void setWon(boolean won) {
+            winner = won ^ (team_betting == Team.US) ? Team.THEM : Team.US;
+	}
+
+	protected String getAnnounce(Context c) {
+		return betToString(bet) + " " +
+		        c.getString(coinchedMultiplicator.tId, c) + " " +
+		        c.getString(Team.announce_tId, c.getString(team_betting.bet_tId));
 	}
 
 	public String toString(Activity a) {
@@ -154,4 +127,16 @@ public class Deal implements Serializable {
 		int todo = (bet * 262 + 161) / 162;
 		return (what == TO_MAKE_LOSE) ? Math.max(1,(263 - todo)) : Math.min(262,todo);
 	}
+
+    public void setBet(int bet) {
+        this.bet = bet;
+    }
+
+    public void setCoinchedMultiplicator(CoinchedMultiplicator m) {
+        this.coinchedMultiplicator = m;
+    }
+
+    public void setWinner(Team t) {
+        winner = t;
+    }
 }

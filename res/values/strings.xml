@@ -38,6 +38,7 @@
 <string name="edit">Édition</string>
 <string name="new_deal">Nouvelle Donne</string>
 <string name="uncoinched">Normal</string>
+<string name="uncoinched_alt">Normal</string>
 <string name="coinched">Coinché</string>
 <string name="overcoinched">Surcoinché</string>
 <string name="shuffle_game">Mélangeante ?</string>
@@ -50,8 +51,7 @@
 <string name="name_player4">À droite</string>
 <string name="title_new_game">Nouvelle partie</string>
 <string name="new_game_go">Start!</string>
-<string name="better_to_string_us">pour nous</string>
-<string name="better_to_string_them">pour eux</string>
+<string name="announce">"pour %1$s</string>
 <string name="seekbar_announce">Annonce</string>
 <string name="to_fail">POUR FAIRE CHUTER</string>
 <string name="to_win">POUR RÉUSSIR</string>

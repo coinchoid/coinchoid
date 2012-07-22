@@ -3,6 +3,8 @@ package net.homelinux.paubox;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import net.homelinux.paubox.Deal.Team;
+
 import android.content.Context;
 import android.widget.SimpleAdapter;
 
@@ -30,7 +32,7 @@ public class GameAdapterWrapper {
 			final Inning i =game.innings.get(index);
 			for (int j=0;j<i.deals.size()-1;j++) {
 				final Deal d = i.deals.get(j);
-				if (d.winner!=Game.UNPLAYED && !d.isShuffleDeal()) {
+				if (d.winner!=null && !d.isShuffleDeal()) {
 					boolean loose;
 					int score;
 					loose = d.team_betting != d.winner;
@@ -47,10 +49,10 @@ public class GameAdapterWrapper {
 						else
 							score = d.bet;
 
-					if (d.winner == Game.Us)
-						Us_score += score*d.coinchedMultiplicator;
+					if (d.winner == Team.US)
+						Us_score += score*d.coinchedMultiplicator.m;
 					else
-						Them_score += score*d.coinchedMultiplicator;
+						Them_score += score*d.coinchedMultiplicator.m;
 				}
 				HashMap<String, String> m;
 				if (j==i.deals.size()-2) {

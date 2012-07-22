@@ -1,5 +1,6 @@
 package net.homelinux.paubox;
 
+import net.homelinux.paubox.Deal.Player;
 import android.app.Activity;
 import android.content.Intent;
 import android.preference.PreferenceManager;
@@ -75,10 +76,10 @@ public abstract class BaseMenuActivity extends Activity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		menu.setHeaderTitle(R.string.distribution_current);
-		menu.add(Menu.NONE, Game.Us_1, 1, current_game.getPlayer_name(Game.players[Game.Us_1]));
-		menu.add(Menu.NONE, Game.Them_1, 2, current_game.getPlayer_name(Game.players[Game.Them_1]));
-		menu.add(Menu.NONE, Game.Us_2, 3, current_game.getPlayer_name(Game.players[Game.Us_2]));
-		menu.add(Menu.NONE, Game.Them_2, 4, current_game.getPlayer_name(Game.players[Game.Them_2]));
+        menu.add(Menu.NONE, Player.A.id, 1, current_game.getPlayer_name(Player.A));
+        menu.add(Menu.NONE, Player.B.id, 2, current_game.getPlayer_name(Player.B));
+		menu.add(Menu.NONE, Player.C.id, 3, current_game.getPlayer_name(Player.C));
+		menu.add(Menu.NONE, Player.D.id, 4, current_game.getPlayer_name(Player.D));
 	}
 	/**
 	 * Invoked when the user selects an item from the Menu.
@@ -109,18 +110,19 @@ public abstract class BaseMenuActivity extends Activity {
 		return false;
 	}
 
+    public static int PlayerA_menuid = 123;
+    public static int PlayerB_menuid = 987;
+    public static int PlayerC_menuid = 12341;
+    public static int PlayerD_menuid = 412;
 	public boolean onContextItemSelected(MenuItem item) {
 		super.onOptionsItemSelected(item);
-		switch (item.getItemId()) {
-			case Game.Us_1:
-			case Game.Us_2:
-			case Game.Them_1:
-			case Game.Them_2:
-				current_game.setPlayer(item.getItemId());
-				return true;
-			default:
-				return false;
-		}
+		int it = item.getItemId();
+		for (Player p : Player.values())
+		    if (p.id == it) {
+                current_game.setPlayer(p);
+                return true;
+		    }
+		return false;
 	}
 	
 	protected void forcePreferencesCounting(Game g) {

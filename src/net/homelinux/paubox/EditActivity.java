@@ -1,5 +1,6 @@
 package net.homelinux.paubox;
 
+import net.homelinux.paubox.Deal.Team;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,9 +28,9 @@ public class EditActivity extends BaseMenuActivity {
 		final RadioGroup coinche_radiogroup = (RadioGroup) findViewById(R.id.coinched_group);
 		final RadioButton winner_us = (RadioButton) findViewById(R.id.winner_Us);
 		final RadioButton winner_them = (RadioButton) findViewById(R.id.winner_Them);
-		if (d.winner==Game.Us) {
+		if (d.winner==Team.US) {
 			winner_us.setChecked(true);
-		} else if (d.winner==Game.Them) {
+		} else if (d.winner==Team.THEM) {
 			winner_them.setChecked(true);
 		}
 
@@ -43,9 +44,9 @@ public class EditActivity extends BaseMenuActivity {
 								coinche_radiogroup);
 						d.announce_difference = WaitingActivity.validateAnnounceDifference(et);
 						if (winner_us.isChecked()) {
-							d.setWinner(Game.Us);
+							d.setWinner(Team.US);
 						} else if (winner_them.isChecked()) {
-							d.setWinner(Game.Them);
+							d.setWinner(Team.THEM);
 						}
 						setResult(BaseMenuActivity.REQUEST_CODE_EDIT, new Intent().putExtra("net.homelinux.paubox.edit",d));
 						finish();

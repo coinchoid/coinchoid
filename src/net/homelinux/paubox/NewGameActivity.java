@@ -1,5 +1,6 @@
 package net.homelinux.paubox;
 
+import net.homelinux.paubox.Deal.Player;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -71,34 +72,34 @@ public class NewGameActivity extends BaseMenuActivity {
 		final Button button_start = (Button) findViewById(R.id.button_new_game_go);
 		button_start.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				for (int i = 0; i<Game.players_cnt; i++) {
+				for (int i = 0; i<Player.values().length; i++) {
 					if ((text_players[i].getText().toString() != null) && (text_players[i].getText().toString().trim().length()>0))
-						current_game.setPlayer_name(text_players[i].getText().toString().trim(), Game.players[i]);
+						current_game.setPlayer_name(text_players[i].getText().toString().trim(), Player.values()[i]);
 					else
-						current_game.setPlayer_name(text_players[i].getHint().toString(), Game.players[i]);
+						current_game.setPlayer_name(text_players[i].getHint().toString(), Player.values()[i]);
 					if (first_distribution[i].isChecked())
-						current_game.setPlayer(i);
+						current_game.setPlayer(Player.values()[i]);
 				}
 				current_game.currentDeal().setShuffleDeal(shuffle_game.isChecked());
 				launchAnnouceActivity();
 			}
 		});
 
-		for (int i = 0; i < Game.players_cnt; i++) {
+		for (int i = 0; i < Player.values().length; i++) {
 			text_players[i] = (EditText) findViewById(text_players_ids[i]);
 			first_distribution[i] = (RadioButton) findViewById(first_distribution_ids[i]);
 		}
 
 		Game previous_game = getIntentGame();
 		if (previous_game!=null){
-			for (int i = 0; i <Game.players_cnt; i++) {
-				text_players[i].setHint(previous_game.getPlayer_name(i));
+			for (int i = 0; i < Player.values().length; i++) {
+				text_players[i].setHint(previous_game.getPlayer_name(Player.values()[i]));
 			}
 		}
 		((Button) (findViewById(R.id.clear_names))).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				for (int i = 0; i < Game.players_cnt; i++) {
+				for (int i = 0; i < Player.values().length; i++) {
 					text_players[i].setHint(text_players_defaults[i]);
 				}
 			}
