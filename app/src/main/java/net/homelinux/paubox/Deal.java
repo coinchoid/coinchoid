@@ -11,7 +11,7 @@ import android.content.Context;
 public class Deal implements Serializable {
 
     public enum CoinchedMultiplicator {
-        UNCOINCHED(1, R.string.uncoinched_alt),
+        UNCOINCHED(1, R.string.uncoinched),
         COINCHED(2, R.string.coinched),
         OVERCOINCHED(4, R.string.overcoinched);
         final public int m;
@@ -84,9 +84,9 @@ public class Deal implements Serializable {
 	}
 
 	protected String getAnnounce(Context c) {
-		return betToString(bet) + " " +
+		return (betToString(bet) + " " +
 		        c.getString(coinchedMultiplicator.tId, c) + " " +
-		        c.getString(Team.announce_tId, c.getString(team_betting.bet_tId));
+		        c.getString(Team.announce_tId, c.getString(team_betting.bet_tId))).toLowerCase();
 	}
 
 	public String toString(Activity a) {
