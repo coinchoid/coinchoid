@@ -28,18 +28,18 @@
 		</RelativeLayout>
 		<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_weight="1.0" android:layout_height="wrap_content">
 			<RadioGroup android:layout_weight="1" android:layout_marginLeft="10sp" android:orientation="vertical" android:layout_height="wrap_content" android:layout_width="wrap_content">
-				<RadioButton android:id="@+id/first_distribution1" android:layout_height="wrap_content" android:layout_width="wrap_content"></RadioButton>
-				<RadioButton android:id="@+id/first_distribution2" android:layout_height="wrap_content" android:layout_width="wrap_content"></RadioButton>
-				<RadioButton android:id="@+id/first_distribution3" android:layout_height="wrap_content" android:layout_width="wrap_content"></RadioButton>
-				<RadioButton android:id="@+id/first_distribution4" android:layout_height="wrap_content" android:layout_width="wrap_content"></RadioButton>
+				<RadioButton android:id="@+id/first_distribution1" android:layout_height="45sp" android:layout_width="wrap_content"></RadioButton>
+				<RadioButton android:id="@+id/first_distribution2" android:layout_height="45sp" android:layout_width="wrap_content"></RadioButton>
+				<RadioButton android:id="@+id/first_distribution3" android:layout_height="45sp" android:layout_width="wrap_content"></RadioButton>
+				<RadioButton android:id="@+id/first_distribution4" android:layout_height="45sp" android:layout_width="wrap_content"></RadioButton>
 			</RadioGroup>
 			<LinearLayout android:layout_weight="10" android:orientation="vertical" android:layout_height="wrap_content" android:layout_width="wrap_content">
-				<EditText android:id="@+id/name_player1" android:layout_height="wrap_content" android:hint="@string/name_player1" android:inputType="textPersonName" android:layout_width="fill_parent">
+				<EditText android:id="@+id/name_player1" android:layout_height="45sp" android:hint="@string/name_player1" android:inputType="textPersonName" android:layout_width="fill_parent">
 					<requestFocus></requestFocus>
 				</EditText>
-				<EditText android:id="@+id/name_player2" android:layout_height="wrap_content" android:hint="@string/name_player2" android:inputType="textPersonName" android:layout_width="fill_parent"></EditText>
-				<EditText android:id="@+id/name_player3" android:layout_height="wrap_content" android:hint="@string/name_player3" android:inputType="textPersonName" android:layout_width="fill_parent"></EditText>
-				<EditText android:id="@+id/name_player4" android:layout_height="wrap_content" android:hint="@string/name_player4" android:inputType="textPersonName" android:layout_width="fill_parent"></EditText>
+				<EditText android:id="@+id/name_player2" android:layout_height="45sp" android:hint="@string/name_player2" android:inputType="textPersonName" android:layout_width="fill_parent"></EditText>
+				<EditText android:id="@+id/name_player3" android:layout_height="45sp" android:hint="@string/name_player3" android:inputType="textPersonName" android:layout_width="fill_parent"></EditText>
+				<EditText android:id="@+id/name_player4" android:layout_height="45sp" android:hint="@string/name_player4" android:inputType="textPersonName" android:layout_width="fill_parent"></EditText>
 			</LinearLayout>
 		</LinearLayout>
 		<CheckBox android:text="@string/shuffle_game" android:gravity="center|fill_horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/shuffle_game" android:layout_weight="1.0"></CheckBox>
