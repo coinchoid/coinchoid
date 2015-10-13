@@ -68,6 +68,7 @@ public class AnnounceActivity extends BaseMenuActivity {
                 current_game.currentDeal().announce_difference = difference;
                 current_game.updateResult();
                 current_game.newDeal();
+                AnnounceActivity.configureDealView(this, current_game.currentDeal());
                 int resultId = won ? R.string.deal_won : R.string.deal_lost;
                 Resources r = getResources();
                 String s = r.getString(R.string.deal_summary, r.getString(resultId), difference);
@@ -189,6 +190,9 @@ public class AnnounceActivity extends BaseMenuActivity {
         final RadioButton radio_buttons[] = new RadioButton[coinched_radiobuttons_ids.length];
         for (int i=0; i<radio_buttons.length;i++) {
             radio_buttons[i] = (RadioButton) a.findViewById(coinched_radiobuttons_ids[i]);
+            radio_buttons[i].setChecked(
+                    coinched_radiobuttons_ids[i] == idFromMultiplicator(d.getCoinchedMultiplicator())
+            );
         }
         OnClickListener radio_emulator_listener = new OnClickListener() {
             public void onClick(View v) {
@@ -208,8 +212,6 @@ public class AnnounceActivity extends BaseMenuActivity {
         final BetSeekBarListener bet_listener = new BetSeekBarListener(a, bet_seekbar, progress_text);
         bet_seekbar.setOnSeekBarChangeListener(bet_listener);
         bet_seekbar.setProgress(ItemIdFromBet(d.bet));
-
-        ((RadioButton) a.findViewById(idFromMultiplicator(d.getCoinchedMultiplicator()))).setChecked(true);
     }
 
     public static int coincheColorFromMultiplicator(Activity a, int multiplicator) {
