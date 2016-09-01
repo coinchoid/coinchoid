@@ -4,7 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="10dip" >
+    android:padding="10dip"
+    android:weightSum="1">
 
     <TextView
         android:layout_width="fill_parent"
@@ -57,7 +58,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/go" />
+        android:text="@string/go"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="fill_parent"
